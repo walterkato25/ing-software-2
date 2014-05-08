@@ -1,0 +1,20 @@
+TABLAS: 
+ 
+Pedido (ID_VENTA, estado, hora, fecha, id_usuario)  
+ 
+Libro (ID_LIBRO,isbn, stock_minimo, stock, img, origen, nombre, reseña, idioma, precio, cantidad_paginas, id_editorial)  
+ 
+Compuesta_por (ID_COMPUESTA_POR, id_venta, isbn)  
+ 
+Editorial (ID_EDITORIAL, nombre)  
+ 
+Autor (ID_AUTOR, nombre, apellido, mail)  
+ 
+Es_del (ID_ES_DEL, isbn, nombre, apellido)  
+ 
+Etiqueta (ID_ETIQUETA, descripcion)  
+ 
+Tiene (ID_TIENE, descripcion, isbn)  
+ 
+Usuario (ID_USUARIO, nombre_de_usuario, password, apellido, nombre, fecha_alta, categoria, tel, cp, localidad, calle, piso, nro, depto, dni/cuit, mail)  
+ 
