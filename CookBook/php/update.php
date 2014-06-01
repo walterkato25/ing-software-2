@@ -19,7 +19,7 @@
 		
 	}
 	$sql = "UPDATE `$tabla` SET $inject WHERE `$idabm` = '$id'";
-	mysql_query($sql,$bd) or die("<script language = javascript> alert('Problema para actualizar: ".mysql_error()."'); self.history.back();</script>");
+	mysql_query($sql,$bd) or die("<script language = javascript> alert(\"Problema para actualizar: ".mysql_error()."\"); self.history.back();</script>");
 	echo '<script language = javascript>
 		alert("se ha actualizado el elemento")
 		self.history.go(-2);

@@ -100,6 +100,120 @@ if(isset($_GET["abm"])){
 						return true;
 					}
 				</script>';
+				break;
+			case 'Libro':
+			//cantPaginas
+				echo '<td>Cantidad de paginas: </td>';
+				echo '<td>';
+				echo '<input id="cantPaginas" type="number" name="cantPaginas" ';
+				if(isset($_GET["cantPaginas"])){
+					echo 'value="'.$_GET["cantPaginas"].'"';
+				}
+				echo '/></td></tr><tr>';
+			//idioma
+				echo '<td>Idioma: </td>';
+				echo '<td>';
+				echo '<input id="idioma" type="text" name="idioma" ';
+				if(isset($_GET["idioma"])){
+					echo 'value="'.$_GET["idioma"].'"';
+				}
+				echo '/></td></tr><tr>';
+			//isbn
+				echo '<td>ISBN: </td>';
+				echo '<td>';
+				echo '<input id="isbn" type="number" name="isbn" ';
+				if(isset($_GET["isbn"])){
+					echo 'value="'.$_GET["isbn"].'"';
+				}
+				echo '/></td></tr><tr>';
+			//nombre
+				echo '<td>Nombre: </td>';
+				echo '<td>';
+				echo '<input id="nombre" type="text" name="nombre" ';
+				if(isset($_GET["nombre"])){
+					echo 'value="'.$_GET["nombre"].'"';
+				}
+				echo '/></td></tr><tr>';
+			//origen
+				echo '<td>Origen: </td>';
+				echo '<td>';
+				echo '<input id="origen" type="text" name="origen" ';
+				if(isset($_GET["origen"])){
+					echo 'value="'.$_GET["origen"].'"';
+				}
+				echo '/></td></tr><tr>';
+			//precio
+				echo '<td>Precio: </td>';
+				echo '<td>';
+				echo '<input id="precio" type="number" step="0.05" name="precio" ';
+				if(isset($_GET["precio"])){
+					echo 'value="'.$_GET["precio"].'"';
+				}
+				echo '/></td></tr><tr>';
+			//resumen
+				echo '<td>Resumen: </td>';
+				echo '<td>';
+				echo '<input id="resumen" type="textarea" name="resumen" ';
+				if(isset($_GET["resumen"])){
+					echo 'value="'.$_GET["resumen"].'"';
+				}
+				echo '/></td></tr><tr>';
+			//stock
+			    echo '<td>Stock: </td>';
+				echo '<td>';
+				echo '<input id="stock" type="textarea" name="stock" ';
+				if(isset($_GET["stock"])){
+					echo 'value="'.$_GET["stock"].'"';
+				}
+				echo '/></td></tr><tr>';
+			//stockminimo
+				echo '<td>Stock minimo: </td>';
+				echo '<td>';
+				echo '<input id="stockMinimo" type="textarea" name="stockMinimo" ';
+				if(isset($_GET["stockMinimo"])){
+					echo 'value="'.$_GET["stockMinimo"].'"';
+				}
+				echo '/></td></tr><tr>';
+			//autor/es
+				echo '<td>Autor/es: <p>Mantenga la tecla ctrl apretada</p> <p>para seleccionar varios autores</p></td>';
+				echo '<td><select multiple name="idAutor[]">';
+				$sql = "SELECT * FROM `Autor`";
+				$query = mysql_query($sql);
+				echo '<option value=""></option>';
+				while ($row  = mysql_fetch_assoc($query)) {
+					$apellidoynombre = $row['apellido'].', '.$row['nombre'];
+					$id = $row['idAutor'];
+					echo '<option value="'.$id.'" ';
+					if (isset($_GET['idAutor'])){
+						if($_GET['idAutor']==$id){
+							echo 'selected';
+						}
+					}
+					echo '>'.$apellidoynombre.'</option>';
+				}
+				echo '</select>';
+				echo '</td><td><a href="formabm.php?abm=Autor">Nuevo</a>';
+				echo '</td></tr><tr>';
+				
+			//etiqueta/s
+				echo '<td>Etiqueta/s: <p>Mantenga la tecla ctrl apretada</p> <p>para seleccionar varias etiquetas</p></td>';
+				echo '<td><select multiple name="idEtiqueta[]">';
+				$sql = "SELECT * FROM `Etiqueta`";
+				$query = mysql_query($sql);
+				echo '<option value=""></option>';
+				while ($row  = mysql_fetch_assoc($query)) {
+					$etiqueta = $row['Etiqueta'];
+					$id = $row['idEtiqueta'];
+					echo '<option value="'.$id.'" ';
+					if (isset($_GET['idEtiqueta'])){
+						if($_GET['idEtiqueta']==$id){
+							echo 'selected';
+						}
+					}
+					echo '>'.$etiqueta.'</option>';
+				}
+				echo '</select>';
+				echo '</td><td><a href="formabm.php?abm=Etiqueta">Nuevo</a>';
 			break;
 		}
 		echo '</td>'; //fin inputs normal
@@ -115,3 +229,4 @@ if(isset($_GET["abm"])){
 }
 ?></div></BODY>
 </HTML>
+
