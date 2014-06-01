@@ -1,7 +1,7 @@
 
 body{
 	font-family:"verdana";
-	background:url('fondo.jpg') repeat;
+	background:url('../img/fondo.jpg') repeat;
 	margin:0;
 	padding:0;
 	border-style:none;
@@ -60,9 +60,9 @@ select{
 	border-radius:5px;
 	}
 .logo{
-	text-align:right;
-	float:right;
-	padding-right:20px;
+	text-align:left;
+	float:left;
+	padding-right:0px;
 	border-style:none;
 	border-width:0px;
 	}

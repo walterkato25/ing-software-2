@@ -1,5 +1,5 @@
 <?php
-require_once("../php/sesion.php");
+require_once("php/sesion.php");
 sesion();
 ?>
 <html>
@@ -13,7 +13,7 @@ sesion();
 	<div id="page">
 		<div id="header">
 			<div id="page-header">
-				<div class=logo><a href="index.php"><img src="img\Imagen1.png" height=100% alt="logo" border="0px"></a></div>
+				<div class=logo><a href="index.php"><img src="img/Imagen1.png" height=100% alt="logo" border="0px"></a></div>
 			</div>
 							
 			<div id="header-menu">
