@@ -30,7 +30,7 @@ if(isset($_POST['abm'])){
 				$sql = "SELECT `idLibro` FROM `Libro` WHERE `isbn` = '$isbn'";
 				$query = mysql_query($sql) or die("<script language = javascript> alert(\"Problema para encontrar isbn: ".mysql_error()."\"); self.history.back() </script>");
 				$idlibroarray = mysql_fetch_array($query);
-				$idlibro = $idlibroarray['idLibro'];
+				$idlibro = $idlibroarray["idLibro"];
 				$autors = array();
 				$autors = $_POST["idAutor"];
 				$tabla = "libroautor";
@@ -46,7 +46,7 @@ if(isset($_POST['abm'])){
 				$sql = "SELECT `idLibro` FROM `Libro` WHERE `isbn` = '$isbn'";
 				$query = mysql_query($sql) or die("<script language = javascript> alert(\"Problema para encontrar isbn: ".mysql_error()."\"); self.history.back() </script>");
 				$idlibroarray = mysql_fetch_array($query);
-				$idlibro = $idlibroarray['idLibro'];
+				$idlibro = $idlibroarray["idLibro"];
 				$Etiquetas = array();
 				$Etiquetas = $_POST["idEtiqueta"];
 				$tabla = "libroetiqueta";
@@ -64,6 +64,8 @@ if(isset($_POST['abm'])){
 	alert("se ha agregado el elemento")
 	self.history.go(-2);
 	</script>';
+
 	
 }
+
 ?>

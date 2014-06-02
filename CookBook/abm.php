@@ -78,14 +78,27 @@ sesion();
 						}
 						$tabla=$abm;
 						$id='id'.$abm;
-						$sql = "SELECT * FROM `$tabla`";
+						switch($abm){
+							case 'Etiqueta':
+							$sql = "SELECT * FROM `$tabla` order by `$abm`";
+							break;
+							case 'Autor':
+							$sql = "SELECT * FROM `$tabla` order by `apellido`";
+							break;
+							case 'Libro':
+							$sql = "SELECT * FROM `$tabla` order by `nombre`";
+							break;
+						}
+						
 						$query = mysql_query($sql);//se hace la consulta						
 						echo '<table>';
 						echo '<tr><th>';
 						if($abm=='Autor'){
 							echo 'Nombre</th><th>Apellido';
 						}
-						
+						if($abm=='Libro'){
+							echo 'Nombre</th><th>Autor</th><th>Etiquetas';
+						}
 						echo'</th><th>Acciones</th></tr>';
 						while ($row  = mysql_fetch_assoc($query)) {
 							switch($abm){
@@ -101,6 +114,30 @@ sesion();
 								echo "<tr><td>$a</td>";
 								echo "<td>$c</td>";
 								break;
+								case 'Libro':
+								$a= $row["nombre"];
+								$b= $row[$id];
+								$sql= "SELECT apellido, nombre FROM `autor` WHERE `idAutor` in (SELECT idAutor FROM `libroautor` WHERE `idLibro`=$b)";
+								$queryautor= mysql_query($sql);
+								$cantAutores = mysql_num_rows($queryautor);
+								$autor = mysql_fetch_assoc($queryautor);
+								$c= $autor["apellido"].', '.$autor["nombre"];
+								echo "<tr><td>$a</td>";
+								echo "<td>$c";
+								if ($cantAutores > 1){
+									echo " y otros...";
+								}
+								echo "</td>";
+								$sql= "SELECT etiqueta FROM `etiqueta` WHERE `idEtiqueta` in (SELECT idEtiqueta FROM `libroetiqueta` WHERE `idLibro`=$b)";
+								$queryetiqueta= mysql_query($sql);
+								$d='';
+								while($etiqueta = mysql_fetch_array($queryetiqueta)){
+									if($d!=''){
+										$d=$d.', ';
+									}
+									$d = $d.$etiqueta["etiqueta"]; 
+								}
+								echo "<td>$d</td>";
 							}
 							
 							$b = $row["$id"];
