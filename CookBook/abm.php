@@ -57,8 +57,8 @@ sesion();
 			<div id="left-bar">
 				<?php
 					
-				 		echo '<h5><a href="abm.php?abm=Autor">Autor</a></h5>
-						<h5><a href="abm.php?abm=Etiqueta">Etiqueta</a></h5>
+				 		echo '<h5><a href="abm.php?abm=Autor">Autores</a></h5>
+						<h5><a href="abm.php?abm=Etiqueta">Etiquetas</a></h5>
 					 	<h5><a href="abm.php?abm=Libro">Libros</a></h5>';
 			
 					?>
@@ -67,13 +67,19 @@ sesion();
 			</div>
 			<div id="main-content">
 				<?php
+					
 					if(isset($_GET["abm"])){
+						echo '<fieldset style="margin:auto; width">';
 						$abm=$_GET["abm"];
+						if($abm=='Autor'){
+							echo '<legend>'.$abm.'es </legend>';
+						}else{
+							echo '<legend>'.$abm.'s </legend>';
+						}
 						$tabla=$abm;
 						$id='id'.$abm;
 						$sql = "SELECT * FROM `$tabla`";
-						$query = mysql_query($sql);//se hace la consulta
-						echo '<h2><p>'.$abm.'</p></h2>';
+						$query = mysql_query($sql);//se hace la consulta						
 						echo '<table>';
 						echo '<tr><th>';
 						if($abm=='Autor'){
@@ -107,16 +113,16 @@ sesion();
 							}
 							echo '"><img src="img/editar.png" title="Editar"/></a>';
 						}
-						echo "</table><span><a href=\"php/formabm.php?abm=$abm";
-						echo "\">Agregar $abm </span>";
+						echo "<tr><td><span ><a id='agregar' href=\"php/formabm.php?abm=$abm";
+						echo "\">Agregar... </span></td></tr></table>";
 
 					}
+					echo '</fieldset>';
 			?>
 			</div>
 		</div>
-
-		<div id="footer">CookBooks 2014</div>
-	
+		<div id="footer">CookBooks 2014</div>	
 	</div>
+	
 </body>
 </html>
