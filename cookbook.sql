@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 29-05-2014 a las 19:52:29
+-- Tiempo de generación: 02-06-2014 a las 01:44:34
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.3.13
 
@@ -32,7 +32,20 @@ CREATE TABLE IF NOT EXISTS `autor` (
   `apellido` varchar(20) NOT NULL,
   `mail` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`idAutor`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `autor`
+--
+
+INSERT INTO `autor` (`idAutor`, `nombre`, `apellido`, `mail`) VALUES
+(3, 'Carlos', 'Carden', NULL),
+(6, 'asdfsad', 'sfdbdfb', NULL),
+(7, 'zxvxzcv', 'asdfsdf', NULL),
+(8, 'xzvxzcv', 'xcvzxcv', NULL),
+(9, 'hjljkl', 'rtyeyr', NULL),
+(10, 'cvbncvbn', 'fghdfgh', NULL),
+(11, 'Walter', 'Kato', NULL);
 
 -- --------------------------------------------------------
 
@@ -42,9 +55,19 @@ CREATE TABLE IF NOT EXISTS `autor` (
 
 CREATE TABLE IF NOT EXISTS `etiqueta` (
   `idEtiqueta` int(11) NOT NULL AUTO_INCREMENT,
-  `descripcion` varchar(30) NOT NULL,
+  `Etiqueta` varchar(30) NOT NULL,
   PRIMARY KEY (`idEtiqueta`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=16 ;
+
+--
+-- Volcado de datos para la tabla `etiqueta`
+--
+
+INSERT INTO `etiqueta` (`idEtiqueta`, `Etiqueta`) VALUES
+(12, 'Minutas'),
+(13, 'Reposteria'),
+(14, 'Etiqueta14'),
+(15, 'Etiqueta16');
 
 -- --------------------------------------------------------
 
@@ -63,10 +86,32 @@ CREATE TABLE IF NOT EXISTS `libro` (
   `resumen` text NOT NULL,
   `idioma` varchar(20) NOT NULL,
   `precio` double NOT NULL,
-  `cantidadPaginas` int(11) NOT NULL,
+  `cantPaginas` int(11) NOT NULL,
   PRIMARY KEY (`idLibro`),
   UNIQUE KEY `isbn` (`isbn`,`nombre`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=29 ;
+
+--
+-- Volcado de datos para la tabla `libro`
+--
+
+INSERT INTO `libro` (`idLibro`, `isbn`, `stock`, `stockMinimo`, `img`, `origen`, `nombre`, `resumen`, `idioma`, `precio`, `cantPaginas`) VALUES
+(1, 2147483647, 23, 2, NULL, 'no se', 'alguno', 'abuuuurrido', 'frances', 34.15, 23),
+(2, 45675467, 4, 1, NULL, 'sadfsdf', 'qerewr', 'dfsadfsdfsadfasdf', 'qwer', 34, 123),
+(3, 21341242, 76, 5, NULL, 'qwerwqer', 'werwq', 'werqwerw', 'qwerwer', 56, 2134),
+(4, 0, 0, 0, NULL, '', '', '', '', 0, 0),
+(5, 5, 32, 3, NULL, 'asdf', 'dafs', 'sdfasdf', 'asdf', 0.1, 3),
+(6, 2345, 0, 0, NULL, '', '', '', '', 0, 0),
+(8, 3465, 0, 0, NULL, '', '', '', '', 0, 0),
+(10, 5678, 0, 0, NULL, '', '', '', '', 0, 0),
+(11, 9870, 0, 0, NULL, '', '', '', '', 0, 0),
+(13, 2, 0, 0, NULL, '', '', '', '', 0, 0),
+(15, 56, 0, 0, NULL, '', '', '', '', 0, 0),
+(16, 7777, 0, 0, NULL, '', '', '', '', 0, 0),
+(19, 3333, 0, 0, NULL, '', '', '', '', 0, 0),
+(20, 5544, 0, 0, NULL, '', '', '', '', 0, 0),
+(21, 666, 0, 0, NULL, '', '', '', '', 0, 1234),
+(28, 786549, 0, 0, NULL, '', '', '', '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -79,7 +124,26 @@ CREATE TABLE IF NOT EXISTS `libroautor` (
   `idLibro` int(11) NOT NULL,
   `idAutor` int(11) NOT NULL,
   PRIMARY KEY (`idLibroAutor`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
+
+--
+-- Volcado de datos para la tabla `libroautor`
+--
+
+INSERT INTO `libroautor` (`idLibroAutor`, `idLibro`, `idAutor`) VALUES
+(1, 10, 3),
+(2, 10, 6),
+(3, 11, 6),
+(4, 11, 7),
+(5, 13, 6),
+(6, 16, 3),
+(7, 16, 6),
+(8, 21, 8),
+(9, 21, 9),
+(10, 21, 10),
+(11, 21, 11),
+(12, 28, 3),
+(13, 28, 6);
 
 -- --------------------------------------------------------
 
@@ -92,7 +156,20 @@ CREATE TABLE IF NOT EXISTS `libroetiqueta` (
   `idLibro` int(11) NOT NULL,
   `idEtiqueta` int(11) NOT NULL,
   PRIMARY KEY (`idLibroEtiqueta`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Volcado de datos para la tabla `libroetiqueta`
+--
+
+INSERT INTO `libroetiqueta` (`idLibroEtiqueta`, `idLibro`, `idEtiqueta`) VALUES
+(1, 15, 12),
+(2, 19, 12),
+(3, 19, 13),
+(4, 20, 12),
+(5, 20, 13),
+(6, 28, 12),
+(7, 28, 13);
 
 -- --------------------------------------------------------
 
