@@ -232,7 +232,7 @@ sesion();
 			//autor/es
 				echo '<td>Autor/es: <p>Mantenga la tecla ctrl apretada<br/>para seleccionar varios autores</p></td>';
 				echo '<td><select multiple id="autor" name="idAutor[]">';
-				$sql = "SELECT * FROM `Autor`";
+				$sql = "SELECT * FROM `Autor` order by `apellido`";
 				$query = mysql_query($sql);
 				while ($row  = mysql_fetch_assoc($query)) {
 					$apellidoynombre = $row['apellido'].', '.$row['nombre'];
@@ -252,7 +252,7 @@ sesion();
 			//etiqueta/s
 				echo '<td>Etiqueta/s: <p>Mantenga la tecla ctrl apretada<br/>para seleccionar varias etiquetas</p></td>';
 				echo '<td><select multiple id="etiqueta" name="idEtiqueta[]">';
-				$sql = "SELECT * FROM `Etiqueta`";
+				$sql = "SELECT * FROM `Etiqueta` Order by `Etiqueta`";
 				$query = mysql_query($sql);
 				while ($row  = mysql_fetch_assoc($query)) {
 					$etiqueta = $row['Etiqueta'];
