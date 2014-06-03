@@ -67,27 +67,27 @@ sesion();
 			</div>
 			<div id="main-content">
 				<?php if(isset($_GET["abm"])){
-	$abm=$_GET["abm"];
-	//comienzo formulario de abm
-	echo '<form onsubmit="return validar_formulario(this);" action=';
-	if(isset($_GET['id'])){
-		echo '"update.php"';	
-	}else{
-		echo '"insert.php"';
-	}
-	echo ' method="POST" name=';
-	if(isset($_GET['id'])){
-		echo '"modificacion"';	
-	}else{
-		echo '"alta"';
-	}
-	echo '>';
-	echo '<fieldset style="margin:auto; width">';
-	echo '<legend>';
-	if (isset($_GET["id"])){echo 'Modificación';}
-	else{echo 'Alta';}
-	echo ' de '.$abm.' </legend><br>';
-	//comienzo de tabla
+						$abm=$_GET["abm"];
+						//comienzo formulario de abm
+						echo '<form onsubmit="return validar_formulario(this);" action=';
+						if(isset($_GET['id'])){
+							echo '"update.php"';	
+						}else{
+							echo '"insert.php"';
+						}
+						echo ' method="POST" name=';
+						if(isset($_GET['id'])){
+							echo '"modificacion"';	
+						}else{
+							echo '"alta"';
+						}
+						echo '>';
+						echo '<fieldset style="margin:auto; width">';
+						echo '<legend>';
+						if (isset($_GET["id"])){echo 'Modificación';}
+						else{echo 'Alta';}
+						echo ' de '.$abm.' </legend><br>';
+						//comienzo de tabla
 
 	
 		
@@ -157,76 +157,105 @@ sesion();
 				</script>';
 				break;
 			case 'Libro':
+				if (isset($_GET["id"])){
+					$idlibro=$_GET["id"];
+					$sql="SELECT * FROM $abm WHERE idLibro= $idlibro";
+					$query=mysql_query($sql);
+					while ($row = mysql_fetch_array($query)){
+						$cantPaginas =  $row["cantPaginas"];
+						$idioma = $row["idioma"];
+						$isbn = $row["isbn"];
+						$nombre = $row["nombre"];
+						$origen = $row["origen"];
+						$precio = $row["precio"];
+						$resumen = $row["resumen"];
+						$stock = $row["stock"];
+						$stockMinimo = $row["stockMinimo"];
+					}
+					$sql= "SELECT * FROM libroAutor WHERE idLibro= $idlibro";
+					$query=mysql_query($sql);
+					$arrayautor=array();
+					while ($row = mysql_fetch_array($query)){
+						$arrayautor[]= $row["idAutor"];
+					}
+					$sql= "SELECT * FROM libroEtiqueta WHERE idLibro= $idlibro";
+					$query=mysql_query($sql);
+					$arrayetiqueta=array();
+					while ($row = mysql_fetch_array($query)){
+						$arrayetiqueta[]= $row["idEtiqueta"];
+					}
+
+				}
 			//cantPaginas
 				echo '<td>Cantidad de paginas: </td>';
 				echo '<td>';
 				echo '<input id="cantPaginas" type="number" name="cantPaginas" ';
-				if(isset($_GET["cantPaginas"])){
-					echo 'value="'.$_GET["cantPaginas"].'"';
+				if(isset($cantPaginas)){
+					echo 'value="'.$cantPaginas.'"';
 				}
 				echo '/><span id="obligatorio">*</span></td></tr><tr>';
 			//idioma
 				echo '<td>Idioma: </td>';
 				echo '<td>';
 				echo '<input id="idioma" type="text" name="idioma" ';
-				if(isset($_GET["idioma"])){
-					echo 'value="'.$_GET["idioma"].'"';
+				if(isset($idioma)){
+					echo 'value="'.$idioma.'"';
 				}
 				echo '/><span id="obligatorio">*</span></td></tr><tr>';
 			//isbn
 				echo '<td>ISBN: </td>';
 				echo '<td>';
 				echo '<input id="isbn" type="text" maxlength="13" name="isbn" ';
-				if(isset($_GET["isbn"])){
-					echo 'value="'.$_GET["isbn"].'"';
+				if(isset($isbn)){
+					echo 'value="'.$isbn.'"';
 				}
 				echo '/><span id="obligatorio">*</span></td></tr><tr>';
 			//nombre
 				echo '<td>Nombre: </td>';
 				echo '<td>';
 				echo '<input id="nombre" type="text" name="nombre" ';
-				if(isset($_GET["nombre"])){
-					echo 'value="'.$_GET["nombre"].'"';
+				if(isset($nombre)){
+					echo 'value="'.$nombre.'"';
 				}
 				echo '/><span id="obligatorio">*</span></td></tr><tr>';
 			//origen
 				echo '<td>Origen: </td>';
 				echo '<td>';
 				echo '<input id="origen" type="text" name="origen" ';
-				if(isset($_GET["origen"])){
-					echo 'value="'.$_GET["origen"].'"';
+				if(isset($origen)){
+					echo 'value="'.$origen.'"';
 				}
 				echo '/><span id="obligatorio">*</span></td></tr><tr>';
 			//precio
 				echo '<td>Precio: </td>';
 				echo '<td>';
 				echo '<input id="precio" type="number" step="0.05" name="precio" ';
-				if(isset($_GET["precio"])){
-					echo 'value="'.$_GET["precio"].'"';
+				if(isset($precio)){
+					echo 'value="'.$precio.'"';
 				}
 				echo '/><span id="obligatorio">*</span></td></tr><tr>';
 			//resumen
 				echo '<td>Resumen: </td>';
 				echo '<td>';
 				echo '<input id="resumen" type="textarea" name="resumen" ';
-				if(isset($_GET["resumen"])){
-					echo 'value="'.$_GET["resumen"].'"';
+				if(isset($resumen)){
+					echo 'value="'.$resumen.'"';
 				}
 				echo '/><span id="obligatorio">*</span></td></tr><tr>';
 			//stock
 			    echo '<td>Stock: </td>';
 				echo '<td>';
 				echo '<input id="stock" type="textarea" name="stock" ';
-				if(isset($_GET["stock"])){
-					echo 'value="'.$_GET["stock"].'"';
+				if(isset($stock)){
+					echo 'value="'.$stock.'"';
 				}
 				echo '/><span id="obligatorio">*</span></td></tr><tr>';
 			//stockminimo
 				echo '<td>Stock minimo: </td>';
 				echo '<td>';
 				echo '<input id="stockMinimo" type="textarea" name="stockMinimo" ';
-				if(isset($_GET["stockMinimo"])){
-					echo 'value="'.$_GET["stockMinimo"].'"';
+				if(isset($stockMinimo)){
+					echo 'value="'.$stockMinimo.'"';
 				}
 				echo '/><span id="obligatorio">*</span></td></tr><tr>';
 			//autor/es
@@ -238,8 +267,8 @@ sesion();
 					$apellidoynombre = $row['apellido'].', '.$row['nombre'];
 					$id = $row['idAutor'];
 					echo '<option value="'.$id.'" ';
-					if (isset($_GET['idAutor'])){
-						if($_GET['idAutor']==$id){
+					if (isset($arrayautor)){
+						if(in_array($id, $arrayautor)){
 							echo 'selected';
 						}
 					}
@@ -258,8 +287,8 @@ sesion();
 					$etiqueta = $row['Etiqueta'];
 					$id = $row['idEtiqueta'];
 					echo '<option value="'.$id.'" ';
-					if (isset($_GET['idEtiqueta'])){
-						if($_GET['idEtiqueta']==$id){
+					if (isset($arrayetiqueta)){
+						if(in_array($id, $arrayetiqueta)){
 							echo 'selected';
 						}
 					}
