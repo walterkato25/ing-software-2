@@ -4,7 +4,7 @@ sesion();
 ?>
 <html>
 <head>
-	<meta charset=utf-8"></meta>
+	<meta charset="utf-8"></meta>
 	<title>CookBook - Libros de Cocina</title>
 	<link href="../css/style.css" type="text/css" rel="stylesheet">
 	<!--<link href="images.jpg" type="img/icon" rel="shortcut icon">-->
