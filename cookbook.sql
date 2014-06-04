@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 02-06-2014 a las 16:49:00
+-- Tiempo de generación: 04-06-2014 a las 11:30:10
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -65,8 +65,7 @@ INSERT INTO `etiqueta` (`idEtiqueta`, `Etiqueta`) VALUES
 (13, 'Reposteria'),
 (15, 'Viandas'),
 (16, 'Jugos'),
-(17, 'Minutas'),
-(18, 'Criolla');
+(17, 'Minutas');
 
 -- --------------------------------------------------------
 
@@ -117,14 +116,6 @@ CREATE TABLE IF NOT EXISTS `libroautor` (
 --
 
 INSERT INTO `libroautor` (`idLibroAutor`, `idLibro`, `idAutor`) VALUES
-(15, 0, 14),
-(16, 0, 12),
-(17, 0, 13),
-(18, 0, 13),
-(19, 0, 14),
-(20, 0, 3),
-(21, 0, 12),
-(22, 0, 12),
 (23, 39, 3),
 (24, 40, 11),
 (25, 40, 12),
@@ -149,11 +140,6 @@ CREATE TABLE IF NOT EXISTS `libroetiqueta` (
 --
 
 INSERT INTO `libroetiqueta` (`idLibroEtiqueta`, `idLibro`, `idEtiqueta`) VALUES
-(9, 0, 18),
-(10, 0, 15),
-(11, 0, 15),
-(12, 0, 15),
-(13, 0, 13),
 (14, 39, 15),
 (15, 40, 15),
 (16, 41, 13),
