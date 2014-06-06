@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 04-06-2014 a las 11:30:10
+-- Tiempo de generación: 06-06-2014 a las 16:33:33
 -- Versión del servidor: 5.5.24-log
--- Versión de PHP: 5.4.3
+-- Versión de PHP: 5.3.13
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `autor` (
   `apellido` varchar(20) NOT NULL,
   `mail` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`idAutor`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
 
 --
 -- Volcado de datos para la tabla `autor`
@@ -43,7 +43,9 @@ INSERT INTO `autor` (`idAutor`, `nombre`, `apellido`, `mail`) VALUES
 (11, 'Walter', 'Kato', NULL),
 (12, 'Federico', 'Agustin', NULL),
 (13, 'Tomas', 'Bavo', NULL),
-(14, 'Carmen', 'Valldejuli', NULL);
+(14, 'Carmen', 'Valldejuli', NULL),
+(15, 'Roberto', 'Carlos', NULL),
+(24, 'Nicolas', 'Delia', NULL);
 
 -- --------------------------------------------------------
 
@@ -55,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `etiqueta` (
   `idEtiqueta` int(11) NOT NULL AUTO_INCREMENT,
   `Etiqueta` varchar(30) NOT NULL,
   PRIMARY KEY (`idEtiqueta`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=38 ;
 
 --
 -- Volcado de datos para la tabla `etiqueta`
@@ -65,7 +67,11 @@ INSERT INTO `etiqueta` (`idEtiqueta`, `Etiqueta`) VALUES
 (13, 'Reposteria'),
 (15, 'Viandas'),
 (16, 'Jugos'),
-(17, 'Minutas');
+(17, 'Minutas'),
+(26, 'comida arabe'),
+(28, 'La comida griega'),
+(33, 'Colaciones'),
+(37, 'comida exotica');
 
 -- --------------------------------------------------------
 
@@ -87,16 +93,19 @@ CREATE TABLE IF NOT EXISTS `libro` (
   `cantPaginas` int(11) NOT NULL,
   PRIMARY KEY (`idLibro`),
   UNIQUE KEY `isbn` (`isbn`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=42 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=61 ;
 
 --
 -- Volcado de datos para la tabla `libro`
 --
 
 INSERT INTO `libro` (`idLibro`, `isbn`, `stock`, `stockMinimo`, `img`, `origen`, `nombre`, `resumen`, `idioma`, `precio`, `cantPaginas`) VALUES
-(39, '8888888888888', 34, 3, NULL, 'wwer', '23', 'wgsdgsdfg', 'Español', 3, 34),
 (40, '5555555555555', 45, 4, NULL, 'rewrt', 'qwer', 'werfdgsd', 'Español', 45, 234),
-(41, '3333333333333', 78, 9, NULL, 'dfghj', 'tyuiop', 'esfbsfhob', 'q', 34, 4);
+(41, '3333333333333', 78, 9, NULL, 'dfghj', 'tyuiop', 'esfbsfhob', 'q', 34, 4),
+(56, '8888888888888', 65, 6, NULL, 'dgjh', 'jyjtr', 'jdgjh', 'gfdhg', 65, 24345),
+(57, '3425465745675', 234, 23, NULL, 'dfaf', 'hola', 'sadfgsdg', 'fdsf', 33, 453),
+(58, '4354376537564', 43, 3, NULL, 'fdghsdhg', 'gourmet', 'fsghfgf', 'dsgsd', 44, 235),
+(59, '8347988479849', 90, 9, NULL, 'kjdflksjkflsj', 'lalolanda', 'jkfdhkjdh', 'lolo', 98, 87);
 
 -- --------------------------------------------------------
 
@@ -109,18 +118,29 @@ CREATE TABLE IF NOT EXISTS `libroautor` (
   `idLibro` int(11) NOT NULL,
   `idAutor` int(11) NOT NULL,
   PRIMARY KEY (`idLibroAutor`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=28 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=65 ;
 
 --
 -- Volcado de datos para la tabla `libroautor`
 --
 
 INSERT INTO `libroautor` (`idLibroAutor`, `idLibro`, `idAutor`) VALUES
-(23, 39, 3),
 (24, 40, 11),
 (25, 40, 12),
 (26, 41, 12),
-(27, 41, 13);
+(27, 41, 13),
+(49, 0, 3),
+(51, 0, 24),
+(54, 0, 3),
+(55, 56, 12),
+(56, 57, 3),
+(57, 0, 3),
+(58, 58, 3),
+(59, 56, 3),
+(60, 59, 3),
+(61, 56, 3),
+(62, 56, 13),
+(63, 56, 3);
 
 -- --------------------------------------------------------
 
@@ -133,18 +153,29 @@ CREATE TABLE IF NOT EXISTS `libroetiqueta` (
   `idLibro` int(11) NOT NULL,
   `idEtiqueta` int(11) NOT NULL,
   PRIMARY KEY (`idLibroEtiqueta`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=56 ;
 
 --
 -- Volcado de datos para la tabla `libroetiqueta`
 --
 
 INSERT INTO `libroetiqueta` (`idLibroEtiqueta`, `idLibro`, `idEtiqueta`) VALUES
-(14, 39, 15),
 (15, 40, 15),
 (16, 41, 13),
 (17, 41, 16),
-(18, 41, 17);
+(18, 41, 17),
+(40, 0, 26),
+(42, 0, 26),
+(45, 0, 26),
+(46, 56, 26),
+(47, 57, 26),
+(48, 0, 16),
+(49, 58, 26),
+(50, 56, 28),
+(51, 59, 26),
+(52, 56, 33),
+(53, 56, 37),
+(54, 56, 26);
 
 -- --------------------------------------------------------
 
@@ -199,7 +230,14 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `mail` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`idUsuario`),
   UNIQUE KEY `nombreDeUsuario` (`nombreDeUsuario`,`dni/cuit`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `usuario`
+--
+
+INSERT INTO `usuario` (`idUsuario`, `nombreDeUsuario`, `password`, `apellido`, `nombre`, `fechaAlta`, `categoria`, `tel`, `cp`, `localidad`, `calle`, `piso`, `nro`, `depto`, `dni/cuit`, `mail`) VALUES
+(1, 'admin', 'admin', '', '', '0000-00-00', '', 0, 0, '', '', 0, 0, '', 0, NULL);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
