@@ -1,7 +1,5 @@
 
-html{height:100% !important;margin: 0px}
 body{
-	min-height: 100%;
 	font-family:"verdana";
 	background:url('../img/fondo.jpg') repeat;
 	margin:0;
@@ -42,7 +40,7 @@ select{
 	}
 #page{
 	width:960px;
-	height:auto!important;
+	height:auto;
 	margin:0 auto;
 	background-color: #EBEDF4;
 	padding:0 10px;
@@ -52,12 +50,12 @@ select{
 #header{
 	margin:5px auto;
 	width:100%; 
-	height:180px;
+	height:150px;
 	}
 #page-header{
 	margin-bottom:2.5px;
 	width:100%; 
-	height:120px; 
+	height:80%; 
 	background:url('../img/header.jpg');
 	border-radius:5px;
 	}
@@ -75,7 +73,7 @@ select{
 #page-header a:active{color:#EBEDF4; text-decoration:none;}
 #header-menu{
 	width:100%;
-	height:30px; 
+	height:20%; 
 	background-color:#5D1746;
 	padding:auto;
 	border-radius:5px;
@@ -87,30 +85,11 @@ ul{
 	border-width:0px;
 	}
 #navegacion li{float:left;padding-top:6px; height:100%; font-weight:bold;}
-#navegacion a{height:18px;}
-#navegacion a:link{color:#EBEDF4;background-color:#5D1746;text-decoration:none;padding:6px 20px;}
-#navegacion a:visited{color:#EBEDF4;background-color:#5D1746;text-decoration:none;padding:6px 20px;}
-#navegacion a:hover{color:#EBEDF4;background-color:#4C4778;text-decoration:none;padding:6px 20px;}
-#navegacion a:active{background-color:#4C4778;text-decoration:none;padding:6px 20px;}
-#actual a:link{color:#EBEDF4;background-color:#4C4778;text-decoration:none;padding:6px 20px;}
-#actual a:visited{color:#EBEDF4;background-color:#4C4778;text-decoration:none;padding:6px 20px;}
-#actual a:hover{color:#EBEDF4;background-color:#4C4778;text-decoration:none;padding:6px 20px;}
-#actual a:active{color:#EBEDF4;background-color:#4C4778;text-decoration:none;padding:6px 20px;}
-#sub-menu{
-	width:100%;
-	height:30px; 
-	background-color:#4C4778;
-	padding:auto;
-	border-radius:5px;	
-	}
-#sub-menu a:link{color:#EBEDF4;background-color:#4C4778;text-decoration:none;padding:6px 20px;}
-#sub-menu a:visited{color:#EBEDF4;background-color:#4C4778;text-decoration:none;padding:6px 20px;}
-#sub-menu a:hover{color:#000000;background-color:#B9C7C9;text-decoration:none;padding:6px 20px;}
-#sub-menu a:active{background-color:#B9C7C9;text-decoration:none;padding:6px 20px;}
-#sub-actual a:link{color:#000000;background-color:#EBEDF4;text-decoration:none;padding:6px 20px;}
-#sub-actual a:visited{color:#000000;background-color:#EBEDF4;text-decoration:none;padding:6px 20px;}
-#sub-actual a:hover{color:#000000;background-color:#EBEDF4;text-decoration:none;padding:6px 20px;}
-#sub-actual a:active{color:#000000;background-color:#EBEDF4;text-decoration:none;padding:6px 20px;}
+#navegacion li a{height:18px;}
+#navegacion li a:link{color:#EBEDF4;background-color:#5D1746;text-decoration:none;padding:6px 20px;}
+#navegacion li a:visited{color:#EBEDF4;background-color:#5D1746;text-decoration:none;padding:6px 20px;}
+#navegacion li a:hover{color:#EBEDF4;background-color:#4C4778;text-decoration:none;padding:6px 20px;}
+#navegacion li a:active{background-color:#4C4778;text-decoration:none;padding:6px 20px;}
 #login{
 	float:right;
 	padding:6px 20px 0; 
@@ -126,33 +105,36 @@ ul{
 	background-color:transparent;
 	margin:5px;
 	width:100%;
-	height:930px;
+	height:100%;
 	padding-top: 15px;
 	}
 
-
+#left-bar{
+	width:250px;
+	height:100%;
+	float:left;
+	margin-left:15px;
+	}
 #main-content{
-	width:auto !important;
+	width:650px;
 	height:auto;
-	margin:auto;
+	margin:0;
+	float:left;
 	padding:15px;
 	background-color:transparent;
 	border-radius:5px;
 	}
-#footer push{
+#footer{
 	font-size:0.6em;
-	background-color:#4C4778;
-	width:100%;
+	background-color:#FBD949;
+	width:auto;
 	height:auto;
 	clear:both;
 	padding:5px 0;
-	bottom:0px !important;
+	bottom:0px;
 	text-align:center;
 	border-radius:5px;
 	}
-#footer #push{
-	height:4em;
-}
 h5 {font-size:1.2em;
 	font-weight:bold;
 	}
@@ -160,9 +142,6 @@ h5 a:link{color:#01214A;background-color:#EBEDF4;text-decoration:none;}
 h5 a:visited{color:#01214A;background-color:#EBEDF4;text-decoration:none;}
 h5 a:hover{color:#01214A;background-color:#EBEDF4;text-decoration:none;}
 h5 a:active{background-color:#EBEDF4;text-decoration:none;} 
-h4 p{
-	margin:auto; text-align: center
-}
 table tr td p{font-size:0.7em}
 select{width:150px}
 #agregar{font-size:0.9em; margin:5px 5px}

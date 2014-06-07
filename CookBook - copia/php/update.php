@@ -72,7 +72,7 @@
 			break;
 			case 'Autor':
 			echo '<script language=javascript> 
-			alert("Error al realizar la modificacion. Ya existe un autor con ese nombre."); 
+			alert("Error al realizar la modificacion. Ya existe una autor con ese nombre."); 
 			self.history.back();</script>';
 			break;
 			case 'Libro':
