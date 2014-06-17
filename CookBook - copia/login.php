@@ -21,29 +21,23 @@ sesion();
 					<li>
 						<a href="index.php">Inicio</a>
 					</li>
-					<li>
-						<a href="aboutUs.php">Conocenos</a>
-					</li>
-					<li>
-						<a href="contacto.php">Contacto</a>
-					</li>
-				    <?php
+				   <!--<?php
 						if($_SESSION){
-							if($usuario=="admin"){
-								echo '<li>
-								<a href="abm.php">ABM</a>
-								</li>';
-							}
+						if($usuario=="admin"){
+							echo '<li>
+							<a href="abm.php">ABM</a>
+							</li>';
 						}
+					}
 					 
-						if($_SESSION){
+							if($_SESSION){
 							echo '<span id=login><a href="desconectar_usuario.php">Logout</a></span>';
 							//aca iba el usuario
 							echo'<span id=login>Usuario:  '.$usuario.' </span>';
-						}else{
-							echo '<li><a href="login.php">Login</a></li>';
-						}
-					?>
+							}else{
+								echo '<span id=login><a href="login.php">Login</a></span>';
+							}
+						?>-->
 				</ul> 
 				
 		
@@ -61,7 +55,7 @@ sesion();
 							<label>Usuario:</label><input type="text" name="user" class="required"><br><br>
 							<label>Contraseña:</label><input type="password" name="pass" class="required"><br><br>
 							<input type="submit" name="enviar" value="Iniciar Sesión" style="margin-left:150px;"> <br><br>
-							<span> <a href="crearcuenta.php">Crear cuenta</a></span>
+							<span> <a href="altaUsuario.php">Crear cuenta</a></span>
 							</fieldset>
                  </form>   
 			</div>

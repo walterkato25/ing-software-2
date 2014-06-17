@@ -18,16 +18,16 @@ sesion();
 							
 			<div id="header-menu">
 				<ul id="navegacion">
-					<li>
+					<li id="navegacion">
 						<a href="index.php">Inicio</a>
 					</li>
-					<li>
+					<!--<li id="navegacion">
 						<a href="aboutUs.php">Conocenos</a>
 					</li>
-					<li>
+					<li id="navegacion">
 						<a href="contacto.php">Contacto</a>
-					</li>
-					<li>
+					</li>-->
+					<li id="actual">
 						<a href="abm.php">ABM</a>
 					</li>
 				<!--<?php
@@ -47,29 +47,44 @@ sesion();
 								echo '<span id=login><a href="login.php">Login</a></span>';
 							}
 						?>-->
-				</ul> 
-				
-		
+				</ul> 		
+			</div>
+
+			<div id="sub-menu">
+				<ul id="navegacion">
+					<li <?php 
+if(isset($_GET["abm"])){
+	if($_GET["abm"]=="Autor"){
+		echo ' id="sub-actual" ';
+	}
+}
+?>><a href="abm.php?abm=Autor">Autores</a></li>
+					<li
+					<?php 
+if(isset($_GET["abm"])){
+	if($_GET["abm"]=="Etiqueta"){
+		echo ' id="sub-actual" ';
+	}
+}
+?>><a href="abm.php?abm=Etiqueta">Etiquetas</a></li>
+					<li
+					<?php 
+						if(isset($_GET["abm"])){
+							if($_GET["abm"]=="Libro"){
+								echo ' id="sub-actual" ';
+							}
+						}
+?>>
+					<a href="abm.php?abm=Libro">Libros</a></li>				
 			</div>
 		</div>
 
 				<div id="content">
-			<div id="left-bar">
-				<?php
-					
-				 		echo '<h5><a href="abm.php?abm=Autor">Autores</a></h5>
-						<h5><a href="abm.php?abm=Etiqueta">Etiquetas</a></h5>
-					 	<h5><a href="abm.php?abm=Libro">Libros</a></h5>';
-			
-					?>
-					
-								
-			</div>
 			<div id="main-content">
 				<?php
 					
 					if(isset($_GET["abm"])){
-						echo '<fieldset style="margin:auto; width">';
+						echo '<fieldset style="margin:auto; width; float:left">';
 						$abm=$_GET["abm"];
 						if($abm=='Autor'){
 							echo '<legend>'.$abm.'es </legend>';
@@ -152,13 +167,16 @@ sesion();
 						}
 						echo "<tr><td><span ><a id='agregar' href=\"php/formabm.php?abm=$abm";
 						echo "\">Agregar... </span></td></tr></table>";
-
+						echo '</fieldset>';
+					}else{
+						echo "<h4><p>Seleccione un campo para realizar alta, baja o modificación</p></h4>";
 					}
-					echo '</fieldset>';
+					
 			?>
 			</div>
+			<br/>
 		</div>
-		<div id="footer">CookBooks 2014</div>	
+		<!--<div id="footer">CookBooks 2014</div>-->	
 	</div>
 	
 </body>

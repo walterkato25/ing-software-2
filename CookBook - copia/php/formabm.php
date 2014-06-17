@@ -21,14 +21,14 @@ sesion();
 					<li>
 						<a href="../index.php">Inicio</a>
 					</li>
-					<li>
+					<!--<li>
 						<a href="../aboutUs.php">Conocenos</a>
 					</li>
 					<li>
 						<a href="../contacto.php">Contacto</a>
-					</li>
-					<li>
-						<a href="../abm.php">ABM</a>
+					</li>-->
+					<li id="actual">
+						<a  href="../abm.php">ABM</a>
 					</li>
 				<!--<?php
 						if($_SESSION){
@@ -51,20 +51,37 @@ sesion();
 				
 		
 			</div>
+			<div id="sub-menu">
+				<ul id="navegacion">
+					<li <?php 
+if(isset($_GET["abm"])){
+	if($_GET["abm"]=="Autor"){
+		echo ' id="sub-actual" ';
+	}
+}
+?>><a href="../abm.php?abm=Autor">Autores</a></li>
+					<li
+					<?php 
+if(isset($_GET["abm"])){
+	if($_GET["abm"]=="Etiqueta"){
+		echo ' id="sub-actual" ';
+	}
+}
+?>><a href="../abm.php?abm=Etiqueta">Etiquetas</a></li>
+					<li
+					<?php 
+						if(isset($_GET["abm"])){
+							if($_GET["abm"]=="Libro"){
+								echo ' id="sub-actual" ';
+							}
+						}
+?>>
+					<a href="../abm.php?abm=Libro">Libros</a></li>				
+			</div>
 		</div>
 
 				<div id="content">
-			<div id="left-bar">
-				<?php
-					
-				 		echo '<h5><a href="../abm.php?abm=Autor">Autor</a></h5>
-						<h5><a href="../abm.php?abm=Etiqueta">Etiqueta</a></h5>
-					 	<h5><a href="../abm.php?abm=Libro">Libros</a></h5>';
 			
-					?>
-					
-								
-			</div>
 			<div id="main-content">
 				<?php if(isset($_GET["abm"])){
 						$abm=$_GET["abm"];
@@ -96,10 +113,10 @@ sesion();
 		}
 		echo '<input type="hidden" name="abm" value="'.$abm.'" />'; //oculto para alta
 		
-		echo '<table>';
-	//altas/modificacion todo menos vehiculo
+		if($abm != "Libro"){echo '<table>';
+	echo '<tr>';}//comienzo encabezado normal}
 	
-		echo '<tr>';//comienzo encabezado normal
+		
 		
 		//input de AM
 		switch($abm){
@@ -187,15 +204,17 @@ sesion();
 					}
 
 				}
-			//cantPaginas
-				echo '<td>Cantidad de paginas: </td>';
+			
+				echo '<div id="libro-text" style="float:left">';
+				//nombre
+				echo '<table><tr><td>Nombre: </td>';
 				echo '<td>';
-				echo '<input id="cantPaginas" min = 0 type="number" name="cantPaginas" ';
-				if(isset($cantPaginas)){
-					echo 'value="'.$cantPaginas.'"';
+				echo '<input id="nombre" type="text" name="nombre" ';
+				if(isset($nombre)){
+					echo 'value="'.$nombre.'"';
 				}
 				echo '/><span id="obligatorio">*</span></td></tr><tr>';
-			//idioma
+				//idioma
 				echo '<td>Idioma: </td>';
 				echo '<td>';
 				echo '<input id="idioma" type="text" name="idioma" ';
@@ -203,23 +222,7 @@ sesion();
 					echo 'value="'.$idioma.'"';
 				}
 				echo '/><span id="obligatorio">*</span></td></tr><tr>';
-			//isbn
-				echo '<td>ISBN: </td>';
-				echo '<td>';
-				echo '<input id="isbn" type="text" maxlength="13" name="isbn" ';
-				if(isset($isbn)){
-					echo 'value="'.$isbn.'"';
-				}
-				echo '/><span id="obligatorio">*</span></td></tr><tr>';
-			//nombre
-				echo '<td>Nombre: </td>';
-				echo '<td>';
-				echo '<input id="nombre" type="text" name="nombre" ';
-				if(isset($nombre)){
-					echo 'value="'.$nombre.'"';
-				}
-				echo '/><span id="obligatorio">*</span></td></tr><tr>';
-			//origen
+				//origen
 				echo '<td>Origen: </td>';
 				echo '<td>';
 				echo '<input id="origen" type="text" name="origen" ';
@@ -227,39 +230,7 @@ sesion();
 					echo 'value="'.$origen.'"';
 				}
 				echo '/><span id="obligatorio">*</span></td></tr><tr>';
-			//precio
-				echo '<td>Precio: </td>';
-				echo '<td>';
-				echo '<input id="precio" min = 0 type="number" step="0.05" name="precio" ';
-				if(isset($precio)){
-					echo 'value="'.$precio.'"';
-				}
-				echo '/><span id="obligatorio">*</span></td></tr><tr>';
-			//resumen
-				echo '<td>Resumen: </td>';
-				echo '<td>';
-				echo '<input id="resumen" type="textarea" name="resumen" ';
-				if(isset($resumen)){
-					echo ' value="'.$resumen.'"';
-				}
-				echo '/><span id="obligatorio">*</span></td></tr><tr>';
-			//stock
-			    echo '<td>Stock: </td>';
-				echo '<td>';
-				echo '<input id="stock" min = 0 type="number" name="stock" ';
-				if(isset($stock)){
-					echo 'value="'.$stock.'"';
-				}
-				echo '/><span id="obligatorio">*</span></td></tr><tr>';
-			//stockminimo
-				echo '<td>Stock minimo: </td>';
-				echo '<td>';
-				echo '<input id="stockMinimo" min= 0 type="number" name="stockMinimo" ';
-				if(isset($stockMinimo)){
-					echo 'value="'.$stockMinimo.'"';
-				}
-				echo '/><span id="obligatorio">*</span></td></tr><tr>';
-			//autor/es
+				//autor/es
 				echo '<td>Autor/es: <p>Mantenga la tecla ctrl apretada<br/>para seleccionar varios autores</p></td>';
 				echo '<td><select multiple id="autor" name="idAutor[]" >';
 				$sql = "SELECT * FROM `Autor` order by `apellido`";
@@ -278,8 +249,7 @@ sesion();
 				echo '</select><span id="obligatorio">*</span>';
 				echo '</td><td><a id="agregar" href="formabm.php?abm=Autor">Nuevo</a>';
 				echo '</td></tr><tr>';
-				
-			//etiqueta/s
+				//etiqueta/s
 				echo '<td>Etiqueta/s: <p>Mantenga la tecla ctrl apretada<br/>para seleccionar varias etiquetas</p></td>';
 				echo '<td><select multiple id="etiqueta" name="idEtiqueta[]" >';
 				$sql = "SELECT * FROM `Etiqueta` Order by `Etiqueta`";
@@ -297,6 +267,76 @@ sesion();
 				}
 				echo '</select><span id="obligatorio">*</span>';
 				echo '</td><td><a id="agregar" href="formabm.php?abm=Etiqueta">Nueva</a>';
+				echo '</tr></table></div>';
+				echo '<div id="libro-number" style="float:right"><table><tr>';
+				//isbn
+				echo '<td>ISBN: </td>';
+				echo '<td>';
+				echo '<input id="isbn" type="text" maxlength="13" name="isbn" ';
+				if(isset($isbn)){
+					echo 'value="'.$isbn.'"';
+				}
+				echo '/><span id="obligatorio">*</span></td></tr><tr>';
+				//precio
+				echo '<td>Precio: </td>';
+				echo '<td>';
+				echo '<input id="precio" min = 0 type="number" step="0.05" name="precio" ';
+				if(isset($precio)){
+					echo 'value="'.$precio.'"';
+				}
+				echo '/><span id="obligatorio">*</span></td></tr><tr>';
+				//stock
+			    echo '<td>Stock: </td>';
+				echo '<td>';
+				echo '<input id="stock" min = 0 type="number" name="stock" ';
+				if(isset($stock)){
+					echo 'value="'.$stock.'"';
+				}
+				echo '/><span id="obligatorio">*</span></td></tr><tr>';
+				//stockminimo
+				echo '<td>Stock minimo: </td>';
+				echo '<td>';
+				echo '<input id="stockMinimo" min= 0 type="number" name="stockMinimo" ';
+				if(isset($stockMinimo)){
+					echo 'value="'.$stockMinimo.'"';
+				}
+				echo '/><span id="obligatorio">*</span></td></tr><tr>';
+				//cantPaginas
+				echo '<td>Cantidad de paginas: </td>';
+				echo '<td>';
+				echo '<input id="cantPaginas" min = 0 type="number" name="cantPaginas" ';
+				if(isset($cantPaginas)){
+					echo 'value="'.$cantPaginas.'"';
+				}
+				echo '/><span id="obligatorio">*</span></td></tr><tr>';
+				echo '</tr></table></div>';
+				echo "<br/>";
+				echo '<div id="resumen" style="float:left"><table><tr>';
+				
+				//resumen
+				echo '<td>Resumen: </td>';
+				echo '<td>';
+				echo '<textarea id="resumen" rows=10 cols=50 style="width: 700px; height: 219px;" name="resumen" ';
+				
+				echo '/>';
+				if(isset($resumen)){
+					echo $resumen;
+				}
+				echo '</textarea><span id="obligatorio">*</span></td></tr><tr>';
+				echo '</tr></table>';
+				
+			
+			
+			
+			
+			
+			
+			
+			
+			
+				
+			
+				
 				echo '<script type="text/javascript">
 					document.getElementById( "cantPaginas" ).focus();
 					function validar_formulario(form){
@@ -370,25 +410,35 @@ sesion();
 				</script>';
 			break;
 		}
+		
+	if($abm != "Libro"){
 		echo '</td>'; //fin inputs normal
 		echo '</tr>'; //fin encabezado normal
-	
 	echo '<br><tr>';
-	echo '<td></td>';
-	echo '<td><input id="submit" type="submit" name="Enviar" value="Enviar" />';
-	echo '<input type="button" name="Cancelar" value="Cancelar" onClick="self.history.back();"/></td></tr>';
-	echo '</table>';	
+	echo '<td></td><td>';
+	}else{
+		echo '<br>';
+		echo '<div style="float:right">';
+	}
+	echo '<input id="submit" type="submit" name="Enviar" value="Enviar" />';
+	echo '<input type="button" name="Cancelar" value="Cancelar" onClick="self.history.back();"/>';
+	if($abm != "Libro"){
+		echo '</td></tr></table>';	
+	}else{
+		echo '</div></div>';
+	}
+	echo '<br>';
 	echo '<span id= "obligatorio">Los campos con * deben llenarse obligatoriamente</span>';
 	echo '</fieldset>';
 	echo '</form>';	
 }
 ?>
-			</div>
+			</div>	<br/>
 		</div>
-		</br>
-
-		<div id="footer">CookBooks 2014</div>
 	
+
+		
+		<!--<div id="footer">CookBooks 2014</div>-->
 	</div>
 	
 </body>
