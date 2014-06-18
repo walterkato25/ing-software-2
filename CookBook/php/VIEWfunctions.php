@@ -53,7 +53,7 @@ function verLibro(){
 		echo "<tr><td>$nombreLibro</td>";
 		echo "<td>$nombreAutor";
 		if ($cantAutores > 1){
-			echo "<a href='javascript:void(0)' title='$otros'> y otros...</a>";
+			echo "<a href='javascript:void(0)' title='$otros' style='text-decoration:none; color:black'> <u>y otros...</u></a>";
 		}
 		echo "</td>";
 		$sql= "SELECT etiqueta FROM `etiqueta` WHERE `idEtiqueta` in (SELECT idEtiqueta FROM `libroetiqueta` WHERE `idLibro`=$id)";
@@ -72,7 +72,7 @@ function verLibro(){
 }
 
 function verUsuario(){
-	echo '<th>Nombre de Usuario</th><th>Apellido</th><th>Nombre</th><th>DNI/CUIT</th>';
+	echo '<th>Nombre de Usuario</th><th>Apellido</th><th>Nombre</th><th>DNI/CUIT</th><th>Categoría</th>';
 	echo'<th>Acciones</th></tr>';
 	$query=select("Usuario","nombreDeUsuario", true);
 	while ($row  = mysql_fetch_assoc($query)) {
@@ -80,6 +80,7 @@ function verUsuario(){
 		echo '<td>'.$row["apellido"].'</td>';
 		echo '<td>'.$row["nombre"].'</td>';
 		echo '<td>'.$row["dni/cuit"].'</td>';
+		echo '<td>'.$row["categoria"].'</td>';
 		modificarEliminar("Usuario", $row["idUsuario"]);
 	}
 }

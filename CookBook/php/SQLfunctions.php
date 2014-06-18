@@ -1,7 +1,14 @@
 <?php
 require_once("config.php");
-	function update($tabla, $atributo, $valor, $id){
-		$sql="UPDATE `$tabla` SET $atributo = \"$valor\" WHERE id$tabla=$id";
+	function update($tabla, $atributosvalores, $id){
+		$toUpdate="";
+		foreach ($atributosvalores as $atributo => $valor) {
+			if($toUpdate!=""){
+				$toUpdate.=", ";
+			}
+			$toUpdate.="$atributo = \"$valor\"";
+		}
+		$sql="UPDATE `$tabla` SET $toUpdate WHERE id$tabla=$id";
 		mysql_query($sql) or die ("<script type='text/javascript'> alert(\"no se ha podido insertar el elemento".mysql_error()."\")</script>");
 	}
 	function insert($tabla, $atributosvalores){

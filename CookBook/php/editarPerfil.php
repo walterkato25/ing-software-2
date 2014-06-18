@@ -13,10 +13,11 @@
 	function inputDinamico($tabla, $nombre, $valor, $id, $type="text"){
 		require_once("SQLfunctions.php");
 		if(isset($_POST[$nombre])){
-			update($tabla, $nombre, $_POST[$nombre], $id);
+			$atributosvalores[$nombre]=$_POST[$nombre];
+			update($tabla, $atributosvalores, $id);
 			echo "<p id='modificado'>El campo $nombre se ha cambiado correctamente</p>";
 		}
-		echo '<form name="'.$nombre.'" method="POST" >';
+		echo '<form name="'.$nombre.'" method="POST">';
 		echo "<label for=$nombre>$nombre</label>: ";
 		if(isset($_POST['update']) && $_POST['update']==$nombre){
 			$a=$_POST['update'];
@@ -31,7 +32,7 @@
 	    	echo '" />';
 		}
 		if(isset($_POST['update']) && $_POST['update']==$nombre){
-	       			echo "<input value='Save' type='submit' />";
+	       	echo "<input value='Save' type='submit' />";
    			echo "<input value='Cancel' type='button' onclick='location.reload();' />";
 		}else{
    			echo "<input name='update' type='hidden' value='$nombre' />";
