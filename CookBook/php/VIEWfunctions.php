@@ -30,22 +30,30 @@ function verAutor(){
 	}
 }
 function verLibro(){
-	echo '<th>Nombre</th><th>Autor</th><th>Etiquetas</th><th>Eliminado</th>';
+	echo '<th>Nombre</th><th>Autores</th><th>Etiquetas</th><th>Precio</th>';
 	echo'<th>Acciones</th></tr>';
 	$query = select("Libro","Nombre", true);
 	while ($row  = mysql_fetch_assoc($query)) {
 		$nombreLibro= $row["nombre"];
 		$id= $row["idLibro"];
-		$baja=$row["baja"];
+		$precio=$row["precio"];
 		$sql= "SELECT apellido, nombre FROM `autor` WHERE `idAutor` in (SELECT idAutor FROM `libroautor` WHERE `idLibro`=$id)";
 		$queryautor= mysql_query($sql);
 		$cantAutores = mysql_num_rows($queryautor);
-		$autor = mysql_fetch_assoc($queryautor);
-		$nombreAutor= $autor["apellido"].', '.$autor["nombre"];
+		$nombreAutor='';
+		$otros='';
+		while ($row = mysql_fetch_array($queryautor)){
+			if($nombreAutor==''){
+				$nombreAutor= $row["apellido"].', '.$row["nombre"];
+			}else{
+				$otros=$otros.$row["apellido"].', '.$row["nombre"].'&#13;';
+			}
+		}
+		
 		echo "<tr><td>$nombreLibro</td>";
 		echo "<td>$nombreAutor";
 		if ($cantAutores > 1){
-			echo "<a href='javascript:void(0)' title=''> y otros...</a>";
+			echo "<a href='javascript:void(0)' title='$otros'> y otros...</a>";
 		}
 		echo "</td>";
 		$sql= "SELECT etiqueta FROM `etiqueta` WHERE `idEtiqueta` in (SELECT idEtiqueta FROM `libroetiqueta` WHERE `idLibro`=$id)";
@@ -58,20 +66,20 @@ function verLibro(){
 			$listaEtiquetas = $listaEtiquetas.$etiqueta["etiqueta"]; 
 		}
 		echo "<td>$listaEtiquetas</td>";
-		echo "<td>$baja</td>";
+		echo "<td style='text-align:right'>\$".number_format($precio,2,',','.')."</td>";
 		modificarEliminar("Libro", $id);
 	}
 }
 
 function verUsuario(){
-	echo '<th>Nombre de Usuario</th><th>Apellido</th><th>Nombre</th><th>Eliminado</th>';
+	echo '<th>Nombre de Usuario</th><th>Apellido</th><th>Nombre</th><th>DNI/CUIT</th>';
 	echo'<th>Acciones</th></tr>';
 	$query=select("Usuario","nombreDeUsuario", true);
 	while ($row  = mysql_fetch_assoc($query)) {
 		echo '<tr><td>'.$row["nombreDeUsuario"].'</td>';
-		echo '<td>'.$row["nombre"].'</td>';
 		echo '<td>'.$row["apellido"].'</td>';
-		echo '<td>'.$row["baja"].'</td>';
+		echo '<td>'.$row["nombre"].'</td>';
+		echo '<td>'.$row["dni/cuit"].'</td>';
 		modificarEliminar("Usuario", $row["idUsuario"]);
 	}
 }
