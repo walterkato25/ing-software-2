@@ -1,18 +1,19 @@
 <?php
 session_start();
 
-if ($_SESSION['idUsuario'])
-{
+if (isset($_SESSION['idUsuario'])){
 	session_destroy();
 	echo '<script language = javascript>
 	alert("Ha cerrado sesion correctamente")
 	self.history.back()
-	</script>';}
+	</script>';
+}
 else
 {
 	echo '<script language = javascript>
 	alert("No ha iniciado ninguna sesion")
-	self.location = "login.php"
-	</script>';}
+	self.location = "../login.php"
+	</script>';
+}
 	
 ?>

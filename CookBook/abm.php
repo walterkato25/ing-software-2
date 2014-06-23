@@ -3,6 +3,9 @@ require_once("php/sesion.php");
 require_once("php/config.php");
 require_once("php/VIEWfunctions.php");
 sesion();
+if(!$_SESSION || !$categoria=="administrador"){
+	header("location:index.php");
+}
 ?>
 <html>
 <head>
@@ -29,26 +32,29 @@ sesion();
 					<li id="navegacion">
 						<a href="contacto.php">Contacto</a>
 					</li>-->
-					<li id="actual">
-						<a href="abm.php">ABM</a>
-					</li>
-				<!--<?php
+					
+				<?php
 						if($_SESSION){
-						if($usuario=="admin"){
-							echo '<li>
-							<a href="abm.php">ABM</a>
+							if($categoria=="administrador"){
+								echo '<li id="actual" >
+								<a href="abm.php">ABM</a>
+								</li>';
+							}
+							echo'</ul><ul id=navegacion style=float:right>
+							<li>
+							<a href="menuUsuario.php">Usuario:  '.$usuario.' </a>
+							</li>
+							<li>
+							<a href="php/desconectarUsuario.php">Logout</a>
+							</li>';
+						}else{
+							echo'<ul id=navegacion style=float:right>
+							<li>
+							<a href="login.php">Login</a>
 							</li>';
 						}
-					}
-					 
-							if($_SESSION){
-							echo '<span id=login><a href="desconectar_usuario.php">Logout</a></span>';
-							//aca iba el usuario
-							echo'<span id=login>Usuario:  '.$usuario.' </span>';
-							}else{
-								echo '<span id=login><a href="login.php">Login</a></span>';
-							}
-						?>-->
+						
+					?>
 				</ul> 		
 			</div>
 

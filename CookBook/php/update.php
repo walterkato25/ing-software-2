@@ -14,7 +14,7 @@ function claveAutor(){
 function claveLibro(){
 	return $_POST["isbn"];
 }
-function reject($tabla, $clave, $valor){
+function reject($tabla, $clave){
 	echo '<script charset="UTF-8"> 
 			alert("Error al realizar la modificacion. Ya existe '.$tabla.' con la clave '.$clave().'."); 
 			self.history.back();</script>';
@@ -37,7 +37,7 @@ function reject($tabla, $clave, $valor){
 		}
 		$funcionValidar="validar_$abm";
 		$clave="clave$abm";
-		$validacion=$funcionValidar($clave());
+		$validacion=$funcionValidar($clave(),$id);
 	}
 	if($validacion){
 		update($abm, $toUpdate, $id);
@@ -62,24 +62,6 @@ function reject($tabla, $clave, $valor){
 			self.history.go(-2);
 			</script>';
 	}else{
-		reject($abm,$clave,$valor);
-		/*switch($abm){
-			case 'Etiqueta':
-			echo '<script language=javascript> 
-			alert("Error al realizar la modificacion. Ya existe una etiqueta con ese nombre."); 
-			self.history.back();</script>';
-			break;
-			case 'Autor':
-			echo '<script language=javascript> 
-			alert("Error al realizar la modificacion. Ya existe un autor con ese nombre."); 
-			self.history.back();</script>';
-			break;
-			case 'Libro':
-			echo '<script language=javascript> 
-			alert("Error al realizar la modificacion. Ya existe un Libro con ese ISBN."); 
-			self.history.back();</script>';
-			break;
-
-		}*/
+		reject($abm,$clave);
 	}
 ?>

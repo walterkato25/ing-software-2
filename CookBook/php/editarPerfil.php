@@ -1,7 +1,7 @@
 <?php
 	function getCliente($id){
 		require_once("config.php");
-		$sql="SELECT nombreDeUsuario , apellido , nombre, tel, `dni/cuit`, mail FROM `usuario` WHERE `idUsuario` = $id";
+		$sql="SELECT nombreDeUsuario , apellido , nombre, tel, `dni/cuit`, mail, calle, nro, piso, depto, localidad, cp  FROM `usuario` WHERE `idUsuario` = $id";
 		$query=mysql_query($sql);
 		while($row = mysql_fetch_assoc($query)){
 			foreach ($row as $atributo => $valor) {

@@ -23,10 +23,14 @@
 		}else //Usuario logueado correctamente
 		{
 			$_SESSION['idUsuario'] = $fila['idUsuario'];
-			$_SESSION['Usuario'] = $fila['Usuario'];
-				
-			header("Location: abm.php");
+			$_SESSION['Usuario'] = $fila['nombreDeUsuario'];
+			$_SESSION['categoria']	= $fila['categoria'];
+			if($_SESSION['categoria']=="usuario"){
+				$_SESSION['carrito'] = array();
+			}
+			header("Location: ../index.php");
 		}
+
 	
 ?>  
 			

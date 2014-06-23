@@ -32,9 +32,7 @@ function insertarLibro(){
 	}
 }
 
-function insertarUsuario(){
-	
-}
+
 if(isset($_POST['abm'])){
 	$se_agrego = False;
 	$abm = $_POST['abm'];
