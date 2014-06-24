@@ -22,7 +22,7 @@ sesion();
 						<a href="index.php">Inicio</a>
 					</li>
 					<?php
-					if ((!$_SESSION) || ($categoria=="usuario")){					
+					if (!(isset($_SESSION["categoria"])) || ($_SESSION["categoria"]=="usuario")){					
 					echo '<li>
 						<a href="catalogo.php">Catalogo</a>
 					</li>';
@@ -34,6 +34,12 @@ sesion();
 							if($categoria=="administrador"){
 								echo '<li>
 								<a href="abm.php">ABM</a>
+								</li>
+								<li>
+								<a href="usuarios.php">Usuarios</a>
+								</li>
+								<li>
+									<a href="pedidos.php">Pedidos</a>
 								</li>';
 							}
 							echo'</ul><ul id=navegacion style=float:right>

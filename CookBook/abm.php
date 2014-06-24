@@ -3,7 +3,7 @@ require_once("php/sesion.php");
 require_once("php/config.php");
 require_once("php/VIEWfunctions.php");
 sesion();
-if(!$_SESSION || !$categoria=="administrador"){
+if($_SESSION["categoria"]!="administrador"){
 	header("location:index.php");
 }
 ?>
@@ -36,8 +36,14 @@ if(!$_SESSION || !$categoria=="administrador"){
 				<?php
 						if($_SESSION){
 							if($categoria=="administrador"){
-								echo '<li id="actual" >
+								echo '<li>
 								<a href="abm.php">ABM</a>
+								</li>
+								<li>
+								<a href="usuarios.php">Usuarios</a>
+								</li>
+								<li>
+									<a href="pedidos.php">Pedidos</a>
 								</li>';
 							}
 							echo'</ul><ul id=navegacion style=float:right>
@@ -86,15 +92,7 @@ if(!$_SESSION || !$categoria=="administrador"){
 						}
 					?>
 					><a href="abm.php?abm=Libro">Libros</a></li>
-					<li
-					<?php 
-						if(isset($_GET["abm"])){
-							if($_GET["abm"]=="Usuario"){
-								echo ' id="sub-actual" ';
-							}
-						}
-					?>
-					><a href="abm.php?abm=Usuario">Usuarios</a></li>				
+									
 			</div>
 		</div>
 

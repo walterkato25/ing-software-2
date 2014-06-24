@@ -4,7 +4,9 @@
 		//conect();
 
 		//Iniciar Sesión
+		if(!isset($_SESSION)){
 		session_start();
+	}
 
 		//Validar si se está ingresando con sesión correctamente
 		

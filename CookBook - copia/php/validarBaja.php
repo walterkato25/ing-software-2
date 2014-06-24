@@ -1,5 +1,5 @@
 <?php
-	function validarTablas($tabla,$idabm,$id){
+	function validarBaja($tabla,$idabm,$id){
 		if($tabla=="Libro"){
 			return true;
 		}

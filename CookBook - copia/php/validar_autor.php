@@ -1,5 +1,5 @@
 <?php
-	function validar_autor($nomApe){
+	function validar_Autor($nomApe){
 		require_once("config.php");
 		$bd=connect();
 		list($nom, $ape) = explode( "', '",$nomApe);
