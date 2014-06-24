@@ -3,9 +3,9 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 14-06-2014 a las 17:12:01
+-- Tiempo de generación: 24-06-2014 a las 22:24:44
 -- Versión del servidor: 5.5.24-log
--- Versión de PHP: 5.3.13
+-- Versión de PHP: 5.4.3
 
 SET SQL_MODE="NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -32,18 +32,19 @@ CREATE TABLE IF NOT EXISTS `autor` (
   `apellido` varchar(20) NOT NULL,
   `mail` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`idAutor`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
 
 --
 -- Volcado de datos para la tabla `autor`
 --
 
 INSERT INTO `autor` (`idAutor`, `nombre`, `apellido`, `mail`) VALUES
-(3, 'a', 'a', NULL),
+(3, 'Rodolfo', 'Dylan', NULL),
 (13, 'Tomas', 'Carmona', NULL),
 (14, 'Carmen', 'Valldejuli', NULL),
 (17, 'Rodolfo', 'Pedroche', NULL),
-(18, 'Tomas', 'Gago', NULL);
+(18, 'Tomas', 'Gago', NULL),
+(19, 'Alfredo', 'Paz', NULL);
 
 -- --------------------------------------------------------
 
@@ -55,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `etiqueta` (
   `idEtiqueta` int(11) NOT NULL AUTO_INCREMENT,
   `Etiqueta` varchar(30) NOT NULL,
   PRIMARY KEY (`idEtiqueta`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
 
 --
 -- Volcado de datos para la tabla `etiqueta`
@@ -65,7 +66,10 @@ INSERT INTO `etiqueta` (`idEtiqueta`, `Etiqueta`) VALUES
 (13, 'ReposterÃ­a'),
 (15, 'Vianda'),
 (16, 'Minutas'),
-(17, 'Jugos');
+(17, 'Jugos'),
+(18, 'CafÃ©'),
+(19, 'Agridulces'),
+(24, 'Pastas');
 
 -- --------------------------------------------------------
 
@@ -88,7 +92,7 @@ CREATE TABLE IF NOT EXISTS `libro` (
   `baja` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idLibro`),
   UNIQUE KEY `isbn` (`isbn`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=47 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=51 ;
 
 --
 -- Volcado de datos para la tabla `libro`
@@ -97,8 +101,9 @@ CREATE TABLE IF NOT EXISTS `libro` (
 INSERT INTO `libro` (`idLibro`, `isbn`, `stock`, `stockMinimo`, `img`, `origen`, `nombre`, `resumen`, `idioma`, `precio`, `cantPaginas`, `baja`) VALUES
 (39, '1111111111111', 34, 23, NULL, 'Hong Kong', '23 recetas panificadas', 'Una maÃ±ana, tras un sueÃ±o intranquilo, Gregorio Samsa se despertÃ³ convertido en un monstruoso insecto. Estaba echado de espaldas sobre un duro caparazÃ³n y, al alzar la cabeza, vio su vientre convexo y oscuro, surcado por curvadas callosidades, sobre el que casi no se aguantaba la colcha, que estaba a punto de escurrirse hasta el suelo. Numerosas patas, penosamente delgadas en comparaciÃ³n con el grosor normal de sus piernas, se agitaban sin concierto. - Â¿QuÃ© me ha ocurrido? No estaba soÃ±ando. Su habitaciÃ³n, una habitaciÃ³n normal, aunque muy pequeÃ±a, tenÃ­a el aspecto habitual. Sobre la mesa habÃ­a desparramado un muestrario de paÃ±os - Samsa era viajante de comercio-, y de la pared colgaba una estampa recientemente recortada de una revista ilustrada y puesta en un marco dorado. La estampa mostraba a una mujer tocada con un gorro de pieles, envuelta en una estola tambiÃ©n de pieles, y que, muy erguida, esgrimÃ­a un amplio manguito, asimismo de piel, que ocultaba todo su antebrazo. Gregorio mirÃ³ hacia la ventana; estaba nublado, y sobre el cinc del alfÃ©izar repiqueteaban las gotas de lluvia, lo que le hizo sentir una gran melancolÃ­a. Â«Bueno -pensÃ³-; Â¿y si siguiese durmiendo un rato y me olvidase de', 'Noruego', 23.05, 234, 0),
 (42, '1817234689732', 35, 23, NULL, 'Argentina', 'Cocina criolla', 'Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules. Omnicos directe al desirabilite de un nov lingua franca: On refusa continuar payar custosi traductores. At solmen va esser necessi far uniform grammatica, pronunciation e plu sommun paroles. Ma quande lingues coalesce, li grammatica del resultant lingue es plu simplic e regulari quam ti del coalescent lingues. Li nov lingua franca va esser plu simplic e regulari quam li existent Europan lingues. It va esser tam simplic quam Occidental in fact, it va esser Occidental. A un Angleso it va semblar un simplificat Angles, quam un skeptic Cambridge amico dit me que Occidental es.Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun vocabules. Omnicos directe al desirabilite de un nov lingua franca: On refusa continuar payar custosi traductores. At solmen va esser necessi far uniform grammatica, pronunciation e plu sommun paroles.', 'Castellano', 54.3, 20, 0),
-(43, '3333333333333', 9, 23, NULL, 'Griego', 'Cocinando en Microondas', 'Y, viÃ©ndole don Quijote de aquella manera, con muestras de tanta tristeza, le dijo: SÃ¡bete, Sancho, que no es un hombre mÃ¡s que otro si no hace mÃ¡s que otro. Todas estas borrascas que nos suceden son seÃ±ales de que presto ha de serenar el tiempo y han de sucedernos bien las cosas; porque no es posible que el mal ni el bien sean durables, y de aquÃ­ se sigue que, habiendo durado mucho el mal, el bien estÃ¡ ya cerca. AsÃ­ que, no debes congojarte por las desgracias que a mÃ­ me suceden, pues a ti no te cabe parte dellas.Y, viÃ©ndole don Quijote de aquella manera, con muestras de tanta tristeza, le dijo: SÃ¡bete, Sancho, que no es un hombre mÃ¡s que otro si no hace mÃ¡s que otro. Todas estas borrascas que nos suceden son seÃ±ales de que presto ha de serenar el tiempo y han de sucedernos bien las cosas; porque no es posible que el mal ni el bien sean durables, y de aquÃ­ se sigue que, habiendo durado mucho el mal, el bien estÃ¡ ya cerca. AsÃ­ que, no debes congojarte por las desgracias que a mÃ­ me suceden, pues a ti no', 'LatÃ­n', 20.25, 89, 0),
-(46, '2345354657456', 23, 5, NULL, 'Australia', 'Penas del joven Werther', 'Reina en mi espÃ­ritu una alegrÃ­a admirable, muy parecida a las dulces alboradas de la primavera, de que gozo aquÃ­ con delicia. Estoy solo, y me felicito de vivir en este paÃ­s, el mÃ¡s a propÃ³sito para almas como la mÃ­a, soy tan dichoso, mi querido amigo, me sojuzga de tal modo la idea de reposar, que no me ocupo de mi arte. Ahora no sabrÃ­a dibujar, ni siquiera hacer una lÃ­nea con el lÃ¡piz; y, sin embargo, jamÃ¡s he sido mejor pintor Cuando el valle se vela en torno mÃ­o con un encaje de vapores; cuando el sol de mediodÃ­a centellea sobre la impenetrable sombra de mi bosque sin conseguir otra cosa que filtrar entre las hojas algunos rayos que penetran hasta el fondo del santuario, cuando recostado sobre la crecida hierba, cerca de la cascada, mi vista, mÃ¡s prÃ³xima a la tierra, descubre multitud de menudas y diversas plantas; cuando siento mÃ¡s cerca de mi corazÃ³n los rumores de vida de ese pequeÃ±o mundo que palpita en los tallos de las hojas, y veo las formas innumerables e infinitas de los gusanillos y de los insectos; cuando siento, en fin, la presencia del Todopoderoso, que nos ha creado', 'Ingles', 134, 123, 0);
+(43, '3333333333333', 9, 23, NULL, 'Griego', 'Cocinando en Microondas', 'Y, viÃ©ndole don Quijote de aquella manera, con muestras de tanta tristeza, le dijo: SÃ¡bete, Sancho, que no es un hombre mÃ¡s que otro si no hace mÃ¡s que otro. Todas estas borrascas que nos suceden son seÃ±ales de que presto ha de serenar el tiempo y han de sucedernos bien las cosas; porque no es posible que el mal ni el bien sean durables, y de aquÃ­ se sigue que, habiendo durado mucho el mal, el bien estÃ¡ ya cerca. AsÃ­ que, no debes congojarte por las desgracias que a mÃ­ me suceden, pues a ti no te cabe parte dellas.Y, viÃ©ndole don Quijote de aquella manera, con muestras de tanta tristeza, le dijo: SÃ¡bete, Sancho, que no es un hombre mÃ¡s que otro si no hace mÃ¡s que otro. Todas estas borrascas que nos suceden son seÃ±ales de que presto ha de serenar el tiempo y han de sucedernos bien las cosas; porque no es posible que el mal ni el bien sean durables, y de aquÃ­ se sigue que, habiendo durado mucho el mal, el bien estÃ¡ ya cerca. AsÃ­ que, no debes congojarte por las desgracias que a mÃ­ me suceden, pues a ti no', 'LatÃ­n', 20.25, 89, 1),
+(46, '2345354657456', 23, 5, NULL, 'Australia', 'Penas del joven Werther', 'Reina en mi espÃ­ritu una alegrÃ­a admirable, muy parecida a las dulces alboradas de la primavera, de que gozo aquÃ­ con delicia. Estoy solo, y me felicito de vivir en este paÃ­s, el mÃ¡s a propÃ³sito para almas como la mÃ­a, soy tan dichoso, mi querido amigo, me sojuzga de tal modo la idea de reposar, que no me ocupo de mi arte. Ahora no sabrÃ­a dibujar, ni siquiera hacer una lÃ­nea con el lÃ¡piz; y, sin embargo, jamÃ¡s he sido mejor pintor Cuando el valle se vela en torno mÃ­o con un encaje de vapores; cuando el sol de mediodÃ­a centellea sobre la impenetrable sombra de mi bosque sin conseguir otra cosa que filtrar entre las hojas algunos rayos que penetran hasta el fondo del santuario, cuando recostado sobre la crecida hierba, cerca de la cascada, mi vista, mÃ¡s prÃ³xima a la tierra, descubre multitud de menudas y diversas plantas; cuando siento mÃ¡s cerca de mi corazÃ³n los rumores de vida de ese pequeÃ±o mundo que palpita en los tallos de las hojas, y veo las formas innumerables e infinitas de los gusanillos y de los insectos; cuando siento, en fin, la presencia del Todopoderoso, que nos ha creado', 'Ingles', 134, 123, 0),
+(50, '3234532452345', 12, 12, NULL, 'as', 'as', 'qwe', 'as', 1, 12, 1);
 
 -- --------------------------------------------------------
 
@@ -111,19 +116,25 @@ CREATE TABLE IF NOT EXISTS `libroautor` (
   `idLibro` int(11) NOT NULL,
   `idAutor` int(11) NOT NULL,
   PRIMARY KEY (`idLibroAutor`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=93 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=108 ;
 
 --
 -- Volcado de datos para la tabla `libroautor`
 --
 
 INSERT INTO `libroautor` (`idLibroAutor`, `idLibro`, `idAutor`) VALUES
-(86, 42, 3),
-(87, 42, 14),
-(88, 46, 13),
 (90, 39, 13),
 (91, 39, 14),
-(92, 43, 13);
+(92, 43, 13),
+(93, 0, 18),
+(94, 48, 18),
+(95, 50, 13),
+(101, 42, 3),
+(102, 42, 18),
+(103, 42, 19),
+(104, 42, 17),
+(105, 42, 14),
+(107, 46, 13);
 
 -- --------------------------------------------------------
 
@@ -136,22 +147,25 @@ CREATE TABLE IF NOT EXISTS `libroetiqueta` (
   `idLibro` int(11) NOT NULL,
   `idEtiqueta` int(11) NOT NULL,
   PRIMARY KEY (`idLibroEtiqueta`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=87 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100 ;
 
 --
 -- Volcado de datos para la tabla `libroetiqueta`
 --
 
 INSERT INTO `libroetiqueta` (`idLibroEtiqueta`, `idLibro`, `idEtiqueta`) VALUES
-(76, 42, 17),
-(77, 42, 13),
-(78, 42, 15),
-(79, 46, 16),
-(80, 46, 13),
 (83, 39, 17),
 (84, 39, 16),
 (85, 39, 15),
-(86, 43, 17);
+(86, 43, 17),
+(87, 0, 16),
+(88, 48, 16),
+(89, 50, 18),
+(93, 42, 17),
+(94, 42, 13),
+(95, 42, 15),
+(98, 46, 16),
+(99, 46, 13);
 
 -- --------------------------------------------------------
 
@@ -196,26 +210,27 @@ CREATE TABLE IF NOT EXISTS `usuario` (
   `nombre` varchar(20) NOT NULL,
   `fechaAlta` date NOT NULL,
   `categoria` varchar(20) NOT NULL,
-  `tel` int(11) NOT NULL,
+  `tel` varchar(20) NOT NULL,
   `cp` int(11) NOT NULL,
   `localidad` varchar(20) NOT NULL,
   `calle` varchar(30) NOT NULL,
   `piso` int(11) NOT NULL,
   `nro` int(11) NOT NULL,
   `depto` varchar(10) NOT NULL,
-  `dni/cuit` int(11) NOT NULL,
+  `dni/cuit` varchar(11) NOT NULL,
   `mail` varchar(30) DEFAULT NULL,
   `baja` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`idUsuario`),
   UNIQUE KEY `nombreDeUsuario` (`nombreDeUsuario`,`dni/cuit`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Volcado de datos para la tabla `usuario`
 --
 
 INSERT INTO `usuario` (`idUsuario`, `nombreDeUsuario`, `password`, `apellido`, `nombre`, `fechaAlta`, `categoria`, `tel`, `cp`, `localidad`, `calle`, `piso`, `nro`, `depto`, `dni/cuit`, `mail`, `baja`) VALUES
-(1, 'sztrff', '1234', 'Llerena Suster', 'Jonatan Nahuel', '2014-05-05', 'administrador', 4840252, 1897, 'Manuel B. Gonnet', '12', 0, 2985, '', 92739535, 'jnllerenas@gmail.com', 0);
+(1, 'jnllerenas', '1234', 'Llerena Suster', 'Jonatan Nahuel', '2014-05-05', 'administrador', '2214594942', 1897, 'Manuel B. Gonnet', '12', 23, 2985, '', '92739535', 'jnllerenas@gmail.com', 0),
+(2, 'Nahuel', '1234', 'Llerena ', 'Nahuel', '2014-06-23', 'usuario', '4840252', 1897, 'Manuel B. Gonnet', '11', 2, 2985, 'A', '20927395356', 'huelna@hotmail.com', 0);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

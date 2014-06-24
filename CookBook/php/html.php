@@ -65,7 +65,7 @@ function headerMenu($actual="", $admin=false){
 				</ul>
 				<ul id="navegacion" style="float:right">
 					<li <?php if($actual=="menuUsuario.php"){echo 'id="actual"'; }?>>							
-						<a href="menuUsuario.php">Usuario:  '<?php echo $_SESSION["Usuario"]; ?>' </a>
+						<a href="menuUsuario.php">Usuario: <?php echo $_SESSION["Usuario"]; ?></a>
 					</li>
 					<li <?php if($actual=="desconectarUsuario.php"){echo 'id="actual"'; }?>> 
 						<a href="php/desconectarUsuario.php">Logout</a>
