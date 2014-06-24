@@ -18,7 +18,7 @@
 		{
 			echo '<script language = javascript>	
 					alert("Usuario o Password incorrectos, por favor verifique.")
-					self.location = "login.php"
+					self.location = "../login.php"
 					</script>';
 		}else //Usuario logueado correctamente
 		{

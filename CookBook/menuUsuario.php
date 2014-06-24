@@ -65,8 +65,13 @@ if(!$_SESSION){
 				<ul id="navegacion">
 					<li id="sub-actual">
 						<a href="menuUsuario.php">Perfil</a></li>
+						<?php if($_SESSION["categoria"]!="administrador"){
+							?>
 					<li>
-						<a href="verPedidos.php">Pedidos</a></li>				
+						<a href="verPedidos.php">Pedidos</a></li>	
+						<?php
+						}
+						?>			
 			</div>
 		</div>
 
@@ -76,9 +81,28 @@ if(!$_SESSION){
 			</div>
 			<div id="main-content">
 				<?php
-
-			getCliente($_SESSION["idUsuario"]);
-			?>
+				getCliente($_SESSION["idUsuario"]);
+				?>
+				<script language='javascript'>
+					function limpiar(){
+						if(document.getElementById('limpiar')){
+							var nodo = document.getElementById("limpiar");
+							rep=document.createElement('br');
+							nodo.parentNode.replaceChild(rep, nodo);
+						}
+					}
+					function edit(atributo, tipo){
+						window.onload=limpiar();
+						var form_ini="<form id='limpiar' method='POST' action='php/userUpdate.php'>"
+						<?php echo "var id=\"<input type='hidden' name='id' value='".$_SESSION["idUsuario"]."'/>\";"; ?>
+						var input1="<input autofocus required type='"+tipo+"' name='"+atributo+"' />";
+						var input2="<input type='submit' value='Save'/>";
+						var cancel="<input type='button' value='Cancel' onclick='limpiar()'/>";
+						var form_fin="</form>";
+						document.getElementById(atributo).innerHTML=form_ini+id+input1+input2+cancel+form_fin;
+					}
+				</script>
+				
 		</div>
 			<div id="push"></div>
 			<br/>

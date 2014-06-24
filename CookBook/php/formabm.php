@@ -19,8 +19,9 @@ sesion();
 							
 			<div id="header-menu">
 				<ul id="navegacion">
-					<li>
-						<a href="../index.php">Inicio</a>
+					
+					<li><a href="../index.php">
+						Inicio</a>
 					</li>
 					<!--<li>
 						<a href="../aboutUs.php">Conocenos</a>

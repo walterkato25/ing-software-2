@@ -1,43 +1,72 @@
 <?php
-	function getCliente($id){
+
+function getCliente($id){
 		require_once("config.php");
 		$sql="SELECT nombreDeUsuario , apellido , nombre, tel, `dni/cuit`, mail, calle, nro, piso, depto, localidad, cp  FROM `usuario` WHERE `idUsuario` = $id";
 		$query=mysql_query($sql);
-		while($row = mysql_fetch_assoc($query)){
-			foreach ($row as $atributo => $valor) {
-				inputDinamico("usuario", $atributo, $valor, $id);
-			}
-			
+		$cliente = mysql_fetch_assoc($query);
+		?>
+		<div id="alluserinfo" style='float:left;width:47%'>
+		<fieldset><legend>Información Personal</legend>
+		</br>
+			<div id="personal" >
+				<?php
+				inputDinamico($cliente, "Nombre de Usuario", "nombreDeUsuario", "text");
+				inputDinamico($cliente, "Apellido", "apellido", "text");
+				inputDinamico($cliente, "Nombre", "nombre", "text");
+				inputDinamico($cliente, "DNI/CUIT", "dni/cuit", "number");
+				?>
+			</div>
+		</fieldset>
+		
+
+		<fieldset><legend>Información de Contacto</legend>
+			</br>
+		<div id="infocontacto" >
+			<?php
+			inputDinamico($cliente, "E-Mail", "mail", "mail");
+			inputDinamico($cliente, "Teléfono", "tel", "number");
+			?>
+		</div>
+		</fieldset>
+	</div>
+	<?php
+	if ($_SESSION['categoria']=="usuario"){
+	?>
+	<fieldset style='float:right; width:47%'><legend>Domicilio</legend>
+	<div id="domicilio" >
+		</br>
+		<?php
+			inputDinamico($cliente, "Calle", "calle", "number");
+			inputDinamico($cliente, "N°", "nro", "number");
+			inputDinamico($cliente, "Piso", "piso", "number");
+			inputDinamico($cliente, "Departamento", "depto", "text");
+			inputDinamico($cliente, "Localidad", "localidad", "text");
+			inputDinamico($cliente, "Código Postal", "cp", "number");
+		?>		
+		</div>
+
+	</fieldset>
+
+		<?php
 		}
 	}
-	function inputDinamico($tabla, $nombre, $valor, $id, $type="text"){
-		require_once("SQLfunctions.php");
-		if(isset($_POST[$nombre])){
-			$atributosvalores[$nombre]=$_POST[$nombre];
-			update($tabla, $atributosvalores, $id);
-			echo "<p id='modificado'>El campo $nombre se ha cambiado correctamente</p>";
-		}
-		echo '<form name="'.$nombre.'" method="POST">';
-		echo "<label for=$nombre>$nombre</label>: ";
-		if(isset($_POST['update']) && $_POST['update']==$nombre){
-			$a=$_POST['update'];
-	   		echo '<input autofocus name="'.$nombre.'" type="'.$type.'" value="';
-		}
-		if(isset($_POST[$nombre])){
-			echo $_POST[$nombre];
-		}else{
-	    	echo $valor;
-		}
-		if(isset($_POST['update']) && $_POST['update']==$nombre){
-	    	echo '" />';
-		}
-		if(isset($_POST['update']) && $_POST['update']==$nombre){
-	       	echo "<input value='Save' type='submit' />";
-   			echo "<input value='Cancel' type='button' onclick='location.reload();' />";
-		}else{
-   			echo "<input name='update' type='hidden' value='$nombre' />";
-    		echo "<input value='Edit' type='submit' /></br>";
-    	}
-    	echo "</form>";
+function inputDinamico($cliente, $label, $atributo, $tipo){
+	?>
+		<table>
+			<tr>
+				<td>
+					<label><?php echo $label; ?>: </label>
+				</td>
+				<td>
+					<span> <?php echo $cliente[$atributo]; ?> </span>
+				</td>
+				<td>
+					<a id="agregar" onclick='edit("<?php echo $atributo; ?>", "<?php echo $tipo; ?>")' href='javascript:void(0)'>Edit</a>
+				</td>
+			</tr>
+		</table>
+		<div id="<?php echo $atributo; ?>"></br></div>
+	<?php
 	}
 	?>

@@ -1,3 +1,10 @@
+<?php
+require_once("php/sesion.php");
+sesion();
+if(isset($_SESSION["categoria"])){
+	header("location:index.php");
+}
+?>
 <html>
 <head>
 	<meta charset="utf-8"></meta>
