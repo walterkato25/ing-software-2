@@ -33,7 +33,7 @@ function headerMenu($actual="", $admin=false){
 						<a href="index.php">Inicio</a>
 					</li>
 				<?php
-					if (!(isset($_SESSION["categoria"])) || ($_SESSION["categoria"]=="usuario")){					
+					if (!$admin){					
 					?>
 					<li <?php if($actual=="catalogo.php"){echo 'id="actual"'; }?>>
 						<a href="catalogo.php">Catalogo</a>
@@ -61,7 +61,13 @@ function headerMenu($actual="", $admin=false){
 					<li <?php if($actual=="pedidos.php"){echo 'id="actual"'; }?>>
 						<a href="pedidos.php">Pedidos</a>
 					</li>
-	<?php	}	?>
+	<?php	}else{
+					?>
+					<li <?php if($actual=="verCarrito.php"){echo 'id="actual"'; }?>>
+						<a href="verCarrito.php">Carrito</a>
+					</li>
+					<?php
+				}	?>
 				</ul>
 				<ul id="navegacion" style="float:right">
 					<li <?php if($actual=="menuUsuario.php"){echo 'id="actual"'; }?>>							

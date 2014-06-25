@@ -41,7 +41,13 @@ sesion();
 								<li>
 									<a href="pedidos.php">Pedidos</a>
 								</li>';
-							}
+							}else{
+					?>
+					<li>
+						<a href="verCarrito.php">Carrito</a>
+					</li>
+					<?php
+				}
 							echo'</ul><ul id=navegacion style=float:right>
 							<li>
 							<a href="menuUsuario.php">Usuario:  '.$usuario.' </a>
