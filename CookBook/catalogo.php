@@ -26,7 +26,7 @@ function buscarPorEtiqueta($idEtiqueta){
 function buscarporNombre($nombre, $idEtiqueta, $idAutor){
 	$tablaEtiqueta=buscarPorEtiqueta($idEtiqueta);
 	$tablaAutor=buscarPorAutor($idAutor);
-	$sql="SELECT * FROM Libro WHERE nombre LIKE \"%$nombre%\" AND idLibro in ($tablaEtiqueta) AND idLibro in ($tablaAutor)";
+	$sql="SELECT * FROM Libro WHERE baja = 0 AND nombre LIKE \"%$nombre%\" AND idLibro in ($tablaEtiqueta) AND idLibro in ($tablaAutor)";
 	return $sql;
 }
 
@@ -96,7 +96,7 @@ function subMenuCatalogo(){
 <?php 
 }
 function contenido(){
-	if (isset($_GET["nombre"])){
+if (isset($_GET["nombre"])){
 		$url=$_SERVER["REQUEST_URI"];
 		if (isset($_GET["orden"])){
 			$lenght=strlen($url)-(9+strlen($_GET["orden"]));
@@ -104,7 +104,7 @@ function contenido(){
 		}
 	
 ?>
-
+	<fieldset><legend>Búsqueda</legend>
 	
 <?php
 	if(!isset($_GET["idEtiqueta"])){
@@ -126,9 +126,11 @@ function contenido(){
 	if(mysql_num_rows($query)==0){
 		echo "<h4><p>No se han encontrado libros en la búsqueda.</p></h4>";
 	}else{ ?>
+	
 		<div id="lista">
 		<table >
 			<tr>
+				<th>Imagen</th>
 				<th><a href="<?php if(isset($_GET["orden"]) && $_GET["orden"]=="nombre ASC"){echo $url.'&orden=nombre DESC';}else{echo $url.'&orden=nombre ASC';} ?>" >Nombre</a></th>
 				<th>Autores</th>
 				<th>Etiquetas</th>
@@ -140,7 +142,13 @@ function contenido(){
 		while($row = mysql_fetch_array($query)){
 			$id= $row["idLibro"];
 			$precio = $row["precio"];
+			$imagen=$row["img"];
 		?>
+			<td><img id="imgelegida" style="max-width:50; max-height:50"
+						<?php
+							echo "src='.$imagen'";
+						?>
+						></td>
  			<td> <?php echo $row["nombre"]; ?> </td>
 			<td> <?php
 			$sql= "SELECT apellido, nombre FROM `autor` WHERE `idAutor` in (SELECT idAutor FROM `libroautor` WHERE `idLibro`=$id)";
@@ -174,7 +182,7 @@ function contenido(){
  			echo "$listaEtiquetas";
 		?>
 			</td>
- 			<td style='text-align:right'> $ <?php echo number_format($precio,2,',','.') ?></td>
+ 			<td style='text-align:right'> $<?php echo number_format($precio,2,',','.') ?></td>
  			<td> <?php echo "<a href=detalle.php?id=$id >Ver detalle</a>";  ?> </td>
 			</tr>
 
@@ -184,7 +192,11 @@ function contenido(){
 		</div>
 	<?php
 	}
+
 }
+?>
+</fieldset>
+<?php
 }
 $pagina="catalogo.php";
 head("");

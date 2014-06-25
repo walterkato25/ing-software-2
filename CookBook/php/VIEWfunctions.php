@@ -86,11 +86,16 @@ function verUsuario(){
 		echo '<td>'.$row["nombre"].'</td>';
 		echo '<td>'.$row["dni/cuit"].'</td>';
 		echo '<td>'.$row["categoria"].'</td>';
-		if($row["categoria"]=="administrador"){
+		if(($row["categoria"]=="administrador")&&($row["idUsuario"]!=$_SESSION["idUsuario"])){
 			eliminar("Usuario", $row["idUsuario"]);
 		}
 	}
 }
+if (isset($_SESSION["categoria"])){
+	function verPedido(){
+		
+	}
+}	
 function viewABM($abm){
 						echo '<fieldset style="margin:auto; width; float:left">';
 						if($abm=='Autor'){

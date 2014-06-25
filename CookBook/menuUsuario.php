@@ -42,6 +42,7 @@ function contenido(){
 				<?php
 		}
 		if($_GET["menu"]=="Pedidos"){
+			viewABM("Pedido");
 
 		}
 				?>

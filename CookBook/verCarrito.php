@@ -87,7 +87,7 @@ function contenido(){
 			</form>
 			</td>
 			<td>
-			<a id="comprar" href="comprar.php"> Comprar </a>
+			<a id="comprar" href="validarCarrito.php"> Comprar </a>
 			</table>
 			</td>
 		</div>

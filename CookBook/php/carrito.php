@@ -2,6 +2,9 @@
 require_once("config.php");
 require_once("sesion.php");
 sesion();
+if(!(isset($_SESSION["carrito"]))){
+	header("location:../login.php");
+}
 
 function crearCarrito(){
 	if(!isset($_SESSION["carrito"])){
