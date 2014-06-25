@@ -34,12 +34,12 @@ function modificarCantidad($id,$cantidad){
 
 if(isset($_SESSION["carrito"])){
 	if(isset($_POST["agregar"])){
-		agregarProducto($_GET["idLibro"],$_GET["cantidad"],$_GET["precio"]);
-		echo "<script language=javascript> alert('Se ha agregado el producto en el carrito.'); self.history.back(); </scrip>";
+		agregarProducto($_POST["idLibro"],$_POST["cantidad"],$_POST["precio"]);
+		echo "<script language='javascript'> alert('Se ha agregado el producto en el carrito.'); self.history.back(); </script>";
 
 	}
 	if(isset($_POST["eliminar"])){
-		eliminarProducto($_POST["id"]);
+		eliminarProducto($_POST["idLibro"]);
 		echo "<script language='javascript'> alert('Se ha eliminado el producto del carrito.'); self.history.back(); </script>";
 	}
 
@@ -48,7 +48,7 @@ if(isset($_SESSION["carrito"])){
 		echo "<script language='javascript'> alert('Su carrito esta vacío.'); self.history.back(); </script>";
 	}
 	if(isset($_POST["modificar"])){
-		modificarCantidad($_POST["id"], $_POST["cantidad"]);
+		modificarCantidad($_POST["idLibro"], $_POST["cantidad"]);
 		echo "<script language='javascript'> alert('Se ha modificado correctamente.'); self.history.back(); </script>";	
 	}
 }

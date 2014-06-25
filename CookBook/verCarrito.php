@@ -55,14 +55,14 @@ function contenido(){
 							echo '<td style="text-align:center">$'.number_format($subtotal,2,',','.').'</td>'; ?>
 							<td>
 								<form method="POST" action="php/carrito.php" onsubmit="if(!confirm('Modificar la cantidad?'))return false">
-									<input type="hidden" name="id" value="<?php echo $id ?>" />
+									<input type="hidden" name="idLibro" value="<?php echo $id ?>" />
 									<input name="cantidad" style="width:40px" type="number" min="1" max="<?php echo $stock ?>" value="<?php echo $cantidad ?>" />
 									<input type="submit" name="modificar" value="Modificar cantidad" />
 								</form>
 							</td>
 							<td>
 								<form method="POST" action="php/carrito.php" onsubmit="if(!confirm('Desea eliminar <?php echo $nombre ?>?'))return false">
-									<input type="hidden" name="id" value="<?php echo $id ?>" />
+									<input type="hidden" name="idLibro" value="<?php echo $id ?>" />
 									<input type="submit" name="eliminar" value="Quitar producto" />
 								</form>
 							</td>
