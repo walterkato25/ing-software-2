@@ -3,12 +3,14 @@
 require_once("SQLfunctions.php");
 require_once("config.php");
 
-function modificarEliminar($abm, $id){
-	echo '<td><a onclick="if(!confirm(';
-	echo " 'Desea borrar el elemento?' ";
-	echo '))return false"; href="php/bajas.php?abm='.$abm.'&id='.$id.'"><img src="img/eliminar.png" title="Eliminar" /></a>';
+function modificar($abm, $id){
 	echo '<a href="php/formabm.php?abm='.$abm.'&id='.$id;
 	echo '"><img src="img/editar.png" title="Editar"/></a>';
+}
+function eliminar($abm, $id){
+	?>
+	<td><a onclick="if(!confirm('Desea borrar el elemento?'))return false"; href="php/bajas.php?abm='<?php echo $abm.'&id='.$id; ?>'"><img src="img/eliminar.png" title="Eliminar" /></a>
+	<?php
 }
 function verEtiqueta(){
 	echo '<th>Etiqueta</th>';
@@ -16,7 +18,8 @@ function verEtiqueta(){
 	$query = select("Etiqueta","Etiqueta");
 	while ($row  = mysql_fetch_assoc($query)) {
 		echo '<tr><td>'.$row["Etiqueta"].'</td>';
-		modificarEliminar("Etiqueta", $row["idEtiqueta"]);
+		eliminar("Etiqueta", $row["idEtiqueta"]);
+		modificar("Etiqueta", $row["idEtiqueta"]);
 	}
 }
 function verAutor(){
@@ -26,7 +29,8 @@ function verAutor(){
 	while ($row  = mysql_fetch_assoc($query)) {
 		echo '<tr><td>'.$row["apellido"].'</td>';
 		echo '<td>'.$row["nombre"].'</td>';
-		modificarEliminar("Autor", $row["idAutor"]);
+		eliminar("Autor", $row["idAutor"]);
+		modificar("Autor", $row["idAutor"]);
 	}
 }
 function verLibro(){
@@ -67,7 +71,8 @@ function verLibro(){
 		}
 		echo "<td>$listaEtiquetas</td>";
 		echo "<td style='text-align:right'>\$".number_format($precio,2,',','.')."</td>";
-		modificarEliminar("Libro", $id);
+		eliminar("Libro", $id);
+		modificar("Libro", $id);
 	}
 }
 
@@ -81,9 +86,16 @@ function verUsuario(){
 		echo '<td>'.$row["nombre"].'</td>';
 		echo '<td>'.$row["dni/cuit"].'</td>';
 		echo '<td>'.$row["categoria"].'</td>';
-		modificarEliminar("Usuario", $row["idUsuario"]);
+		if(($row["categoria"]=="administrador")&&($row["idUsuario"]!=$_SESSION["idUsuario"])){
+			eliminar("Usuario", $row["idUsuario"]);
+		}
 	}
 }
+if (isset($_SESSION["categoria"])){
+	function verPedido(){
+		
+	}
+}	
 function viewABM($abm){
 						echo '<fieldset style="margin:auto; width; float:left">';
 						if($abm=='Autor'){
@@ -97,9 +109,11 @@ function viewABM($abm){
 						
 
 						$funcionVer();
-
-						echo "<tr><td><span ><a id='agregar' href=\"php/formabm.php?abm=$abm";
-						echo "\">Agregar... </span></td></tr></table>";
+						if(!($abm=="Usuario")){
+							echo "<tr><td><span ><a id='agregar' href=\"php/formabm.php?abm=$abm";
+							echo "\">Agregar... </span></td></tr>";
+						}
+						echo "</table>";
 						echo '</fieldset>';
 }
 

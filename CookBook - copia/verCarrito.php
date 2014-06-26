@@ -26,7 +26,7 @@ function contenido(){
 
 				}else{
 			?>
-			<table style="margin: auto">
+			<table>
 				<tr>
 					<th style="padding:6px">   Cantidad   </th>
 					<th style="padding:6px">   Libro   </th>
@@ -49,19 +49,19 @@ function contenido(){
 							$precio=$_SESSION["carrito"][$row["idLibro"]]["precio"];
 							$subtotal=$precio*$cantidad;
 							$total+=$subtotal;
-							echo '<td style="text-align: center">'.$cantidad.'</td>';
+							echo '<td>'.$cantidad.'</td>';
 							echo '<td>'.$nombre.'</td>';
 							echo '<td style="text-align:center">$'.number_format($precio,2,',','.').'</td>';
 							echo '<td style="text-align:center">$'.number_format($subtotal,2,',','.').'</td>'; ?>
 							<td>
-								<form style="margin: auto" method="POST" action="php/carrito.php" onsubmit="if(!confirm('Modificar la cantidad?'))return false">
+								<form method="POST" action="php/carrito.php" onsubmit="if(!confirm('Modificar la cantidad?'))return false">
 									<input type="hidden" name="idLibro" value="<?php echo $id ?>" />
 									<input name="cantidad" style="width:40px" type="number" min="1" max="<?php echo $stock ?>" value="<?php echo $cantidad ?>" />
 									<input type="submit" name="modificar" value="Modificar cantidad" />
 								</form>
 							</td>
 							<td>
-								<form style="margin: auto" method="POST" action="php/carrito.php" onsubmit="if(!confirm('Desea eliminar <?php echo $nombre ?>?'))return false">
+								<form method="POST" action="php/carrito.php" onsubmit="if(!confirm('Desea eliminar <?php echo $nombre ?>?'))return false">
 									<input type="hidden" name="idLibro" value="<?php echo $id ?>" />
 									<input type="submit" name="eliminar" value="Quitar producto" />
 								</form>
@@ -87,7 +87,7 @@ function contenido(){
 			</form>
 			</td>
 			<td>
-			<a style="margin: auto" id="comprar" href="validarCarrito.php"> Comprar </a>
+			<a id="comprar" href="validarCarrito.php"> Comprar </a>
 			</table>
 			</td>
 		</div>

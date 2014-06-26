@@ -89,27 +89,56 @@ function verUsuario(){
 		if(($row["categoria"]=="administrador")&&($row["idUsuario"]!=$_SESSION["idUsuario"])){
 			eliminar("Usuario", $row["idUsuario"]);
 		}
+		if($row["categoria"]=="usuario"){
+			echo '<td><a href="pedidos.php?idUsuario='.$row["idUsuario"].'" > Ver Pedidos </a></td>';
+		}
 	}
 }
 if (isset($_SESSION["categoria"])){
 	function verPedido(){
-		
+		$sql="SELECT * FROM pedido";
+		if($_SESSION["categoria"]=="usuario"){
+			$idUsuario=$_SESSION["idUsuario"];
+			$sql.=" WHERE idUsuario=$idUsuario";
+			$query=mysql_query($sql);
+			if (mysql_num_rows($query)!=0) { ?>
+				<th>Fecha y Hora</th><th>Monto</th><th>Estado</th><th>Acciones</th></tr>
+				<?php while($row=mysql_fetch_array($query)){
+				?>
+				
+					<tr>
+						<td><?php echo $row["timestamp"]; ?></td>
+						<td><?php echo "$".number_format($row["monto"],2,',','.'); ?></td>
+						<td><?php echo $row["estado"]; ?></td>
+						<td><?php if ($row["estado"]=="Pendiente") {
+							echo "<a href='php/cancelarPedido.php?idPedido=".$row["idPedido"]."' onclick='if(!confirm(\"Desea borrar el elemento?\"))return false'>Cancelar Pedido</a> ";
+						} ?></td>
+
+					</tr>
+					<?php } ?>
+				
+				<?php	
+				
+			}else{
+				echo "<h4><p>No tiene nigún pedido.</p></h4>";
+			}		
+		}
 	}
 }	
 function viewABM($abm){
-						echo '<fieldset style="margin:auto; width; float:left">';
+						echo '<fieldset style="margin:auto; width:885px; float:left">';
 						if($abm=='Autor'){
 							echo '<legend>'.$abm.'es </legend>';
 						}else{
 							echo '<legend>'.$abm.'s </legend>';
 						}
 						$funcionVer='ver'.$abm;
-						echo '<table>';
+						echo '<table rules="rows">';
 						echo '<tr>';
 						
 
 						$funcionVer();
-						if(!($abm=="Usuario")){
+						if(!($abm=="Usuario") && !($abm=="Pedido")){
 							echo "<tr><td><span ><a id='agregar' href=\"php/formabm.php?abm=$abm";
 							echo "\">Agregar... </span></td></tr>";
 						}

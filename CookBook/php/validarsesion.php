@@ -28,7 +28,10 @@
 			if($_SESSION['categoria']=="usuario"){
 				$_SESSION['carrito'] = array();
 			}
-			header("Location: ../index.php");
+			echo '<script language = javascript>	
+					alert("Ha iniciado sesion correctamente.");
+					self.history.go(-2);
+					</script>';
 		}
 
 	

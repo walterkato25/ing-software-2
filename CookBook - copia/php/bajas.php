@@ -23,7 +23,14 @@ function bajaEtiqueta($abm,$idabm,$id){
 	}
 }
 function bajaUsuario($abm,$idabm,$id){
-	logic_delete($abm, $id);
+	$sql="SELECT * FROM pedido WHERE idUsuario=$id AND estado in ('pendiente', 'enviado')";
+	$query=mysql_query($sql);
+	if(mysql_num_rows($query)==0){
+		if($_SESSION["idUsuario"]==$id){
+			session_destroy();
+		}
+		logic_delete($abm, $id);
+	}
 }
 if(isset($_GET["abm"])){
 	$abm=$_GET["abm"];

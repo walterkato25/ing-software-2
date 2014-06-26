@@ -1,19 +1,22 @@
 <?php
+require_once("config.php");
+require_once("sesion.php");
+sesion();
+if(!(isset($_SESSION["carrito"]))){
+	header("location:../login.php");
+}
 
 function crearCarrito(){
 	if(!isset($_SESSION["carrito"])){
-		$_SESSION["carrito"]=array();	
+		$_SESSION["carrito"]=array();
 	}
 }
-function destruirCarrito()
+function destruirCarrito(){
 		$_SESSION["carrito"]=array();	
 }
-function agregarProducto($id,$cantidad){
-	$sql="SELECT precio FROM Libro WHERE idLibro=$id"
-	$query=mysql_query($sql);
-	$precio=mysql_fetch_assoc($query);
+function agregarProducto($id,$cantidad,$precio){
 	$producto["cantidad"]=$cantidad;
-	$producto["precio"]=$precio["precio"];
+	$producto["precio"]=$precio	;
 	$_SESSION["carrito"][$id]=$producto;
 }
 
@@ -22,8 +25,32 @@ function eliminarProducto($id){
 }
 
 function modificarCantidad($id,$cantidad){
-	$_SESSION["carrito"][$id]["cantidad"]=$cantidad;
+	if($cantidad==0){
+		eliminarProducto($id);
+	}else{
+		$_SESSION["carrito"][$id]["cantidad"]=$cantidad;
+	}
 }
 
+if(isset($_SESSION["carrito"])){
+	if(isset($_POST["agregar"])){
+		agregarProducto($_POST["idLibro"],$_POST["cantidad"],$_POST["precio"]);
+		echo "<script language='javascript'> alert('Se ha agregado el producto en el carrito.'); self.history.back(); </script>";
+
+	}
+	if(isset($_POST["eliminar"])){
+		eliminarProducto($_POST["idLibro"]);
+		echo "<script language='javascript'> alert('Se ha eliminado el producto del carrito.'); self.history.back(); </script>";
+	}
+
+	if(isset($_POST["vaciar"])){
+		destruirCarrito();
+		echo "<script language='javascript'> alert('Su carrito esta vacío.'); self.history.back(); </script>";
+	}
+	if(isset($_POST["modificar"])){
+		modificarCantidad($_POST["idLibro"], $_POST["cantidad"]);
+		echo "<script language='javascript'> alert('Se ha modificado correctamente.'); self.history.back(); </script>";	
+	}
+}
 
 ?>

@@ -9,7 +9,7 @@
 	$username = $_POST["user"]; //recibo los datos ingresados en el formulario login.php
 	$password = $_POST["pass"];
 					
-	$consulta = "SELECT * FROM `usuario` WHERE `nombreDeUsuario` = \"$username\" AND `password` = \"$password\""; //consulto a la bd si los datos estan guardados
+	$consulta = "SELECT * FROM `usuario` WHERE `nombreDeUsuario` = \"$username\" AND `password` = \"$password\" AND `baja` = 0"; //consulto a la bd si los datos estan guardados
 	$resultado = mysql_query($consulta);
 	$fila = mysql_fetch_array($resultado);
 	

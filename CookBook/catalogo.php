@@ -36,15 +36,11 @@ function subMenuCatalogo(){
 <form method="GET" id="catalogo">
 	<table id="navegacion">
 	<tr>
-		<th></th>
 		<th>Etiquetas: </th>
-		<th></th>
 		<th>Autores: </th>
-		<th></th>
 		<th>Nombre: </th>
 	</tr>
 	<tr>
-		<td></td>
 		<td>
 			<select multiple id="etiqueta" name="idEtiqueta[]" >
 			<?php
@@ -60,7 +56,6 @@ function subMenuCatalogo(){
 			?>
 			</select>
 		</td>
-		<td></td>
 		<td>
 			<select multiple id="autor" name="idAutor[]" >
 				<?php
@@ -76,9 +71,8 @@ function subMenuCatalogo(){
 				?>
 			</select>
 		</td>
-		<td></td>
 		<td>
-			<input style="float:right" type="text" name="nombre" 
+			<input  type="text" name="nombre" 
 			<?php
 			if(isset($_GET["nombre"])){
 				echo ' value="'.$_GET["nombre"].'"';
@@ -86,8 +80,8 @@ function subMenuCatalogo(){
 			?>
 			/>
 		</br>
-			<input style="float:left" type="button" onclick="location.href='catalogo.php'" value="Limpiar"/>
-			<input style="float:right" type="submit" value="Buscar"/>
+			<input  type="button" onclick="location.href='catalogo.php'" value="Limpiar"/>
+			<input  type="submit" value="Buscar"/>
 		</td>
 	</tr>
 	</table>
@@ -128,7 +122,7 @@ if (isset($_GET["nombre"])){
 	}else{ ?>
 	
 		<div id="lista">
-		<table >
+		<table rules="rows">
 			<tr>
 				<th>Imagen</th>
 				<th><a href="<?php if(isset($_GET["orden"]) && $_GET["orden"]=="nombre ASC"){echo $url.'&orden=nombre DESC';}else{echo $url.'&orden=nombre ASC';} ?>" >Nombre</a></th>

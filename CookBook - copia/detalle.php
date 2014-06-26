@@ -36,11 +36,10 @@ function contenido(){
 			<legend><?php echo $libro["nombre"]; ?></legend>
 			<div id="imagen" style="float:left"><img width="300" src=".<?php echo $libro["img"]; ?>" /></div>
 			<div id="info-libro" style="float:left; width:550;">
-			</br></br>
-				<table >
+				<table>
 					<tr>
-						<td style="width:80px"><label>Autor<?php if(sizeof($autores)>1){ echo 'es';} ?>: </label></td>
-						<td id="infodetalle">
+						<td>Autor<?php if(sizeof($autores)>1){ echo 'es';} ?>: </td>
+						<td>
 							<?php
 							foreach ($autores as $key => $value) {
 								echo $value["apellido"].', '.$value["nombre"].' - ';
@@ -49,24 +48,24 @@ function contenido(){
 						</td>
 					</tr>
 					<tr>
-						<td><label>Origen: </label></td>
-						<td id="infodetalle"><?php echo $libro["origen"]; ?></td>
+						<td>Origen: </td>
+						<td><?php echo $libro["origen"]; ?></td>
 					</tr>
 					<tr>
-						<td><label>Idioma: </label></td>
-						<td id="infodetalle"><?php echo $libro["idioma"]; ?></td>
+						<td>Idioma: </td>
+						<td><?php echo $libro["idioma"]; ?></td>
 					</tr>
 					<tr>
-						<td><label>ISBN: </label></td>
-						<td id="infodetalle"><?php echo $libro["isbn"] ?></td>
+						<td>ISBN: </td>
+						<td><?php echo $libro["isbn"] ?></td>
 					</tr>
 					<tr>
-						<td><label>Páginas: </label></td>
-						<td id="infodetalle"><?php echo $libro["cantPaginas"]; ?></td>
+						<td>Páginas: </td>
+						<td><?php echo $libro["cantPaginas"]; ?></td>
 					</tr>
 					<tr>
-						<td><label>Etiqueta<?php if(sizeof($etiquetas)>1){ echo 's';} ?>: </label></td>
-						<td id="infodetalle"><?php 
+						<td>Etiqueta<?php if(sizeof($etiquetas)>1){ echo 's';} ?>: </td>
+						<td><?php 
 						foreach ($etiquetas as $key => $value) {
 						 	echo $value.'   ';
 						 }  ?></td>
@@ -75,38 +74,34 @@ function contenido(){
 			</div>
 			<div id="info-comercial" style="float:right">
 			</br>
-			<table>
-				<tr>
 			<?php
 			if(isset($_SESSION["carrito"])&&(isset($_SESSION["carrito"][$_GET["id"]]))){
 			?>
-				<div id="agregado"><td style="width:200px;text-align:right"><label>Producto agregado.<label></td>
-				<td><form method="POST" action="php/carrito.php" onsbmit="if(!confirm('Desea eliminar el producto del carrito?'))return false">
+				<div id="agregado"> Producto agregado. Cantidad: <?php echo $_SESSION["carrito"][$_GET["id"]]["cantidad"] ?> </div>
+				<form method="POST" action="php/carrito.php" onsbmit="if(!confirm('Desea eliminar el producto del carrito?'))return false">
 				<input type="hidden"  name="idLibro" value="<?php echo $libro["idLibro"] ?>" />
 				<input type="submit" name="eliminar" value="Eliminar" />
-				</form></td></tr>
-				<tr><td><label>Cantidad: </label> </td><td id="infodetalle"><?php echo $_SESSION["carrito"][$_GET["id"]]["cantidad"] ?> </td></div>
-				
+				</form>
 			<?php
 			}else{
 			?>
 				<form method="POST" action="php/carrito.php" onsbmit="if(!confirm('Desea agregar el producto al carrito?'))return false">
 				<input type="hidden" name="precio" value="<?php echo $libro["precio"] ?>" />
 				<input type="hidden"  name="idLibro" value="<?php echo $libro["idLibro"] ?>" />
-				<td style="text-align:right"><input name="cantidad" type="number" min="1" max="<?php echo $libro["stock"] ?>" value="1" /></td>
-				<td><input type="submit" name="agregar" value="Agregar a Carrito" /></td>
+				<input name="cantidad" type="number" min="1" max="<?php echo $libro["stock"] ?>" value="1" />
+				<input type="submit" name="agregar" value="Agregar a Carrito" />
 				</form>
 			<?php
 			}
 			?>
+			<table>
+				<tr>
+					<td>Precio: </td>
+					<td>$<?php echo number_format($libro["precio"],2,',','.'); ?></td>
 				</tr>
 				<tr>
-					<td><label>Precio: </label></td>
-					<td id="infodetalle">$<?php echo number_format($libro["precio"],2,',','.'); ?></td>
-				</tr>
-				<tr>
-					<td><label>Stock: </label></td>
-					<td id="infodetalle"><?php echo $libro["stock"]; ?></td>
+					<td>Stock: </td>
+					<td><?php echo $libro["stock"]; ?></td>
 				</tr>	
 			</table>
 			</div>

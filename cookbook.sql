@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 25-06-2014 a las 19:44:40
+-- Tiempo de generación: 26-06-2014 a las 14:19:42
 -- Versión del servidor: 5.5.24-log
 -- Versión de PHP: 5.4.3
 
@@ -174,13 +174,21 @@ INSERT INTO `libroetiqueta` (`idLibroEtiqueta`, `idLibro`, `idEtiqueta`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `pedido` (
-  `idVenta` int(11) NOT NULL AUTO_INCREMENT,
+  `idPedido` int(11) NOT NULL AUTO_INCREMENT,
   `estado` varchar(20) NOT NULL,
-  `hora` time NOT NULL,
-  `fecha` date NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `idUsuario` int(11) NOT NULL,
-  PRIMARY KEY (`idVenta`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  `monto` double NOT NULL,
+  PRIMARY KEY (`idPedido`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Volcado de datos para la tabla `pedido`
+--
+
+INSERT INTO `pedido` (`idPedido`, `estado`, `timestamp`, `idUsuario`, `monto`) VALUES
+(3, 'Pendiente', '2014-06-26 12:24:06', 3, 53.5),
+(4, 'Enviado', '2014-06-26 14:08:42', 3, 2678.45);
 
 -- --------------------------------------------------------
 

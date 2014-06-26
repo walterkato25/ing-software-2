@@ -29,6 +29,7 @@ function getCliente($id){
 			?>
 		</div>
 		</fieldset>
+		
 	</div>
 	<?php
 	if ($_SESSION['categoria']=="usuario"){
@@ -47,6 +48,14 @@ function getCliente($id){
 		</div>
 
 	</fieldset>
+	
+	<div id="eliminarcuenta">
+		<?php
+		$id=$_SESSION["idUsuario"];
+					echo '<br><a onclick="if(!confirm(';
+					echo "'Esta seguro que desea borrar su cuenta?'";
+					echo '))return false" href="php/bajas.php?abm=Usuario&id='.$id.'">Darse de baja</a></br>';
+?>		</div>
 
 		<?php
 		}
