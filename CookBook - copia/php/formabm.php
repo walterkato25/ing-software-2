@@ -1,6 +1,9 @@
 <?php
 require_once("sesion.php");
 sesion();
+if($_SESSION["categoria"]!="administrador"){
+	header("location:../index.php");
+}
 ?>
 <html>
 <head>
@@ -8,6 +11,7 @@ sesion();
 	<title>CookBook - Libros de Cocina</title>
 	<link href="../css/style.css" type="text/css" rel="stylesheet">
 	<link href="../img/icon.jpg" type="img/icon" rel="shortcut icon">
+	<script src="../js/validar_formularios.js" language="javascript"></script>
 </head>
 <body>
 	<div id="page">
@@ -18,8 +22,9 @@ sesion();
 							
 			<div id="header-menu">
 				<ul id="navegacion">
-					<li>
-						<a href="../index.php">Inicio</a>
+					
+					<li><a href="../index.php">
+						Inicio</a>
 					</li>
 					<!--<li>
 						<a href="../aboutUs.php">Conocenos</a>
@@ -27,26 +32,28 @@ sesion();
 					<li>
 						<a href="../contacto.php">Contacto</a>
 					</li>-->
-					<li id="actual">
-						<a  href="../abm.php">ABM</a>
-					</li>
-				<!--<?php
+					<?php
 						if($_SESSION){
-						if($usuario=="admin"){
-							echo '<li>
-							<a href="abm.php">ABM</a>
+							if($categoria=="administrador"){
+								echo '<li id="actual" >
+								<a href="../abm.php">ABM</a>
+								</li>';
+							}
+							echo'</ul><ul id=navegacion style=float:right>
+							<li>
+							<a href="../menuUsuario.php">Usuario:  '.$usuario.' </a>
+							</li>
+							<li>
+							<a href="desconectarUsuario.php">Logout</a>
+							</li>';
+						}else{
+							echo'<ul id=navegacion style=float:right>
+							<li>
+							<a href="../login.php">Login</a>
 							</li>';
 						}
-					}
-					 
-							if($_SESSION){
-							echo '<span id=login><a href="desconectar_usuario.php">Logout</a></span>';
-							//aca iba el usuario
-							echo'<span id=login>Usuario:  '.$usuario.' </span>';
-							}else{
-								echo '<span id=login><a href="login.php">Login</a></span>';
-							}
-						?>-->
+						
+					?>
 				</ul> 
 				
 		
@@ -76,7 +83,16 @@ if(isset($_GET["abm"])){
 							}
 						}
 ?>>
-					<a href="../abm.php?abm=Libro">Libros</a></li>				
+					<a href="../abm.php?abm=Libro">Libros</a></li>
+					<li
+					<?php 
+						if(isset($_GET["abm"])){
+							if($_GET["abm"]=="Usuario"){
+								echo ' id="sub-actual" ';
+							}
+						}
+?>>
+					<a href="../abm.php?abm=Usuario">Usuarios</a></li>				
 			</div>
 		</div>
 
@@ -85,8 +101,12 @@ if(isset($_GET["abm"])){
 			<div id="main-content">
 				<?php if(isset($_GET["abm"])){
 						$abm=$_GET["abm"];
+						if($abm=="Usuario"){
+							require_once("editarPerfil.php");
+							getCliente($_GET["id"]);
+						}
 						//comienzo formulario de abm
-						echo '<form onsubmit="return validar_formulario(this);" action=';
+						echo '<form onsubmit="return validar_formulario_'.$abm.'(this);" action=';
 						if(isset($_GET['id'])){
 							echo '"update.php"';	
 						}else{
@@ -120,59 +140,47 @@ if(isset($_GET["abm"])){
 		
 		//input de AM
 		switch($abm){
-
-			
 			case 'Etiqueta':
+				if (isset($_GET["id"])){
+					$idEtiqueta=$_GET["id"];
+					$sql="SELECT * FROM $abm WHERE idEtiqueta= $idEtiqueta";
+					$query=mysql_query($sql);
+					while ($row = mysql_fetch_array($query)){
+						$etiqueta = $row["Etiqueta"];
+					}
+				}
 				echo '<td>'.$abm.': </td>';
 				echo '<td>';
-				echo '<input id="focus" type="text" name="'.$abm.'" ';
-				if(isset($_GET["nombre"])){
-					echo 'value="'.$_GET["nombre"].'"';
+				echo '<input autofocus id="focus" type="text" name="'.$abm.'" ';
+				if(isset($etiqueta)){
+					echo 'value="'.$etiqueta.'"';
 
 				}
 				echo '/><span id="obligatorio">*</span>';
-				//autofoco js
-				echo '<script type="text/javascript">
-					document.getElementById( "focus" ).focus();
-					function validar_formulario(form){
-						if(form.'.$abm.'.value.length == 0){
-						form.'.$abm.'.focus();
-						alert("Introduzca '.$abm.'."); 
-						return false;
-						}
-						return true;
-					}
-				</script>';
+			
 			break;
 			case 'Autor':
+				if (isset($_GET["id"])){
+					$idAutor=$_GET["id"];
+					$sql="SELECT * FROM $abm WHERE idAutor= $idAutor";
+					$query=mysql_query($sql);
+					while ($row = mysql_fetch_array($query)){
+						$nombre = $row["nombre"];
+						$apellido = $row["apellido"];
+					}
+				}
 				echo '<td>Nombre: </td>';
 				echo '<td>';
-				echo '<input id="focus" type="text" name="nombre" ';
-				if(isset($_GET["nombre"])){
-					echo 'value="'.$_GET["nombre"].'"';
+				echo '<input autofocus id="focus" type="text" name="nombre" ';
+				if(isset($nombre)){
+					echo 'value="'.$nombre.'"';
 				}
 				echo '/><span id="obligatorio">*</span></td></tr><tr><td>Apellido: </td> <td>';
 				echo '<input id="ape" type="text" name="apellido" ';
-				if(isset($_GET["apellido"])){
-					echo 'value="'.$_GET["apellido"].'"';
+				if(isset($apellido)){
+					echo 'value="'.$apellido.'"';
 				}
 				echo '/><span id="obligatorio">*</span>';
-				echo '<script type="text/javascript">
-					document.getElementById( "focus" ).focus();
-					function validar_formulario(form){
-						if(form.nombre.value.length == 0){
-						form.nombre.focus();
-						alert("Introduzca nombre."); 
-						return false;
-						}
-						if(form.apellido.value.length == 0){
-						form.apellido.focus();
-						alert("Introduzca apellido."); 
-						return false;
-						}
-						return true;
-					}
-				</script>';
 				break;
 			case 'Libro':
 				if (isset($_GET["id"])){
@@ -189,6 +197,7 @@ if(isset($_GET["abm"])){
 						$resumen = $row["resumen"];
 						$stock = $row["stock"];
 						$stockMinimo = $row["stockMinimo"];
+						$imagen= $row["img"];
 					}
 					$sql= "SELECT * FROM libroAutor WHERE idLibro= $idlibro";
 					$query=mysql_query($sql);
@@ -209,7 +218,7 @@ if(isset($_GET["abm"])){
 				//nombre
 				echo '<table><tr><td>Nombre: </td>';
 				echo '<td>';
-				echo '<input id="nombre" type="text" name="nombre" ';
+				echo '<input autofocus id="nombre" type="text" name="nombre" ';
 				if(isset($nombre)){
 					echo 'value="'.$nombre.'"';
 				}
@@ -276,7 +285,7 @@ if(isset($_GET["abm"])){
 				if(isset($isbn)){
 					echo 'value="'.$isbn.'"';
 				}
-				echo '/><span id="obligatorio">*</span></td></tr><tr>';
+				echo '/><span id="obligatorio">*</span></td><td style="width:55"></td></tr><tr>';
 				//precio
 				echo '<td>Precio: </td>';
 				echo '<td>';
@@ -284,7 +293,7 @@ if(isset($_GET["abm"])){
 				if(isset($precio)){
 					echo 'value="'.$precio.'"';
 				}
-				echo '/><span id="obligatorio">*</span></td></tr><tr>';
+				echo '/><span id="obligatorio">*</span></td><td style="width:55"></td></tr><tr>';
 				//stock
 			    echo '<td>Stock: </td>';
 				echo '<td>';
@@ -292,7 +301,7 @@ if(isset($_GET["abm"])){
 				if(isset($stock)){
 					echo 'value="'.$stock.'"';
 				}
-				echo '/><span id="obligatorio">*</span></td></tr><tr>';
+				echo '/><span id="obligatorio">*</span></td><td style="width:55"></td></tr><tr>';
 				//stockminimo
 				echo '<td>Stock minimo: </td>';
 				echo '<td>';
@@ -300,21 +309,67 @@ if(isset($_GET["abm"])){
 				if(isset($stockMinimo)){
 					echo 'value="'.$stockMinimo.'"';
 				}
-				echo '/><span id="obligatorio">*</span></td></tr><tr>';
+				echo '/><span id="obligatorio">*</span></td><td style="width:55"></td></tr>';
 				//cantPaginas
-				echo '<td>Cantidad de paginas: </td>';
+				echo '<tr><td>Cantidad de paginas: </td>';
 				echo '<td>';
 				echo '<input id="cantPaginas" min = 0 type="number" name="cantPaginas" ';
 				if(isset($cantPaginas)){
 					echo 'value="'.$cantPaginas.'"';
 				}
-				echo '/><span id="obligatorio">*</span></td></tr><tr>';
-				echo '</tr></table></div>';
-				echo "<br/>";
-				echo '<div id="resumen" style="float:left"><table><tr>';
+				echo '/><span id="obligatorio">*</span></td><td style="width:55"></td></tr>';
+				?>
+				<tr>
+					<td>
+						Imagen: </br></br>
+						<a href="../cargarPortada.php" id="agregar">Nueva</a> 
+					</td>
+					<td>
+						<select id="imagen" name="img" onchange="mostrarImagen();">
+							<option></option>
+					<?php
+				    $directory="/portadas";
+				    $dirint = dir('../'.$directory);
+				    while (($archivo = $dirint->read()) !== false)
+				    {
+				        if (preg_match("(gif)i", $archivo) || preg_match("(jpg)i", $archivo) || preg_match("(png)i", $archivo)){
+				            echo '<option value="'.$directory."/".$archivo.'"';
+				            	if(isset($imagen)){
+				            		if($imagen==$directory.'/'.$archivo){
+				            			echo ' selected ';
+				            		}
+				            	}
+				            echo '>'.$archivo.'</option>';
+				        }
+				    }
+				    $dirint->close();
+					?>
 				
+						</select><span id="obligatorio">*</span>
+					</td>
+					<td style="width:55;height:55;">
+						<img id="imgelegida" style="max-width:50; max-height:50"
+						<?php
+							if(isset($imagen)){
+								echo "src='..$imagen'";
+							}
+						?>
+						>
+					</td>
+				</tr>
+<script>
+function mostrarImagen(){
+	var img=document.getElementById("imgelegida");
+	var src=document.getElementById("imagen").value;
+	img.src='..'+src;
+}
+</script>
+				<?php
+				echo '</table></div>';
+				echo "<br/>";
 				//resumen
-				echo '<td>Resumen: </td>';
+				echo '<div id="resumen" style="float:left">';
+				echo '<table><tr><td>Resumen: </td>';
 				echo '<td>';
 				echo '<textarea id="resumen" rows=10 cols=50 style="width: 700px; height: 219px;" name="resumen" ';
 				
@@ -324,90 +379,6 @@ if(isset($_GET["abm"])){
 				}
 				echo '</textarea><span id="obligatorio">*</span></td></tr><tr>';
 				echo '</tr></table>';
-				
-			
-			
-			
-			
-			
-			
-			
-			
-			
-				
-			
-				
-				echo '<script type="text/javascript">
-					document.getElementById( "cantPaginas" ).focus();
-					function validar_formulario(form){
-						if(form.cantPaginas.value.length == 0){
-						form.cantPaginas.focus();
-						alert("Introduzca cantidad de paginas."); 
-						return false;
-						}
-						if(form.idioma.value.length == 0){
-						form.idioma.focus();
-						alert("Introduzca idioma."); 
-						return false;
-						}
-						if(form.idioma.value.length == 0){
-						form.idioma.focus();
-						alert("Introduzca idioma."); 
-						return false;
-						}
-						if(form.isbn.value.length != 13){
-						form.isbn.focus();
-						alert("El ISBN es demasiado corto."); 
-						return false;
-						}
-						if(isNaN(form.isbn.value)){
-						form.isbn.focus();
-						alert("El ISBN solo debe contener numeros."); 
-						return false;
-						}
-						if(form.nombre.value.length == 0){
-						form.nombre.focus();
-						alert("Introduzca nombre."); 
-						return false;
-						}
-						if(form.origen.value.length == 0){
-						form.origen.focus();
-						alert("Introduzca origen."); 
-						return false;
-						}
-						if(form.precio.value.length == 0){
-						form.precio.focus();
-						alert("Introduzca precio."); 
-						return false;
-						}
-						if(form.resumen.value.length == 0){
-						form.resumen.focus();
-						alert("Introduzca resumen."); 
-						return false;
-						}
-						if(form.stock.value.length == 0){
-						form.stock.focus();
-						alert("Introduzca stock."); 
-						return false;
-						}
-						if(form.stockMinimo.value.length == 0){
-						form.stockMinimo.focus();
-						alert("Introduzca stock minimo."); 
-						return false;
-						}
-						if(document.getElementById( "autor" ).value == ""){
-						document.getElementById( "autor" ).focus();
-						alert("Debe agregar por lo menos un autor."); 
-						return false;
-						}
-						if(document.getElementById( "etiqueta" ).value == ""){
-						document.getElementById( "etiqueta" ).focus();
-						alert("Debe agregar por lo menos una etiqueta."); 
-						return false;
-						}
-						return true;
-					}
-				</script>';
 			break;
 		}
 		

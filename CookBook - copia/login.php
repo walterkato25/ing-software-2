@@ -1,13 +1,16 @@
 <?php
 require_once("php/sesion.php");
 sesion();
+if(isset($_SESSION["categoria"])){
+	header("location:index.php");
+}
 ?>
 <html>
 <head>
-	<meta charset=utf-8"></meta>
+	<meta charset="utf-8"></meta>
 	<title>CookBook - Libros de Cocina</title>
 	<link href="css/style.css" type="text/css" rel="stylesheet">
-	<!--<link href="images.jpg" type="img/icon" rel="shortcut icon">-->
+	<link href="img/icon.png" type="img/icon" rel="shortcut icon">
 </head>
 <body>
 	<div id="page">
@@ -18,26 +21,13 @@ sesion();
 							
 			<div id="header-menu">
 				<ul id="navegacion">
-					<li>
+					<li id="actual">
 						<a href="index.php">Inicio</a>
 					</li>
-				   <!--<?php
-						if($_SESSION){
-						if($usuario=="admin"){
-							echo '<li>
-							<a href="abm.php">ABM</a>
-							</li>';
-						}
-					}
-					 
-							if($_SESSION){
-							echo '<span id=login><a href="desconectar_usuario.php">Logout</a></span>';
-							//aca iba el usuario
-							echo'<span id=login>Usuario:  '.$usuario.' </span>';
-							}else{
-								echo '<span id=login><a href="login.php">Login</a></span>';
-							}
-						?>-->
+					<li>
+						<a href="catalogo.php">Catalogo</a>
+					</li>
+
 				</ul> 
 				
 		
@@ -52,8 +42,8 @@ sesion();
 			<form id="contacto" name="login" method="post" action="php/validarsesion.php">
 							<fieldset style="padding:15px;width:300px">
 							<legend>Iniciar Sesión:</legend>
-							<label>Usuario:</label><input type="text" name="user" class="required"><br><br>
-							<label>Contraseña:</label><input type="password" name="pass" class="required"><br><br>
+							<label>Usuario:</label><input type="text" name="user" required><br><br>
+							<label>Contraseña:</label><input type="password" name="pass" required><br><br>
 							<input type="submit" name="enviar" value="Iniciar Sesión" style="margin-left:150px;"> <br><br>
 							<span> <a href="altaUsuario.php">Crear cuenta</a></span>
 							</fieldset>

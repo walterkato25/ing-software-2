@@ -1,5 +1,7 @@
 <?php
 require_once("php/sesion.php");
+require_once("php/SQLfunctions.php");
+
 sesion();
 ?>
 <html>
@@ -21,35 +23,30 @@ sesion();
 					<li id="actual">
 						<a href="index.php">Inicio</a>
 					</li>
-					<!--<li>
-						<a href="aboutUs.php">Conocenos</a>
-					</li>
 					<li>
-						<a href="contacto.php">Contacto</a>
-					</li>-->
-					<li>
-						<a href="abm.php">ABM</a>
+						<a href="catalogo.php">Catalogo</a>
 					</li>
-					<li>
-						<a href="login.php">Login</a>    
-					</li>
-				<!--<?php
+					<?php
 						if($_SESSION){
-						if($usuario=="admin"){
-							echo '<li>
-							<a href="abm.php">ABM</a>
+							if($categoria=="administrador"){
+								echo '<li>
+								<a href="abm.php">ABM</a>
+								</li>';
+							}
+							echo'</ul><ul id=navegacion style=float:right>
+							<li>
+							<a href="menuUsuario.php">Usuario:  '.$usuario.' </a>
+							</li>
+							<li>
+							<a href="php/desconectarUsuario.php">Logout</a>
+							</li>';
+						}else{
+							echo'<ul id=navegacion style=float:right>
+							<li>
+							<a href="login.php">Login</a>
 							</li>';
 						}
-					}
-					 
-							if($_SESSION){
-							echo '<span id=login><a href="desconectar_usuario.php">Logout</a></span>';
-							//aca iba el usuario
-							echo'<span id=login>Usuario:  '.$usuario.' </span>';
-							}else{
-								echo '<span id=login><a href="login.php">Login</a></span>';
-							}
-						?>-->
+					?>																																						
 				</ul> 
 				
 		
@@ -61,34 +58,27 @@ sesion();
 				
 			</div>
 			<div id="main-content">
-			<form id="contacto" name="login" method="post" action="php/validarSesion.php">
+			<form id="contacto" name="login" method="POST" action="php/insertarUsuario.php">
 							<fieldset style="padding:15px;width:300px">
 							<legend>Registrarse:</legend>
-							<label>Usuario:</label><input id="focus" type="text" name="usuario" class="required"><span id="obligatorio">*</span><br><br>
-							<label>Contraseña:</label><input id="focus" type="password" name="contraseña" class="required"><span id="obligatorio">*</span><br><br>
-							<script type="text/javascript">
-								document.getElementById( "contacto" ).focus();
-								function validar_formulario(form){
-								if(form.usuario.value.length == 0){
-									form.usuario.focus();
-									alert("Introduzca usuario."); 
-									return false;
-								}
-								if(form.contraseña.value.length == 0){
-									form.contraseña.focus();
-									alert("Introduzca contraseña."); 
-								return false;
-								}
-								return true;
-								}
-							</script>
-							<label>Repita Contraseña:</label><input id="focus" type="password" name="contraseña2" class="required"><span id="obligatorio">*</span><br><br>
-							<label>Nombre:</label><input id="focus" type="text" name="nombre" class="required"><span id="obligatorio">*</span><br><br>
-							<label>Apellido:</label><input id="focus" type="text" name="apellido" class="required"><span id="obligatorio">*</span><br><br>
-							<label>Mail:</label><input id="focus" type="text" name="mail" class="required"><span id="obligatorio">*</span><br><br>
+							<label>Usuario:</label><input id="focus" type="text" name="nombreDeUsuario" required><span id="obligatorio">*</span><br><br>
+							<label>Contraseña:</label><input id="focus" type="password" name="password"required><span id="obligatorio">*</span><br><br>
+							<label>Repita Contraseña:</label><input id="focus" type="password" name="contraseña2" required><span id="obligatorio">*</span><br><br>
+							<label>Nombre:</label><input id="focus" type="text" name="nombre" required><span id="obligatorio">*</span><br><br>
+							<label>Apellido:</label><input id="focus" type="text" name="apellido" required><span id="obligatorio">*</span><br><br>
+							<label>Mail:</label><input id="focus" type="email" name="mail" required><span id="obligatorio">*</span><br><br>
+							<label>DNI:</label><input id="focus" type="number" name="dni/cuit" required><span id="obligatorio">*</span><br><br>
+							<label>Telefono:</label><input id="focus" type="tel" name="tel" required><span id="obligatorio">*</span><br><br>
+							<label>Cp:</label><input id="focus" type="text" name="cp" required><span id="obligatorio">*</span><br><br>
+							<label>Localidad:</label><input id="focus" type="text" name="localidad" required><span id="obligatorio">*</span><br><br>
+							<label>Calle:</label><input id="focus" type="text" name="calle" required><span id="obligatorio">*</span><br><br>
+							<label>Numero:</label><input id="focus" type="number" name="nro" ><br><br>
+							<label>Piso:</label><input id="focus" type="number" name="piso" ><br><br>
+							<label>Depto:</label><input id="focus" type="text" name="depto" ><br><br>
 							<input type="submit" name="enviar" value="Crear Usuario" style="margin-left:150px;"> <br><br>	
 							<span id= "obligatorio">Los campos con * deben llenarse obligatoriamente</span>
 							</fieldset>
+						
                  </form>   
 			</div>
 		</div>

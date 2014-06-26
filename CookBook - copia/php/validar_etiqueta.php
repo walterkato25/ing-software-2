@@ -1,5 +1,5 @@
 <?php
-	function validar_etiqueta($nom){
+	function validar_Etiqueta($nom){
 		require_once("config.php");
 		$bd=connect();
 		$consulta = "SELECT * FROM `etiqueta` WHERE `Etiqueta`='$nom'";

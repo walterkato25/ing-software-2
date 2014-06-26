@@ -6,17 +6,17 @@ require_once("config.php");
 			if($toUpdate!=""){
 				$toUpdate.=", ";
 			}
-			$toUpdate.="$atributo = \"$valor\"";
+			$toUpdate.="`$atributo` = \"$valor\"";
 		}
 		$sql="UPDATE `$tabla` SET $toUpdate WHERE id$tabla=$id";
-		mysql_query($sql) or die ("<script type='text/javascript'> alert(\"no se ha podido insertar el elemento".mysql_error()."\")</script>");
+		mysql_query($sql) or die ("<script type='text/javascript'> alert(\"no se ha podido insertar el elemento\")</script>");
 	}
 	function insert($tabla, $atributosvalores){
 		$lista_atributos='';
 		$lista_valores='';
 		foreach($atributosvalores as $atributo => $valor){
 			if($lista_atributos!=''){
-				$lista_atributos=$lista_atributos.', '.$atributo;
+				$lista_atributos=$lista_atributos.', '.'`'.$atributo.'`';
 			}else{
 				$lista_atributos=$atributo;
 			}
@@ -25,9 +25,10 @@ require_once("config.php");
 			}else{
 				$lista_valores='"'.$valor.'"';
 			}
-		}		
+		}
+
 		$sql="INSERT INTO $tabla ($lista_atributos) values ($lista_valores)";
-		mysql_query($sql) or die ("<script type='text/javascript'> alert(\"no se ha podido insertar el elemento".mysql_error()."\"); self.history.back()</script>");
+		mysql_query($sql) or die ("<script type='text/javascript'> alert(\"no se ha podido insertar el elemento\"); self.history.back()</script>");
 		
 	}
 

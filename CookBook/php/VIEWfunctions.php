@@ -3,12 +3,14 @@
 require_once("SQLfunctions.php");
 require_once("config.php");
 
-function modificarEliminar($abm, $id){
-	echo '<td><a onclick="if(!confirm(';
-	echo " 'Desea borrar el elemento?' ";
-	echo '))return false"; href="php/bajas.php?abm='.$abm.'&id='.$id.'"><img src="img/eliminar.png" title="Eliminar" /></a>';
+function modificar($abm, $id){
 	echo '<a href="php/formabm.php?abm='.$abm.'&id='.$id;
 	echo '"><img src="img/editar.png" title="Editar"/></a>';
+}
+function eliminar($abm, $id){
+	?>
+	<td><a onclick="if(!confirm('Desea borrar el elemento?'))return false"; href="php/bajas.php?abm='<?php echo $abm.'&id='.$id; ?>'"><img src="img/eliminar.png" title="Eliminar" /></a>
+	<?php
 }
 function verEtiqueta(){
 	echo '<th>Etiqueta</th>';
@@ -16,7 +18,8 @@ function verEtiqueta(){
 	$query = select("Etiqueta","Etiqueta");
 	while ($row  = mysql_fetch_assoc($query)) {
 		echo '<tr><td>'.$row["Etiqueta"].'</td>';
-		modificarEliminar("Etiqueta", $row["idEtiqueta"]);
+		eliminar("Etiqueta", $row["idEtiqueta"]);
+		modificar("Etiqueta", $row["idEtiqueta"]);
 	}
 }
 function verAutor(){
@@ -26,7 +29,8 @@ function verAutor(){
 	while ($row  = mysql_fetch_assoc($query)) {
 		echo '<tr><td>'.$row["apellido"].'</td>';
 		echo '<td>'.$row["nombre"].'</td>';
-		modificarEliminar("Autor", $row["idAutor"]);
+		eliminar("Autor", $row["idAutor"]);
+		modificar("Autor", $row["idAutor"]);
 	}
 }
 function verLibro(){
@@ -67,7 +71,8 @@ function verLibro(){
 		}
 		echo "<td>$listaEtiquetas</td>";
 		echo "<td style='text-align:right'>\$".number_format($precio,2,',','.')."</td>";
-		modificarEliminar("Libro", $id);
+		eliminar("Libro", $id);
+		modificar("Libro", $id);
 	}
 }
 
@@ -81,23 +86,67 @@ function verUsuario(){
 		echo '<td>'.$row["nombre"].'</td>';
 		echo '<td>'.$row["dni/cuit"].'</td>';
 		echo '<td>'.$row["categoria"].'</td>';
-		modificarEliminar("Usuario", $row["idUsuario"]);
+		if(($row["categoria"]=="administrador")&&($row["idUsuario"]!=$_SESSION["idUsuario"])){
+			eliminar("Usuario", $row["idUsuario"]);
+		}
+		if($row["categoria"]=="usuario"){
+			echo '<td><a href="pedidos.php?idUsuario='.$row["idUsuario"].'" > Ver Pedidos </a></td>';
+		}
 	}
 }
+if (isset($_SESSION["categoria"])){
+	function verPedido(){
+		$sql="SELECT * FROM pedido";
+		if($_SESSION["categoria"]=="usuario"){
+			$idUsuario=$_SESSION["idUsuario"];
+			$sql.=" WHERE idUsuario=$idUsuario";
+			$query=mysql_query($sql);
+			if (mysql_num_rows($query)!=0) { ?>
+				<th>Fecha y Hora</th><th>Monto</th><th>Estado</th><th>Acciones</th></tr>
+				<?php while($row=mysql_fetch_array($query)){
+				?>
+				
+					<tr>
+						<td><?php echo $row["timestamp"]; ?></td>
+						<td><?php echo "$".number_format($row["monto"],2,',','.'); ?></td>
+						<td><?php echo $row["estado"]; ?></td>
+						<td><?php if ($row["estado"]=="Pendiente") {
+							echo "<a href='php/cancelarPedido.php?idPedido=".$row["idPedido"]."' onclick='if(!confirm(\"Desea borrar el elemento?\"))return false'>Cancelar Pedido</a> ";
+						} ?></td>
+
+					</tr>
+					<?php } ?>
+				
+				<?php	
+				
+			}else{
+				echo "<h4><p>No tiene nigún pedido.</p></h4>";
+			}		
+		}
+	}
+}	
 function viewABM($abm){
-						echo '<fieldset style="margin:auto; width; float:left">';
+						echo '<fieldset style="margin:auto; width:885px; float:left">';
 						if($abm=='Autor'){
 							echo '<legend>'.$abm.'es </legend>';
 						}else{
 							echo '<legend>'.$abm.'s </legend>';
 						}
 						$funcionVer='ver'.$abm;
-						echo '<table>';
+						echo '<table rules="rows">';
 						echo '<tr>';
 						
 						$funcionVer();
+<<<<<<< HEAD
 						echo "<tr><td><span ><a id='agregar' href=\"php/formabm.php?abm=$abm";
 						echo "\">Agregar... </span></td></tr></table>";
+=======
+						if(!($abm=="Usuario") && !($abm=="Pedido")){
+							echo "<tr><td><span ><a id='agregar' href=\"php/formabm.php?abm=$abm";
+							echo "\">Agregar... </span></td></tr>";
+						}
+						echo "</table>";
+>>>>>>> origin/master
 						echo '</fieldset>';
 }
 

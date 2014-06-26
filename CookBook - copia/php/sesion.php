@@ -1,16 +1,23 @@
 <?php
 	function sesion(){
 		require_once("config.php");
+		//conect();
 
 		//Iniciar Sesión
+		if(!isset($_SESSION)){
 		session_start();
+	}
 
 		//Validar si se está ingresando con sesión correctamente
 		
 		
-		if ($_SESSION) {
+		if (isset($_SESSION['categoria'])) {
 			global $usuario;
-			$usuario = $_SESSION['Usuario'];	
+			global $categoria;
+			global $idUsuario;
+			$categoria = $_SESSION['categoria'];
+			$usuario = $_SESSION['Usuario'];
+			$idUsuario = $_SESSION["idUsuario"];
 		}
 		
 	}

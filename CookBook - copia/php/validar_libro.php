@@ -1,5 +1,5 @@
 <?php
-	function validar_libro($isbn, $id=-1){
+	function validar_Libro($isbn, $id=-1){
 		require_once("config.php");
 		$bd=connect();
 		if($id==-1){
