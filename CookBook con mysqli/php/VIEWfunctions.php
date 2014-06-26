@@ -1,7 +1,7 @@
 <?php
 
 require_once("SQLfunctions.php");
-require_once("config.php");
+$link = mysqli_connect("localhost", "root", "","cookbook");
 
 function modificarEliminar($abm, $id){
 	echo '<td><a onclick="if(!confirm(';
@@ -14,7 +14,7 @@ function verEtiqueta(){
 	echo '<th>Etiqueta</th>';
 	echo'<th>Acciones</th></tr>';
 	$query = select("Etiqueta","Etiqueta");
-	while ($row  = mysql_fetch_assoc($query)) {
+	while ($row = mysqli_fetch_array($query)) {
 		echo '<tr><td>'.$row["Etiqueta"].'</td>';
 		modificarEliminar("Etiqueta", $row["idEtiqueta"]);
 	}
@@ -23,26 +23,27 @@ function verAutor(){
 	echo '<th>Apellido</th><th>Nombre</th>';
 	echo'<th>Acciones</th></tr>';
 	$query=select("Autor","Apellido");
-	while ($row  = mysql_fetch_assoc($query)) {
+	while ($row = mysqli_fetch_array($query)){
 		echo '<tr><td>'.$row["apellido"].'</td>';
 		echo '<td>'.$row["nombre"].'</td>';
 		modificarEliminar("Autor", $row["idAutor"]);
 	}
 }
 function verLibro(){
+    $link = mysqli_connect("localhost", "root", "","cookbook");
 	echo '<th>Nombre</th><th>Autores</th><th>Etiquetas</th><th>Precio</th>';
 	echo'<th>Acciones</th></tr>';
 	$query = select("Libro","Nombre", true);
-	while ($row  = mysql_fetch_assoc($query)) {
+	while ($row = mysqli_fetch_array($query)) {
 		$nombreLibro= $row["nombre"];
 		$id= $row["idLibro"];
 		$precio=$row["precio"];
 		$sql= "SELECT apellido, nombre FROM `autor` WHERE `idAutor` in (SELECT idAutor FROM `libroautor` WHERE `idLibro`=$id)";
-		$queryautor= mysql_query($sql);
-		$cantAutores = mysql_num_rows($queryautor);
+		$queryautor= mysqli_query($link,$sql);
+		$cantAutores = mysqli_num_rows($queryautor);
 		$nombreAutor='';
 		$otros='';
-		while ($row = mysql_fetch_array($queryautor)){
+		while ($row = mysqli_fetch_array($queryautor)){
 			if($nombreAutor==''){
 				$nombreAutor= $row["apellido"].', '.$row["nombre"];
 			}else{
@@ -57,9 +58,9 @@ function verLibro(){
 		}
 		echo "</td>";
 		$sql= "SELECT etiqueta FROM `etiqueta` WHERE `idEtiqueta` in (SELECT idEtiqueta FROM `libroetiqueta` WHERE `idLibro`=$id)";
-		$queryetiqueta= mysql_query($sql);
+		$queryetiqueta= mysqli_query($link,$sql);
 		$listaEtiquetas='';
-		while($etiqueta = mysql_fetch_array($queryetiqueta)){
+		while($etiqueta = mysqli_fetch_array($queryetiqueta)){
 			if($listaEtiquetas!=''){
 				$listaEtiquetas=$listaEtiquetas.', ';
 			}
@@ -75,7 +76,7 @@ function verUsuario(){
 	echo '<th>Nombre de Usuario</th><th>Apellido</th><th>Nombre</th><th>DNI/CUIT</th><th>Categoría</th>';
 	echo'<th>Acciones</th></tr>';
 	$query=select("Usuario","nombreDeUsuario", true);
-	while ($row  = mysql_fetch_assoc($query)) {
+	while ($row = mysqli_fetch_array($query)) {
 		echo '<tr><td>'.$row["nombreDeUsuario"].'</td>';
 		echo '<td>'.$row["apellido"].'</td>';
 		echo '<td>'.$row["nombre"].'</td>';
@@ -95,7 +96,9 @@ function viewABM($abm){
 						echo '<table>';
 						echo '<tr>';
 						
+
 						$funcionVer();
+
 						echo "<tr><td><span ><a id='agregar' href=\"php/formabm.php?abm=$abm";
 						echo "\">Agregar... </span></td></tr></table>";
 						echo '</fieldset>';
