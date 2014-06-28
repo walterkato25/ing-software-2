@@ -1,4 +1,5 @@
 <?php
+header("Content-type: text/html; charset=utf-8");
 function validarUsuario($nombre,$mail){
 		require_once("config.php");
 		$consulta1 = "SELECT * FROM `cookbook`.`usuario` WHERE `nombreDeUsuario`='$nombre'";

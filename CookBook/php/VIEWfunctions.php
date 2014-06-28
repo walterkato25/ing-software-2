@@ -1,5 +1,5 @@
 <?php
-
+header("Content-type: text/html; charset=utf-8");
 require_once("SQLfunctions.php");
 require_once("config.php");
 
@@ -9,7 +9,7 @@ function modificar($abm, $id){
 }
 function eliminar($abm, $id){
 	?>
-	<td><a onclick="if(!confirm('Desea borrar el elemento?'))return false"; href="php/bajas.php?abm='<?php echo $abm.'&id='.$id; ?>'"><img src="img/eliminar.png" title="Eliminar" /></a>
+	<td><a onclick="if(!confirm('¿Desea borrar el elemento?'))return false"; href="php/bajas.php?abm=<?php echo $abm.'&id='.$id; ?>"><img src="img/eliminar.png" title="Eliminar" /></a>
 	<?php
 }
 function verEtiqueta(){
@@ -107,12 +107,14 @@ if (isset($_SESSION["categoria"])){
 				?>
 				
 					<tr>
-						<td><?php echo $row["timestamp"]; ?></td>
-						<td><?php echo "$".number_format($row["monto"],2,',','.'); ?></td>
-						<td><?php echo $row["estado"]; ?></td>
-						<td><?php if ($row["estado"]=="Pendiente") {
-							echo "<a href='php/cancelarPedido.php?idPedido=".$row["idPedido"]."' onclick='if(!confirm(\"Desea borrar el elemento?\"))return false'>Cancelar Pedido</a> ";
-						} ?></td>
+						<td><?php echo $row["timestamp"]; ?>
+						</td>
+						<td><?php echo "$".number_format($row["monto"],2,',','.'); ?>
+						</td>
+						<td><?php echo $row["estado"]; ?>
+						</td>
+						<td><?php echo "<a href='verPedido.php?idPedido=".$row["idPedido"]."' >Ver Pedido</a> "; ?>
+						</td>
 
 					</tr>
 					<?php } ?>
@@ -136,17 +138,13 @@ function viewABM($abm){
 						echo '<table rules="rows">';
 						echo '<tr>';
 						
+
 						$funcionVer();
-<<<<<<< HEAD
-						echo "<tr><td><span ><a id='agregar' href=\"php/formabm.php?abm=$abm";
-						echo "\">Agregar... </span></td></tr></table>";
-=======
 						if(!($abm=="Usuario") && !($abm=="Pedido")){
 							echo "<tr><td><span ><a id='agregar' href=\"php/formabm.php?abm=$abm";
 							echo "\">Agregar... </span></td></tr>";
 						}
 						echo "</table>";
->>>>>>> origin/master
 						echo '</fieldset>';
 }
 

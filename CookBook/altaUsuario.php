@@ -3,6 +3,9 @@ require_once("php/sesion.php");
 require_once("php/SQLfunctions.php");
 
 sesion();
+if(isset($_SESSION["categoria"])){
+	header("location:menuUsuario.php");
+}
 ?>
 <html>
 <head>
@@ -10,6 +13,7 @@ sesion();
 	<title>CookBook - Libros de Cocina</title>
 	<link href="css/style.css" type="text/css" rel="stylesheet">
 	<link href="img/icon.png" type="img/icon" rel="shortcut icon">
+	<script src="js/validar_formularios.js" language="javascript"></script>
 </head>
 <body>
 	<div id="page">
@@ -58,24 +62,26 @@ sesion();
 				
 			</div>
 			<div id="main-content">
-			<form id="contacto" name="login" method="POST" action="php/insertarUsuario.php">
-							<fieldset style="padding:15px;width:300px">
+			<form name="login" autocomplete="on" onsubmit="return validar_altaCliente(this);" method="POST" action="php/insertarUsuario.php">
+							<fieldset style="margin-left:auto;margin-right:auto;width:500px">
 							<legend>Registrarse:</legend>
-							<label>Usuario:</label><input id="focus" type="text" name="nombreDeUsuario" required><span id="obligatorio">*</span><br><br>
-							<label>Contraseña:</label><input id="focus" type="password" name="password"required><span id="obligatorio">*</span><br><br>
-							<label>Repita Contraseña:</label><input id="focus" type="password" name="contraseña2" required><span id="obligatorio">*</span><br><br>
-							<label>Nombre:</label><input id="focus" type="text" name="nombre" required><span id="obligatorio">*</span><br><br>
-							<label>Apellido:</label><input id="focus" type="text" name="apellido" required><span id="obligatorio">*</span><br><br>
-							<label>Mail:</label><input id="focus" type="email" name="mail" required><span id="obligatorio">*</span><br><br>
-							<label>DNI:</label><input id="focus" type="number" name="dni/cuit" required><span id="obligatorio">*</span><br><br>
-							<label>Telefono:</label><input id="focus" type="tel" name="tel" required><span id="obligatorio">*</span><br><br>
-							<label>Cp:</label><input id="focus" type="text" name="cp" required><span id="obligatorio">*</span><br><br>
-							<label>Localidad:</label><input id="focus" type="text" name="localidad" required><span id="obligatorio">*</span><br><br>
-							<label>Calle:</label><input id="focus" type="text" name="calle" required><span id="obligatorio">*</span><br><br>
-							<label>Numero:</label><input id="focus" type="number" name="nro" ><br><br>
-							<label>Piso:</label><input id="focus" type="number" name="piso" ><br><br>
-							<label>Depto:</label><input id="focus" type="text" name="depto" ><br><br>
-							<input type="submit" name="enviar" value="Crear Usuario" style="margin-left:150px;"> <br><br>	
+							<table rules ="rows">
+								<tr><td class="label"><label>Usuario:</label></td><td class="input"><input type="text" autofocus autocomplete="off" name="nombreDeUsuario" ><span id="obligatorio">*</span></td></tr>
+								<tr><td class="label"><label>Contraseña:</label></td><td class="input"><input type="password" autocomplete="off" name="password"><span id="obligatorio">*</span></td></tr>
+								<tr><td class="label"><label>Repita Contraseña:</label></td><td class="input"><input type="password" autocomplete="off" name="contraseña2" ><span id="obligatorio">*</span></td></tr>
+								<tr><td class="label"><label>Nombre:</label></td><td class="input"><input type="text" name="nombre" ><span id="obligatorio">*</span></td></tr>
+								<tr><td class="label"><label>Apellido:</label></td><td class="input"><input type="text" name="apellido" ><span id="obligatorio">*</span></td></tr>
+								<tr><td class="label"><label>Mail:</label></td><td class="input"><input type="mail" name="mail" ><span id="obligatorio">*</span></td></tr>
+								<tr><td class="label"><label>DNI:</label></td><td class="input"><input type="text" name="dnicuit" maxlength="11" ><span id="obligatorio">*</span></td></tr>
+								<tr><td class="label"><label>Teléfono:</label></td><td class="input"><input type="tel" name="tel" ><span id="obligatorio">*</span></td></tr>
+								<tr><td class="label"><label>Código Postal:</label></td><td class="input"><input type="text" name="cp" ><span id="obligatorio">*</span></td></tr>
+								<tr><td class="label"><label>Localidad:</label></td><td class="input"><input type="text" name="localidad" ><span id="obligatorio">*</span></td></tr>
+								<tr><td class="label"><label>Calle:</label></td><td class="input"><input type="text" name="calle" ><span id="obligatorio">*</span></td></tr>
+								<tr><td class="label"><label>Número:</label></td><td class="input"><input type="number" name="nro" ></td></tr>
+								<tr><td class="label"><label>Piso:</label></td><td class="input"><input type="number" name="piso" ></td></tr>
+								<tr><td class="label"><label>Departamento:</label></td><td class="input"><input type="text" name="depto" ></td></tr>
+								<tr><td class="label"></td><td class="input"><input type="submit" name="enviar" value="Crear Usuario" style=""></td></tr>	
+							</table>
 							<span id= "obligatorio">Los campos con * deben llenarse obligatoriamente</span>
 							</fieldset>
 						

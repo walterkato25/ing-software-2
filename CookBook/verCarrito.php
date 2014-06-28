@@ -87,7 +87,7 @@ function contenido(){
 			</form>
 			</td>
 			<td>
-			<a style="margin: auto" id="comprar" href="validarCarrito.php"> Comprar </a>
+			<a style="margin: auto" id="comprar" href="php/validarCarrito.php?continue=../compra.php"> Comprar </a>
 			</table>
 			</td>
 		</div>

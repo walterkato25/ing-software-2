@@ -36,7 +36,7 @@ if($_SESSION["categoria"]!="administrador"){
 				<?php
 						if($_SESSION){
 							if($categoria=="administrador"){
-								echo '<li>
+								echo '<li  id="actual">
 								<a href="abm.php">ABM</a>
 								</li>
 								<li>

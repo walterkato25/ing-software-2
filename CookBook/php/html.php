@@ -1,5 +1,6 @@
 
 <?php
+header("Content-type: text/html; charset=utf-8");
 require_once("sesion.php");
 sesion();
 function head($script){

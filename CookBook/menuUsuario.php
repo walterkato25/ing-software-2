@@ -11,7 +11,7 @@ if(!$_SESSION){
 ?>
 <html>
 <?php
-head("");
+head("js/validar_formularios.js");
 body("menuUsuario.php");
 
 ?>

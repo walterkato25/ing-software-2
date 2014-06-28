@@ -173,7 +173,7 @@ select{width:150px}
 #agregar:hover{color:#EBEDF4;background-color:#4C4778;border-radius:5px;text-decoration:none;padding:3px}
 #agregar:active{color:#EBEDF4;background-color:#4C4778;border-radius:5px;text-decoration:none;padding:3px}
 
-#obligatorio{font-size:0.6em; float:right}
+#obligatorio{font-size:0.6em; }
 
 #comprar {
 	-moz-box-shadow:inset 0px 1px 0px 0px #c1ed9c;
@@ -222,3 +222,6 @@ select{width:150px}
 #eliminarcuenta{font-size: 0.7em; float:right; padding: 6px;}
 #infodetalle{margin:auto; text-align:left;}
 label{display:inline-block;text-align:right;}
+
+.label{text-align:right} 
+.input{text-align:left;}

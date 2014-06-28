@@ -1,4 +1,5 @@
 <?php
+header("Content-type: text/html; charset=utf-8");
 require_once("config.php");
 	function update($tabla, $atributosvalores, $id){
 		$toUpdate="";
@@ -9,7 +10,7 @@ require_once("config.php");
 			$toUpdate.="`$atributo` = \"$valor\"";
 		}
 		$sql="UPDATE `$tabla` SET $toUpdate WHERE id$tabla=$id";
-		mysql_query($sql) or die ("<script type='text/javascript'> alert(\"no se ha podido insertar el elemento\")</script>");
+		mysql_query($sql) or die ("<script type='text/javascript'> alert(\"No se ha podido insertar el elemento.\")</script>");
 	}
 	function insert($tabla, $atributosvalores){
 		$lista_atributos='';
@@ -28,7 +29,7 @@ require_once("config.php");
 		}
 
 		$sql="INSERT INTO $tabla ($lista_atributos) values ($lista_valores)";
-		mysql_query($sql) or die ("<script type='text/javascript'> alert(\"no se ha podido insertar el elemento\"); self.history.back()</script>");
+		mysql_query($sql) or die ("<script type='text/javascript'> alert(\"No se ha podido insertar el elemento.\"); self.history.back()</script>");
 		
 	}
 
@@ -52,13 +53,13 @@ require_once("config.php");
 	function delete($tabla, $id){
 		require_once("config.php");
 		$sql="DELETE FROM $tabla WHERE id$tabla=$id";
-		mysql_query($sql,connect()) or die("<script type='text/javascript'> alert(\"no se ha podido eliminar el elemento\")</script>");
+		mysql_query($sql,connect()) or die("<script type='text/javascript'> alert(\"No se ha podido eliminar el elemento.\")</script>");
 		
 	}
 
 	function logic_delete($tabla, $id){
 		$sql="UPDATE $tabla SET `baja` = 1 WHERE id$tabla=$id";
-		mysql_query($sql) or die("<script type='text/javascript'> alert(\"no se ha podido eliminar el elemento\")</script>");
+		mysql_query($sql) or die("<script type='text/javascript'> alert(\"No se ha podido eliminar el elemento.\")</script>");
 		
 	}
 ?>

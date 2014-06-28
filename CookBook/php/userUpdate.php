@@ -1,4 +1,5 @@
 <?php
+header("Content-type: text/html; charset=utf-8");
 	require_once('config.php');
 	require_once('SQLfunctions.php');
 	require_once('funcionExiste.php');
@@ -10,19 +11,24 @@
 			if(($atributo=="nombreDeUsuario") || ($atributo=="dni/cuit") || ($atributo == "mail")){
 				$valida=!(existeDatoUsuario($atributo, $valor));
 			}
-			$toUpdate[$atributo]=$valor;
+			if($atributo=="dnicuit"){
+				$atrib="dni/cuit";
+			}else{
+				$atrib=$atributo;
+			}
+			$toUpdate[$atrib]=$valor;
 		}
 		unset($toUpdate["id"]);
 		if($valida){
 			update($tabla, $toUpdate, $id);
-			echo '<script language = javascript  charset="UTF-8">
+			echo '<script language = "javascript"  >
 			alert("Se ha actualizado el elemento correctamente.")
 			self.history.back();
 			</script>';
 		}else{
 			if($atributo=="nombreDeUsuario"){$atributo="nombre de usuario";}
-			echo "<script charset='UTF-8'> 
-			alert(\"Error al realizar la modificacion. El $atributo '$valor' ya está en uso.\"); 
+			echo "<script language = 'javascript'> 
+			alert(\"Error al realizar la modificación. El $atributo '$valor' ya está en uso.\"); 
 			self.history.back();</script>";
 		}
 	}

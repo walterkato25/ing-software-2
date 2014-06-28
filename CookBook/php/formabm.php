@@ -1,4 +1,5 @@
 <?php
+header("Content-type: text/html; charset=utf-8");
 require_once("sesion.php");
 sesion();
 if($_SESSION["categoria"]!="administrador"){
@@ -20,25 +21,38 @@ if($_SESSION["categoria"]!="administrador"){
 				<div class=logo><a href="../index.php"><img src="../img/Imagen1.png" height=100% alt="logo" border="0px"></a></div>
 			</div>
 							
-			<div id="header-menu">
+	<div id="header-menu">
 				<ul id="navegacion">
-					
-					<li><a href="../index.php">
-						Inicio</a>
-					</li>
-					<!--<li>
-						<a href="../aboutUs.php">Conocenos</a>
-					</li>
 					<li>
-						<a href="../contacto.php">Contacto</a>
-					</li>-->
+						<a href="../index.php">Inicio</a>
+					</li>
+					<?php
+					if (!(isset($_SESSION["categoria"])) || ($_SESSION["categoria"]=="usuario")){					
+					echo '<li>
+						<a href="../catalogo.php">Catalogo</a>
+					</li>';
+					
+					}
+					?>
 					<?php
 						if($_SESSION){
 							if($categoria=="administrador"){
-								echo '<li id="actual" >
+								echo '<li  id="actual">
 								<a href="../abm.php">ABM</a>
+								</li>
+								<li>
+								<a href="../usuarios.php">Usuarios</a>
+								</li>
+								<li>
+									<a href="../pedidos.php">Pedidos</a>
 								</li>';
-							}
+							}else{
+					?>
+					<li>
+						<a href="../verCarrito.php">Carrito</a>
+					</li>
+					<?php
+				}
 							echo'</ul><ul id=navegacion style=float:right>
 							<li>
 							<a href="../menuUsuario.php">Usuario:  '.$usuario.' </a>
@@ -55,7 +69,7 @@ if($_SESSION["categoria"]!="administrador"){
 						
 					?>
 				</ul> 
-				
+						
 		
 			</div>
 			<div id="sub-menu">
@@ -156,8 +170,7 @@ if(isset($_GET["abm"])){
 					echo 'value="'.$etiqueta.'"';
 
 				}
-				echo '/><span id="obligatorio">*</span>';
-			
+				echo '/><span id="obligatorio">*</span>';			
 			break;
 			case 'Autor':
 				if (isset($_GET["id"])){

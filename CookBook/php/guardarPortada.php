@@ -1,5 +1,5 @@
-
 <?php
+header("Content-type: text/html; charset=utf-8");
 require_once("sesion.php");
 sesion();
 if(!(isset($_SESSION["categoria"])) || ($_SESSION["categoria"]!="administrador")){

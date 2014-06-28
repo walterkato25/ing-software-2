@@ -1,4 +1,5 @@
 <?php
+header("Content-type: text/html; charset=utf-8");
 require_once("sesion.php");
 sesion();
 require_once("config.php");
@@ -9,7 +10,7 @@ function bajaAutor($abm,$idabm,$id){
 	if(validarBaja($abm,$idabm,$id)){
 		delete($abm,$id);
 	}else{
-		echo '<script language=javascript> alert("No se puede eliminar el elemento, porque existe un libro asociado."); self.history.back();</script>';
+		echo '<script language=javascript> alert("No se puede eliminar el elemento porque existe un libro asociado."); self.history.back();</script>';
 	}
 }
 function bajaLibro($abm,$idabm,$id){
@@ -19,7 +20,7 @@ function bajaEtiqueta($abm,$idabm,$id){
 	if(validarBaja($abm,$idabm,$id)){
 		delete($abm,$id);
 	}else{
-		echo '<script language=javascript> alert("No se puede eliminar el elemento, porque existe un libro asociado."); self.history.back();</script>';
+		echo '<script language=javascript> alert("No se puede eliminar el elemento porque existe un libro asociado."); self.history.back();</script>';
 	}
 }
 function bajaUsuario($abm,$idabm,$id){

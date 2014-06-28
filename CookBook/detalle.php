@@ -111,9 +111,10 @@ function contenido(){
 			</table>
 			</div>
 		</br>
-			<div id="resumen" style="float:left">
+			<div id="resumen" style="float:left;">
 				<h4><p> Resumen: </p></h4>
-				<p><?php echo $libro["resumen"]; ?></p>
+				<textarea disabled style="background-color: #EBEDF4;width:900;height:300;color:black;border-color:black"><?php echo $libro["resumen"]; ?></textarea>
+				<br>
 			</div>
 		</fieldset>	
 	<?php

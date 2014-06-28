@@ -163,7 +163,9 @@ h5 a:active{background-color:#EBEDF4;text-decoration:none;}
 h4 p{
 	margin:auto; text-align: center
 }
-table tr td p{font-size:0.7em}
+table{width:100%;}
+table, tr, td{margin-left:auto;margin-right:auto; text-align:center;}
+table tr td p{font-size:0.7em;}
 select{width:150px}
 #agregar{font-size:0.9em; margin:5px 5px}
 #agregar:link{color:#EBEDF4;background-color:#5D1746;border-radius:5px;text-decoration:none;padding:3px}
@@ -218,3 +220,5 @@ select{width:150px}
 	top:1px;
 }
 #eliminarcuenta{font-size: 0.7em; float:right; padding: 6px;}
+#infodetalle{margin:auto; text-align:left;}
+label{display:inline-block;text-align:right;}

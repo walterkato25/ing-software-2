@@ -1,5 +1,5 @@
 <?php
-
+header("Content-type: text/html; charset=utf-8");
 	require_once("config.php");
 			
 	if (!isset($_SESSION)) {
@@ -16,7 +16,7 @@
 				
 	if (!$fila[0]) //si no existe o los datos son incorrectos
 		{
-			echo '<script language = javascript>	
+			echo '<script language = "javascript">	
 					alert("Usuario o Password incorrectos, por favor verifique.")
 					self.location = "../login.php"
 					</script>';
@@ -28,8 +28,8 @@
 			if($_SESSION['categoria']=="usuario"){
 				$_SESSION['carrito'] = array();
 			}
-			echo '<script language = javascript>	
-					alert("Ha iniciado sesion correctamente.");
+			echo '<script language = "javascript">	
+					alert("Ha iniciado sesión correctamente.");
 					self.history.go(-2);
 					</script>';
 		}
