@@ -139,14 +139,21 @@ function subMenuUsuario(){
 			?>>
 			<a href="menuUsuario.php?menu=Perfil">Perfil</a>
 		</li>
+		<?php
+		if((isset($_SESSION["categoria"]))&&($_SESSION["categoria"]!="administrador")){
+			?>
 		<li	<?php 
 			if(isset($_GET["menu"])){
 				if($_GET["menu"]=="Pedidos"){
 					echo ' id="sub-actual" ';
 				}
 			}
+
 			?>>
 			<a href="menuUsuario.php?menu=Pedidos">Pedidos</a>
+			<?php
+		}
+		?>
 		</li>
 	</ul>
 	</div>
