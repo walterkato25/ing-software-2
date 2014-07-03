@@ -8,6 +8,9 @@ sesion();
 if(!isset($_GET["id"])){
 	header("location:index.php");
 }
+if((isset($_SESSION["categoria"])) && ($_SESSION["categoria"]=="administrador")){
+	header("location:menuUsuario.php");
+}
 
 
 function contenido(){

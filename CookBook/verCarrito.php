@@ -1,4 +1,5 @@
 <?php
+header("Content-type: text/html; charset=utf-8");
 require_once("php/config.php");
 require_once("php/sesion.php");
 require_once("php/html.php");
@@ -54,14 +55,14 @@ function contenido(){
 							echo '<td style="text-align:center">$'.number_format($precio,2,',','.').'</td>';
 							echo '<td style="text-align:center">$'.number_format($subtotal,2,',','.').'</td>'; ?>
 							<td>
-								<form style="margin: auto" method="POST" action="php/carrito.php" onsubmit="if(!confirm('Modificar la cantidad?'))return false">
+								<form style="margin: auto" method="POST" action="php/carrito.php" onsubmit="if(!confirm('¿Desea modificar la cantidad?'))return false">
 									<input type="hidden" name="idLibro" value="<?php echo $id ?>" />
 									<input name="cantidad" style="width:40px" type="number" min="1" max="<?php echo $stock ?>" value="<?php echo $cantidad ?>" />
 									<input type="submit" name="modificar" value="Modificar cantidad" />
 								</form>
 							</td>
 							<td>
-								<form style="margin: auto" method="POST" action="php/carrito.php" onsubmit="if(!confirm('Desea eliminar <?php echo $nombre ?>?'))return false">
+								<form style="margin: auto" method="POST" action="php/carrito.php" onsubmit="if(!confirm('¿Desea eliminar <?php echo $nombre ?>?'))return false">
 									<input type="hidden" name="idLibro" value="<?php echo $id ?>" />
 									<input type="submit" name="eliminar" value="Quitar producto" />
 								</form>
@@ -82,7 +83,7 @@ function contenido(){
 					</b>
 					</td>
 			<td>
-			<form style="margin: auto" method="POST" action="php/carrito.php">							
+			<form style="margin: auto" method="POST" onsubmit="if(!confirm('¿Desea vaciar el carrito?'))return false" action="php/carrito.php">							
 				<input type="submit" name="vaciar" value="Vaciar Carrito" />
 			</form>
 			</td>

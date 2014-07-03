@@ -93,85 +93,8 @@ function headerMenu($actual="", $admin=false){
 			</div>
 <?php
 }
-function subMenuABM(){
-	?>
-	<div id="sub-menu" >
-	<ul id="navegacion">
-		<li <?php 
-				if(isset($_GET["abm"])){
-					if($_GET["abm"]=="Autor"){
-						echo ' id="sub-actual" ';
-					}
-				}
-			?>>
-			<a href="abm.php?abm=Autor">Autores</a></li>
-		<li	<?php 
-				if(isset($_GET["abm"])){
-					if($_GET["abm"]=="Etiqueta"){
-						echo ' id="sub-actual" ';
-					}
-				}
-			?>>
-			<a href="abm.php?abm=Etiqueta">Etiquetas</a></li>
-					<li
-					<?php 
-						if(isset($_GET["abm"])){
-							if($_GET["abm"]=="Libro"){
-								echo ' id="sub-actual" ';
-							}
-						}
-					?>
-					><a href="abm.php?abm=Libro">Libros</a></li>
-			</ul>
-		</div>
-	<?php
-}
-function subMenuUsuario(){
-?>
-	<div id="sub-menu" >
-	<ul id="navegacion">
-		<li <?php 
-			if(isset($_GET["menu"])){
-				if($_GET["menu"]=="Perfil"){
-					echo ' id="sub-actual" ';
-				}
-			}
-			?>>
-			<a href="menuUsuario.php?menu=Perfil">Perfil</a>
-		</li>
-		<?php
-		if((isset($_SESSION["categoria"]))&&($_SESSION["categoria"]!="administrador")){
-			?>
-		<li	<?php 
-			if(isset($_GET["menu"])){
-				if($_GET["menu"]=="Pedidos"){
-					echo ' id="sub-actual" ';
-				}
-			}
 
-			?>>
-			<a href="menuUsuario.php?menu=Pedidos">Pedidos</a>
-			<?php
-		}
-		?>
-		</li>
-	</ul>
-	</div>
-<?php
-}
-function subMenu($pagina){
-?>
-	
-		<?php
-		if($pagina=="abm.php"){ subMenuABM(); }
-		if($pagina=="menuUsuario.php"){ subMenuUsuario(); }
-		if($pagina=="catalogo.php"){ subMenuCatalogo(); }
-		?>
 
-	
-
-<?php
-}
 function encabezado($pagina){
 ?>
 	<div id="header" <?php if($pagina=="catalogo.php"){ echo "style='height:240px'" ;} ?>>
@@ -183,7 +106,9 @@ function encabezado($pagina){
 				$admin=false;
 			}
 			headerMenu($pagina, $admin);
-			subMenu($pagina);
+			if (function_exists('subMenu')){
+			subMenu(); //subMenu debe implementarse en aquellas paginas que tengan que implementar un submenu
+			}
 			?>			
 	</div> 
 <?php
@@ -197,7 +122,7 @@ function body($pagina){
 			?>
 			<div id="content">
 				<div id="main-content">
-					<?php contenido(); ?>
+					<?php contenido(); //contenido es una funcion que debe implementarse en el script de cada pagina. tendra el contenido de la pagina debajo del menu y el submenu. ?> 
 				</div>
 			</div>
 		</div>

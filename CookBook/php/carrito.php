@@ -46,7 +46,7 @@ if(isset($_SESSION["carrito"])){
 
 	if(isset($_POST["vaciar"])){
 		destruirCarrito();
-		echo "<script language='javascript'> alert('Su carrito esta vacío.'); self.history.back(); </script>";
+		echo "<script language='javascript'> alert('Se ha vaciado el carrito.'); self.history.back(); </script>";
 	}
 	if(isset($_POST["modificar"])){
 		modificarCantidad($_POST["idLibro"], $_POST["cantidad"]);

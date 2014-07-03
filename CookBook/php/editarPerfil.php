@@ -13,7 +13,6 @@ function getCliente($id){
 		</br>
 			<div id="personal" >
 				<?php
-				inputDinamico($cliente, "Nombre de Usuario", "nombreDeUsuario", "text");
 				inputDinamico($cliente, "Apellido", "apellido", "text");
 				inputDinamico($cliente, "Nombre", "nombre", "text");
 				inputDinamico($cliente, "DNI/CUIT", "dni/cuit", "text");
@@ -116,7 +115,6 @@ function editarDomicilio($cliente){
 								var valida=atributo;
 								var name=atributo;
 								if(atributo=="dni/cuit"){
-									alert("perro");
 									valida="dnicuit";
 									name="dnicuit";
 								}

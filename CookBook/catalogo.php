@@ -30,7 +30,7 @@ function buscarporNombre($nombre, $idEtiqueta, $idAutor){
 	return $sql;
 }
 
-function subMenuCatalogo(){
+function subMenu(){
 ?>
 <div id="sub-menu" style='height:110px'>
 <form method="GET" id="catalogo">
