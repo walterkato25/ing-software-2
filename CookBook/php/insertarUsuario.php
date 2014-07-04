@@ -10,21 +10,13 @@ if($_POST["password"]!=$_POST["contraseña2"]){
 		self.history.back();
 		</script>';
 }else{
-			
-	$fecha=date("Y/m/d");
 	$atributos=array();
 	foreach ($_POST as $clave => $valor) {
-		$atrib=$clave;
-		if($clave=="dnicuit"){
-			$atrib="dni/cuit";
-		}
-		$atributos[$atrib]=$valor;
+		$atributos[$clave]=$valor;
 	}
-	$atributos["fechaAlta"]=$fecha;
 	$atributos["categoria"]="usuario";
-	$atributos["idUsuario"]=NULL;
 	$existeUsuario=existeDatoUsuario("nombreDeUsuario",$atributos["nombreDeUsuario"]);
-	$existeDni=existeDatoUsuario("dni/cuit",$atributos["dni/cuit"]);
+	$existeDni=existeDatoUsuario("dni_cuit",$atributos["dni_cuit"]);
 	$existeMail=existeDatoUsuario("mail",$atributos["mail"]);
 	if($existeUsuario){
 		echo '<script language = "javascript">
@@ -49,7 +41,7 @@ if($_POST["password"]!=$_POST["contraseña2"]){
 		unset($atributos["enviar"]);
 		insert("usuario",$atributos);	
 		echo '<script language = "javascript">
-		alert("Se ha agregado el usuario con éxito.")
+		alert("Bienvenido, '.$atributos["nombreDeUsuario"].'.\nAhora tienes una cuenta en Cookbook.")
 		self.location = "../menuUsuario.php";
 		</script>';
 	}

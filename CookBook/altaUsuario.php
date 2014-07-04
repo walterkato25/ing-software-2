@@ -72,7 +72,7 @@ if(isset($_SESSION["categoria"])){
 								<tr><td class="label"><label>Nombre:</label></td><td class="input"><input type="text" name="nombre" ><span id="obligatorio">*</span></td></tr>
 								<tr><td class="label"><label>Apellido:</label></td><td class="input"><input type="text" name="apellido" ><span id="obligatorio">*</span></td></tr>
 								<tr><td class="label"><label>Mail:</label></td><td class="input"><input type="mail" name="mail" ><span id="obligatorio">*</span></td></tr>
-								<tr><td class="label"><label>DNI:</label></td><td class="input"><input type="text" name="dnicuit" maxlength="11" ><span id="obligatorio">*</span></td></tr>
+								<tr><td class="label"><label>DNI:</label></td><td class="input"><input type="text" name="dni_cuit" maxlength="11" ><span id="obligatorio">*</span></td></tr>
 								<tr><td class="label"><label>Teléfono:</label></td><td class="input"><input type="tel" name="tel" ><span id="obligatorio">*</span></td></tr>
 								<tr><td class="label"><label>Código Postal:</label></td><td class="input"><input type="text" name="cp" ><span id="obligatorio">*</span></td></tr>
 								<tr><td class="label"><label>Localidad:</label></td><td class="input"><input type="text" name="localidad" ><span id="obligatorio">*</span></td></tr>

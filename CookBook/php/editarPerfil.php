@@ -1,7 +1,7 @@
 <?php
 function getDataCliente($id){
 		require_once("config.php");
-		$sql="SELECT nombreDeUsuario , apellido , nombre, tel, `dni/cuit`, mail, calle, nro, piso, depto, localidad, cp  FROM `usuario` WHERE `idUsuario` = $id";
+		$sql="SELECT nombreDeUsuario , apellido , nombre, tel, `dni_cuit`, mail, calle, nro, piso, depto, localidad, cp  FROM `usuario` WHERE `idUsuario` = $id";
 		$query=mysql_query($sql);
 		return mysql_fetch_assoc($query);
 }
@@ -15,7 +15,7 @@ function getCliente($id){
 				<?php
 				inputDinamico($cliente, "Apellido", "apellido", "text");
 				inputDinamico($cliente, "Nombre", "nombre", "text");
-				inputDinamico($cliente, "DNI/CUIT", "dni/cuit", "text");
+				inputDinamico($cliente, "DNI/CUIT", "dni_cuit", "text");
 				?>
 			</div>
 		</fieldset>
@@ -46,19 +46,16 @@ function getCliente($id){
 								var td_ini="<td>";
 								var td_fin="</td>";
 								var valida=atributo;
-								var name=atributo;
-								if(atributo=="dni/cuit"){
-									alert("perro");
-									valida="dnicuit";
-									name="dnicuit";
-								}
 								var maxlength="";
 								if(atributo=="cp"){
 									var maxlength=" maxlength='4' ";
 								}
+								if(atributo=="dni_cuit"){
+									var maxlength=" maxlength='11' ";
+								}
 								var form_ini="<form id='limpiar' onsubmit='return validar_"+valida+"(this);' method='POST' action='php/userUpdate.php'>"
 								<?php echo "var id=\"<input type='hidden' name='id' value='".$_SESSION["idUsuario"]."'/>\";"; ?>
-								var input1="<input autofocus required type='"+tipo+"' name='"+name+"' "+maxlength+"/>";
+								var input1="<input autofocus required type='"+tipo+"' name='"+atributo+"' "+maxlength+"/>";
 								var input2="<input type='submit' value='Save'/>";
 								var cancel="<input type='button' value='Cancel' onclick='limpiar()'/>";
 								var form_fin="</form>";
@@ -114,17 +111,16 @@ function editarDomicilio($cliente){
 								var td_fin="</td>";
 								var valida=atributo;
 								var name=atributo;
-								if(atributo=="dni/cuit"){
-									valida="dnicuit";
-									name="dnicuit";
-								}
 								var maxlength="";
 								if(atributo=="cp"){
 									var maxlength=" maxlength='4' ";
 								}
+								if(atributo=="dni_cuit"){
+									var maxlength=" maxlength='11' ";
+								}
 								var form_ini="<form id='limpiar' onsubmit='return validar_"+valida+"(this);' method='POST' action='php/userUpdate.php'>"
 								<?php echo "var id=\"<input type='hidden' name='id' value='".$_SESSION["idUsuario"]."'/>\";"; ?>
-								var input1="<input autofocus required type='"+tipo+"' name='"+name+"' "+maxlength+"/>";
+								var input1="<input autofocus required type='"+tipo+"' name='"+atributo+"' "+maxlength+"/>";
 								var input2="<input type='submit' value='Save'/>";
 								var cancel="<input type='button' value='Cancel' onclick='limpiar()'/>";
 								var form_fin="</form>";

@@ -12,7 +12,8 @@ if(!$_SESSION){
 <html>
 <?php
 head("js/validar_formularios.js");
-body("menuUsuario.php");
+$pagina="menuUsuario.php";
+body($pagina);
 
  
 function subMenu(){

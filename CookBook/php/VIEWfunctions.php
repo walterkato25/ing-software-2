@@ -84,7 +84,7 @@ function verUsuario(){
 		echo '<tr><td>'.$row["nombreDeUsuario"].'</td>';
 		echo '<td>'.$row["apellido"].'</td>';
 		echo '<td>'.$row["nombre"].'</td>';
-		echo '<td>'.$row["dni/cuit"].'</td>';
+		echo '<td>'.$row["dni_cuit"].'</td>';
 		echo '<td>'.$row["categoria"].'</td>';
 		if(($row["categoria"]=="administrador")&&($row["idUsuario"]!=$_SESSION["idUsuario"])){
 			eliminar("Usuario", $row["idUsuario"]);
@@ -122,7 +122,7 @@ if (isset($_SESSION["categoria"])){
 				<?php	
 				
 			}else{
-				echo "<h4><p>No tiene nigún pedido.</p></h4>";
+				echo "<h4><p>No ha realizado nigún pedido.</p></h4>";
 			}		
 		}
 	}

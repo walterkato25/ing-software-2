@@ -8,15 +8,10 @@ header("Content-type: text/html; charset=utf-8");
 		$tabla='Usuario';
 		$valida=true;
 		foreach( $_POST as $atributo => $valor){
-			if(($atributo=="nombreDeUsuario") || ($atributo=="dni/cuit") || ($atributo == "mail")){
+			if(($atributo=="nombreDeUsuario") || ($atributo=="dni_cuit") || ($atributo == "mail")){
 				$valida=!(existeDatoUsuario($atributo, $valor));
 			}
-			if($atributo=="dnicuit"){
-				$atrib="dni/cuit";
-			}else{
-				$atrib=$atributo;
-			}
-			$toUpdate[$atrib]=$valor;
+			$toUpdate[$atributo]=$valor;
 		}
 		unset($toUpdate["id"]);
 		if($valida){
@@ -27,6 +22,7 @@ header("Content-type: text/html; charset=utf-8");
 			</script>';
 		}else{
 			if($atributo=="nombreDeUsuario"){$atributo="nombre de usuario";}
+			if($atributo=="dni_cuit"){$atributo="dni o cuit";}
 			echo "<script language = 'javascript'> 
 			alert(\"Error al realizar la modificación. El $atributo '$valor' ya está en uso.\"); 
 			self.history.back();</script>";

@@ -99,10 +99,10 @@ function validar_apellido(form){
 function validar_nombre(form){
 	return validarEmptyForm(form.nombre,"nombre");
 }
-function validar_dnicuit(form){
-	return validarEmptyForm(form.dnicuit,"DNI/CUIT")
-		&& validarLengthDniCuit(form.dnicuit)
-		&& validarCampoNumerico(form.dnicuit,'DNI/CUIT');
+function validar_dni_cuit(form){
+	return validarEmptyForm(form.dni_cuit,"DNI/CUIT")
+		&& validarLengthDniCuit(form.dni_cuit)
+		&& validarCampoNumerico(form.dni_cuit,'DNI/CUIT');
 }
 function validar_mail(form){
 	return validarEmptyForm(form.mail,"E-Mail")
@@ -153,7 +153,7 @@ function validar_altaCliente(form){
 	&& validar_nombre(form)
 	&& validarEmptyForm(form.apellido,"apellido")
 	&& validar_mail(form)
-	&& validar_dnicuit(form)
+	&& validar_dni_cuit(form)
 	&& validar_tel(form);
 
 }
