@@ -58,7 +58,7 @@ function contenido(){
 				<?php
 		}
 		if($_GET["menu"]=="Pedidos"){
-			viewABM("Pedido",$_SESSION["idUsuario"]);
+			viewABM("Pedido");
 
 		}
 				?>

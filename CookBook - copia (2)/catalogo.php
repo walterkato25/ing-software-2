@@ -183,7 +183,6 @@ if (isset($_GET["nombre"])){
 		<?php
 		}
 		?>
-			</table>
 		</div>
 	<?php
 	}

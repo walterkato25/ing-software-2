@@ -40,20 +40,34 @@ legend{
 select{
 	width:100px;
 	}
-
+#page{
+	width:960px;
+	height:auto!important;
+	margin:0 auto;
+	background-color: #EBEDF4;
+	padding:0 10px;
+	border-style:none;
+	border-width:0px;
+	}
 #header{
-	margin:auto;
+	margin:5px auto;
 	width:100%; 
-	height:auto;
+	height:190px;
 	}
 #page-header{
 	margin-bottom:0px;
 	width:100%; 
 	height:120px; 
 	background:url('../img/header.jpg');
-
+	border-radius:5px;
 	}
-
+.logo{
+	text-align:left;
+	float:left;
+	padding-right:0px;
+	border-style:none;
+	border-width:0px;
+	}
 
 #page-header a:link{color:#EBEDF4; text-decoration:none;}
 #page-header a:visited{color:#EBEDF4; text-decoration:none;}
@@ -61,35 +75,23 @@ select{
 #page-header a:active{color:#EBEDF4; text-decoration:none;}
 #header-menu{
 	width:100%;
-	height:60px; 
+	height:30px; 
 	background-color:#5D1746;
 	padding:auto;
-	
+	border-radius:5px;
 	}
 ul{
 	list-style-type:none;
 	margin:auto;
 	border-style:none;
 	border-width:0px;
-	padding-left: 0
 	}
-.logo{
-	height: 60px!important;
-	display:flex;
-	padding:0 20px!important;
-	margin:0!important;
-	}
-.logo:active{background-color:#5D1746!important}
-.logo:hover{background-color:#5D1746!important}
-
-#navegacion li{float:left;padding-top:6px; height:24px; font-weight:bold;margin-top:30px;}
+#navegacion li{float:left;padding-top:6px; height:24px; font-weight:bold;}
 #navegacion a{height:18px;}
 #navegacion a:link{color:#EBEDF4;background-color:#5D1746;text-decoration:none;padding:6px 20px;}
 #navegacion a:visited{color:#EBEDF4;background-color:#5D1746;text-decoration:none;padding:6px 20px;}
 #navegacion a:hover{color:#EBEDF4;background-color:#4C4778;text-decoration:none;padding:6px 20px;}
 #navegacion a:active{background-color:#4C4778;text-decoration:none;padding:6px 20px;}
-
-
 #actual a:link{color:#EBEDF4;background-color:#4C4778;text-decoration:none;padding:6px 20px;}
 #actual a:visited{color:#EBEDF4;background-color:#4C4778;text-decoration:none;padding:6px 20px;}
 #actual a:hover{color:#EBEDF4;background-color:#4C4778;text-decoration:none;padding:6px 20px;}
@@ -99,11 +101,8 @@ ul{
 	height:30px; 
 	background-color:#4C4778;
 	padding:auto;
-
-		
+	border-radius:5px;	
 	}
-	#sub-menu ul{padding-left:40px;}
-	#sub-menu li{ margin-top: 0px !important}
 #sub-menu a:link{color:#EBEDF4;background-color:#4C4778;text-decoration:none;padding:6px 20px;}
 #sub-menu a:visited{color:#EBEDF4;background-color:#4C4778;text-decoration:none;padding:6px 20px;}
 #sub-menu a:hover{color:#000000;background-color:#B9C7C9;text-decoration:none;padding:6px 20px;}
@@ -123,32 +122,24 @@ ul{
 #login a:visited{color:#EBEDF4;background-color:#7FB400;text-decoration:none;}
 #login a:hover{color:#EBEDF4;background-color:#4C4778;text-decoration:none;}
 #login a:active{background-color:#4C4778;text-decoration:none;}
-#page{
-	width:960px;
-	margin:auto;
-	background-color: #EBEDF4;
-	padding: 15px;
-	border-style:none;
-	border-width:0px;
-	}
 #content{
 	background-color:transparent;
-	margin:auto;
+	margin:5px;
 	width:100%;
-	height:100%;
+	height:930px;
+	padding-top: 15px;
 	}
 
 
 #main-content{
 	width:auto !important;
-	height:100%;
+	height:auto;
 	margin:auto;
-	padding:0;
+	padding:15px;
 	background-color:transparent;
 	border-radius:5px;
-	overflow:auto;
 	}
-#footer{
+#footer push{
 	font-size:0.6em;
 	background-color:#4C4778;
 	width:100%;
@@ -157,6 +148,7 @@ ul{
 	padding:5px 0;
 	bottom:0px !important;
 	text-align:center;
+	border-radius:5px;
 	}
 #footer #push{
 	height:4em;

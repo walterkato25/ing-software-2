@@ -29,13 +29,9 @@ function pageHeader(){
 function headerMenu($actual="", $admin=false){
 	?>
 	<div id="header-menu">
-		
-
 				<ul id="navegacion">
-					<li style="padding:0; margin:0" >
-						<a class="logo" href="index.php">
-							<img src="img/Imagen1.png" height="60px" alt="logo" border="0px">
-						</a>
+					<li <?php if($actual=="index.php"){echo 'id="actual"'; }?>>
+						<a href="index.php">Inicio</a>
 					</li>
 				<?php
 					if (!$admin){					
@@ -101,12 +97,9 @@ function headerMenu($actual="", $admin=false){
 
 function encabezado($pagina){
 ?>
-
-	<div id="header" >
-			
+	<div id="header" <?php if($pagina=="catalogo.php"){ echo "style='height:240px'" ;} ?>>
 			<?php 
-			//pageHeader(); 
-
+			pageHeader(); 
 			if(isset($_SESSION["categoria"])){
 				$admin=($_SESSION["categoria"]=="administrador");
 			}else{
@@ -120,28 +113,19 @@ function encabezado($pagina){
 	</div> 
 <?php
 }
-function footer(){
-	?>
-	<div id="footer">CookBook 2014</div>
-	<?php
-}
 function body($pagina){
 ?>
 	<body>
-		<?php 
+		<div id="page">
+			<?php 
 			encabezado($pagina);
 			?>
-		<div id="page">
-			
 			<div id="content">
 				<div id="main-content">
 					<?php contenido(); //contenido es una funcion que debe implementarse en el script de cada pagina. tendra el contenido de la pagina debajo del menu y el submenu. ?> 
 				</div>
 			</div>
 		</div>
-		<?php 
-			footer($pagina);
-			?>
 	</body>
 	<?php
 }

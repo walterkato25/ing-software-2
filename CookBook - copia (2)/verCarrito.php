@@ -80,26 +80,22 @@ function contenido(){
 						<b>$<?php
 						echo number_format($total,2,',','.');
 						?>
-						</b>
+					</b>
 					</td>
-					<td>
-						<form style="margin: auto" method="POST" onsubmit="if(!confirm('¿Desea vaciar el carrito?'))return false" action="php/carrito.php">							
-							<input type="submit" name="vaciar" value="Vaciar Carrito" />
-						</form>
-					</td>
-					<td>
-						<a style="margin: auto" id="comprar" href="php/validarCarrito.php?continue=../compra.php"> Comprar </a>
-					</td>
-				</tr>
+			<td>
+			<form style="margin: auto" method="POST" onsubmit="if(!confirm('¿Desea vaciar el carrito?'))return false" action="php/carrito.php">							
+				<input type="submit" name="vaciar" value="Vaciar Carrito" />
+			</form>
+			</td>
+			<td>
+			<a style="margin: auto" id="comprar" href="php/validarCarrito.php?continue=../compra.php"> Comprar </a>
 			</table>
-			<?php
-	}
-?>
-		</div>		
+			</td>
+		</div>
 		</fieldset>
 	</div>
-
-<?php	
+<?php
+	}	
 }
 $pagina="verCarrito.php";
 head("");
