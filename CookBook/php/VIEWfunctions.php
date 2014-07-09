@@ -79,15 +79,36 @@ function verLibro($id){
 }
 
 function verUsuario($id){
-	echo '<th>Nombre de Usuario</th><th>Apellido</th><th>Nombre</th><th>DNI/CUIT</th><th>Categoría</th>';
-	echo'<th>Acciones</th></tr>';
-	$query=select("Usuario","nombreDeUsuario", true);
+	$url=$_SERVER["REQUEST_URI"];
+	if (isset($_GET["orden"])){
+		$lenght=strlen($url)-(9+strlen($_GET["orden"]));
+		$url=substr($url, 0, $lenght);
+	}
+	?>
+	<th><a href="<?php if(isset($_GET["orden"]) && $_GET["orden"]=="nombreDeUsuario ASC"){echo $url.'?orden=nombreDeUsuario DESC';}else{echo $url.'?orden=nombreDeUsuario ASC';} ?>" >Usuario</a></th>
+	<th><a href="<?php if(isset($_GET["orden"]) && $_GET["orden"]=="apellido ASC"){echo $url.'?orden=apellido DESC';}else{echo $url.'?orden=apellido ASC';} ?>" >Apellido</a></th>
+	<th><a href="<?php if(isset($_GET["orden"]) && $_GET["orden"]=="nombre ASC"){echo $url.'?orden=nombre DESC';}else{echo $url.'?orden=nombre ASC';} ?>" >Nombre</a></th>
+	<th>DNI/CUIT</th>
+	<th><a href="<?php if(isset($_GET["orden"]) && $_GET["orden"]=="categoria ASC"){echo $url.'?orden=categoria DESC';}else{echo $url.'?orden=categoria ASC';} ?>" >Categoría</a></th>
+	<th><a href="<?php if(isset($_GET["orden"]) && $_GET["orden"]=="baja ASC"){echo $url.'?orden=baja DESC';}else{echo $url.'?orden=baja ASC';} ?>" >Estado de Cuenta</a></th>
+	<th>Acciones</th>
+	</tr>
+	<?php
+	if(isset($_GET["orden"])){
+		$orden=$_GET["orden"];
+	}else{
+		$orden="nombreDeUsuario";
+	}
+	$query=select("Usuario",$orden);
 	while ($row  = mysql_fetch_assoc($query)) {
 		echo '<tr><td>'.$row["nombreDeUsuario"].'</td>';
 		echo '<td>'.$row["apellido"].'</td>';
 		echo '<td>'.$row["nombre"].'</td>';
 		echo '<td>'.$row["dni_cuit"].'</td>';
 		echo '<td>'.$row["categoria"].'</td>';
+		echo '<td>';
+		if($row["baja"]){echo "Eliminada";}else{echo "Activa";}
+		echo'</td>';
 		if(($row["categoria"]=="administrador")&&($row["idUsuario"]!=$_SESSION["idUsuario"])){
 			eliminar("Usuario", $row["idUsuario"]);
 		}
@@ -98,16 +119,26 @@ function verUsuario($id){
 }
 if (isset($_SESSION["categoria"])){
 	function verPedido($id){
-		$sql="SELECT * FROM pedido";
+		$url=$_SERVER["REQUEST_URI"];
+		if (isset($_GET["orden"])){
+			$lenght=strlen($url)-(9+strlen($_GET["orden"]));
+			$url=substr($url, 0, $lenght);
+		}
+		$sql="SELECT idPedido, estado, pedido.idUsuario, monto, timestamp, nombreDeUsuario FROM pedido INNER JOIN usuario WHERE pedido.idUsuario=usuario.idUsuario";
 		if($id!=""){
-			$sql.=" WHERE idUsuario=$id";
+			$sql.=" AND pedido.idUsuario=$id";
+		}
+		if(isset($_GET["orden"])){
+			$sql.=" ORDER BY ".$_GET["orden"];
 		}
 			$query=mysql_query($sql);
 			if (mysql_num_rows($query)!=0) { ?>
-				<th>Fecha y Hora</th><th>Monto</th><th>Estado</th>
+				<th><a href="<?php if(isset($_GET["orden"]) && $_GET["orden"]=="timestamp ASC"){echo $url.'?orden=timestamp DESC';}else{echo $url.'?orden=timestamp ASC';} ?>" >Fecha y Hora</a></th>
+				<th><a href="<?php if(isset($_GET["orden"]) && $_GET["orden"]=="monto ASC"){echo $url.'?orden=monto DESC';}else{echo $url.'?orden=monto ASC';} ?>" >Monto</a></th>
+				<th><a href="<?php if(isset($_GET["orden"]) && $_GET["orden"]=="estado ASC"){echo $url.'?orden=estado DESC';}else{echo $url.'?orden=estado ASC';} ?>" >Estado</a></th>
 				<?php 
 				if($_SESSION["categoria"]=="administrador"){
-					?><th>Usuario</th><?php
+					?><th><a href="<?php if(isset($_GET["orden"]) && $_GET["orden"]=="nombreDeUsuario ASC"){echo $url.'?orden=nombreDeUsuario DESC';}else{echo $url.'?orden=nombreDeUsuario ASC';} ?>" >Usuario</a></th><?php
 				}?>
 				<th>Acciones</th>
 				</tr>
@@ -115,9 +146,8 @@ if (isset($_SESSION["categoria"])){
 				while($row=mysql_fetch_array($query)){
 					$estado=$row["estado"];
 					$idUsuario=$row["idUsuario"];
-					$usuario=mysql_query("SELECT nombreDeUsuario FROM Usuario WHERE idUsuario=$idUsuario");
-					$usuario=mysql_fetch_assoc($usuario);
-					$nombreDeUsuario=$usuario["nombreDeUsuario"];
+					$nombreDeUsuario=$row["nombreDeUsuario"];
+					
 				?>
 				
 					<tr>
