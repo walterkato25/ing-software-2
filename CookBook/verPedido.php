@@ -33,6 +33,7 @@ function contenido(){
 	$apellido=$usuario["apellido"];
 	$mail=$usuario["mail"];
 	$telefono=$usuario["tel"];
+	$baja=$usuario["baja"];
 ?>
 	<div id="pedido">
 		<div style="float:left;width: 45%">
@@ -62,7 +63,7 @@ function contenido(){
 									$nuevoEstado="Recibido";
 								}?>
 								<td>
-									<a href='cambiarEstado.php?idPedido=<?php echo $idPedido?>' onclick= 'if(!confirm("¿Desea marcar el pedido como <?php echo $nuevoEstado ?>?"))return false'>
+									<a href='php/cambiarEstado.php?idPedido=<?php echo $idPedido?>' onclick= 'if(!confirm("¿Desea marcar el pedido como <?php echo $nuevoEstado ?>?"))return false'>
 										<?php echo $nuevoEstado ?>
 									</a>
 								</td>
@@ -89,6 +90,12 @@ function contenido(){
 						</tr>
 						<tr>
 							<th>Apellido y Nombre:</th><td><?php echo $apellido.', '.$nombre; ?></td>
+						</tr>
+						<tr>
+							<th>Estado de cuenta:</th><td>
+							<?php
+							if($baja){echo "Eliminada";}else{echo "Activa";}
+							?></td>
 						</tr>
 						<tr>
 							<th>E-Mail:</th><td><?php echo $mail; ?></td>
