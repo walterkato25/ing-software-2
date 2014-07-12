@@ -66,6 +66,9 @@ function headerMenu($actual="", $admin=false){
 					<li <?php if($actual=="pedidos.php"){echo 'id="actual"'; }?>>
 						<a href="pedidos.php">Pedidos</a>
 					</li>
+						<li <?php if($actual=="reporte.php"){echo 'id="actual"'; }?>>
+						<a href="reporte.php">Reporte</a>
+					</li>
 	<?php	}else{
 					?>
 					<li <?php if($actual=="verCarrito.php"){echo 'id="actual"'; }?>>

@@ -3,7 +3,8 @@ header("Content-type: text/html; charset=utf-8");
 require_once("SQLfunctions.php");
 require_once("config.php");
 require_once("funcionExiste.php");
-
+require_once("sesion.php");
+sesion();
 if($_POST["password"]!=$_POST["contraseña2"]){
 		echo '<script language = "javascript">
 		alert("Las contraseñas no coinciden.")
@@ -14,7 +15,11 @@ if($_POST["password"]!=$_POST["contraseña2"]){
 	foreach ($_POST as $clave => $valor) {
 		$atributos[$clave]=$valor;
 	}
-	$atributos["categoria"]="usuario";
+	$categoria='usuario';
+	if(isset($_SESSION['categoria'])){
+		$categoria=$_SESSION['categoria'];
+	}
+	$atributos["categoria"]=$categoria;
 	$existeUsuario=existeDatoUsuario("nombreDeUsuario",$atributos["nombreDeUsuario"]);
 	$existeDni=existeDatoUsuario("dni_cuit",$atributos["dni_cuit"]);
 	$existeMail=existeDatoUsuario("mail",$atributos["mail"]);

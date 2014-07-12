@@ -157,3 +157,11 @@ function validar_altaCliente(form){
 	&& validar_tel(form);
 
 }
+function validar_rango_fecha(form){
+	if(form.desde.value > form.hasta.value){
+		form.desde.focus();
+		alert("Introduzca una rango de fecha válido");
+		return false;
+	}
+	return true;
+}

@@ -3,11 +3,12 @@ html{height:100% !important;margin: 0px}
 body{
 	min-height: 100%;
 	font-family:"verdana";
-	background:url('../img/fondo.jpg') repeat;
+	background:url('../img/fondo.jpg') no-repeat center center;
+	-webkit-background-size:cover;
+	-moz-background-size:cover;
+	-o-background-size:cover;
+	background-size:cover;
 	margin:0;
-	padding:0;
-	border-style:none;
-	border-width:0px;
 	}
 img{
 	border-style:none;
@@ -126,7 +127,7 @@ ul{
 #page{
 	width:960px;
 	margin:auto;
-	background-color: #EBEDF4;
+	background-color: /*#EBEDF4;*/
 	padding: 15px;
 	border-style:none;
 	border-width:0px;
@@ -233,3 +234,9 @@ label{display:inline-block;text-align:right;}
 
 .label{text-align:right} 
 .input{text-align:left;}
+
+#orden span{display: inline-block; width: 100%; background-image: url("../img/svg_gradient.svg");}
+#orden a{display: inline-block; width: 100%; background-image: url("../img/svg_gradient.svg");}
+#orden a:link{text-decoration: none; color: black }
+#orden a:hover{text-decoration: underline;}
+#orden a:visited{color: black};

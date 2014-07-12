@@ -12,6 +12,16 @@ if(!isset($_GET["idPedido"])){
 }
 
 function contenido(){
+	$url=$_SERVER["REQUEST_URI"];
+		if (isset($_GET["orden"])){
+			$lenght=strlen($url)-(9+strlen($_GET["orden"]));
+			$url=substr($url, 0, $lenght);
+		}
+	if(isset($_GET["orden"])){
+		$orden=$_GET["orden"];
+	}else{
+		$orden="nombre";
+	}
 	$idPedido=$_GET["idPedido"];
 	$sql="SELECT * FROM pedido WHERE idPedido=$idPedido";
 	$query=mysql_query($sql);
@@ -43,15 +53,15 @@ function contenido(){
 			<div id="info-pedido">
 				<table style="margin:10 0">
 					<tr>
-					<th>Estado</th>
-					<th>Monto</th>
+					<th id="orden"><span>Estado</span></th>
+					<th id="orden"><span>Monto</span></th>
 					<?php
 					if($_SESSION["categoria"]=="administrador"){ ?>
-					<th>Marcar como...</th>
+					<th id="orden"><span>Marcar como...</span></th>
 					<?php } ?>
 					</tr>
 					<tr>
-						<td><?php echo $estado ?></td>
+						<td id="estado" style="background-color:#01214A;color:#EBEDF4"><span><b><?php echo $estado ?></b></span></td>
 						<td><?php echo  "$".number_format($monto,2,',','.') ?></td>
 						<?php
 						if($_SESSION["categoria"]=="administrador"){
@@ -63,7 +73,7 @@ function contenido(){
 									$nuevoEstado="Recibido";
 								}?>
 								<td>
-									<a href='php/cambiarEstado.php?idPedido=<?php echo $idPedido?>' onclick= 'if(!confirm("¿Desea marcar el pedido como <?php echo $nuevoEstado ?>?"))return false'>
+									<a id="agregar" href='php/cambiarEstado.php?idPedido=<?php echo $idPedido?>' onclick= 'if(!confirm("¿Desea marcar el pedido como <?php echo $nuevoEstado ?>?"))return false'>
 										<?php echo $nuevoEstado ?>
 									</a>
 								</td>
@@ -120,8 +130,17 @@ function contenido(){
 			
 			<table  style="margin:10 0">
 				<tr>
-					<th >   Cantidad   </th>
-					<th >   Libro   </th>
+					<th id="orden"> <span>Cantidad</span>     </th>
+					<th id="orden">
+						<a href="
+						<?php 
+							if(isset($_GET["orden"]) && $_GET["orden"]=="nombre DESC"){
+								echo $url.'&orden=nombre ASC';
+							}else{
+								echo $url.'&orden=nombre DESC';} ?>
+								" title="Ordenar por nombre" >Libro
+						</a>
+					</th>
 				</tr>
 				<?php
 					$sql="SELECT * FROM pedidoLibro WHERE idPedido=$idPedido";
@@ -131,7 +150,7 @@ function contenido(){
 						$cantidades[$row["idLibro"]]=$row["cantidad"];
 					}
 					$ids=implode(", ",$id);
-					$sql="SELECT * FROM libro WHERE idLibro in ($ids)";
+					$sql="SELECT * FROM libro WHERE idLibro in ($ids) ORDER BY $orden";
 					$query= mysql_query($sql);
 					while( $row = mysql_fetch_array($query)){
 						?>
