@@ -1,18 +1,67 @@
 <?php
 require_once("php/sesion.php");
 require_once("php/SQLfunctions.php");
-require_once("php/config.php");
-require_once("php/html.php");
+
 sesion();
-if(isset($_SESSION["categoria"]) && $_SESSION["categoria"]=="usuario"){
+if(isset($_SESSION["categoria"])){
 	header("location:menuUsuario.php");
 }
-head("js/validar_formularios.js");
-body("altaUsuario.php");
-
-function contenido(){
 ?>
+<html>
+<head>
+	<meta charset="utf-8"></meta>
+	<title>CookBook - Libros de Cocina</title>
+	<link href="css/style.css" type="text/css" rel="stylesheet">
+	<link href="img/icon.png" type="img/icon" rel="shortcut icon">
+	<script src="js/validar_formularios.js" language="javascript"></script>
+</head>
+<body>
+	<div id="page">
+		<div id="header">
+			<div id="page-header">
+				<div class=logo><a href="index.php"><img src="img/Imagen1.png" height=100% alt="logo" border="0px"></a></div>
+			</div>
+							
+			<div id="header-menu">
+				<ul id="navegacion">
+					<li id="actual">
+						<a href="index.php">Inicio</a>
+					</li>
+					<li>
+						<a href="catalogo.php">Catalogo</a>
+					</li>
+					<?php
+						if($_SESSION){
+							if($categoria=="administrador"){
+								echo '<li>
+								<a href="abm.php">ABM</a>
+								</li>';
+							}
+							echo'</ul><ul id=navegacion style=float:right>
+							<li>
+							<a href="menuUsuario.php">Usuario:  '.$usuario.' </a>
+							</li>
+							<li>
+							<a href="php/desconectarUsuario.php">Logout</a>
+							</li>';
+						}else{
+							echo'<ul id=navegacion style=float:right>
+							<li>
+							<a href="login.php">Login</a>
+							</li>';
+						}
+					?>																																						
+				</ul> 
+				
+		
+			</div>
+		</div>
 
+		<div id="content">
+			<div id="left-bar">
+				
+			</div>
+			<div id="main-content">
 			<form name="login" autocomplete="on" onsubmit="return validar_altaCliente(this);" method="POST" action="php/insertarUsuario.php">
 							<fieldset style="margin-left:auto;margin-right:auto;width:500px">
 							<legend>Registrarse:</legend>
@@ -25,7 +74,7 @@ function contenido(){
 								<tr><td class="label"><label>Mail:</label></td><td class="input"><input type="mail" name="mail" ><span id="obligatorio">*</span></td></tr>
 								<tr><td class="label"><label>DNI:</label></td><td class="input"><input type="text" name="dni_cuit" maxlength="11" ><span id="obligatorio">*</span></td></tr>
 								<tr><td class="label"><label>Teléfono:</label></td><td class="input"><input type="tel" name="tel" ><span id="obligatorio">*</span></td></tr>
-								<tr><td class="label"><label>Código Postal:</label></td><td class="input"><input type="text" maxlength="4" name="cp" ><span id="obligatorio">*</span></td></tr>
+								<tr><td class="label"><label>Código Postal:</label></td><td class="input"><input type="text" name="cp" ><span id="obligatorio">*</span></td></tr>
 								<tr><td class="label"><label>Localidad:</label></td><td class="input"><input type="text" name="localidad" ><span id="obligatorio">*</span></td></tr>
 								<tr><td class="label"><label>Calle:</label></td><td class="input"><input type="text" name="calle" ><span id="obligatorio">*</span></td></tr>
 								<tr><td class="label"><label>Número:</label></td><td class="input"><input type="number" name="nro" ></td></tr>
@@ -37,6 +86,11 @@ function contenido(){
 							</fieldset>
 						
                  </form>   
-<?php
-}
-?>
+			</div>
+		</div>
+
+		<div id="footer">CookBooks 2014</div>
+	
+	</div>
+</body>
+</html>

@@ -1,7 +1,7 @@
 <?php
-require_once("sesion.php");
-sesion();
 header("Content-type: text/html; charset=utf-8");
+session_start();
+
 if (isset($_SESSION['idUsuario'])){
 	session_destroy();
 	echo '<script language = javascript>

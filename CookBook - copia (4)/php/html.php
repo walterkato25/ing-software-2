@@ -3,11 +3,11 @@
 header("Content-type: text/html; charset=utf-8");
 require_once("sesion.php");
 sesion();
-function head($script,$nombre="CookBook - Libros de Cocina"){
+function head($script){
 	?>
 	<head>
 	<meta charset="utf-8"></meta>
-	<title><?php echo $nombre ?></title>
+	<title>CookBook - Libros de Cocina</title>
 	<link href="css/style.css" type="text/css" rel="stylesheet">
 	<link href="img/icon.jpg" type="img/icon" rel="shortcut icon">
 	<script src="<?php echo $script ?>" language="javascript"></script>
@@ -66,9 +66,9 @@ function headerMenu($actual="", $admin=false){
 					<li <?php if($actual=="pedidos.php"){echo 'id="actual"'; }?>>
 						<a href="pedidos.php">Pedidos</a>
 					</li>
-					<!--<li <?php if($actual=="reporte.php"){echo 'id="actual"'; }?>>
+						<li <?php if($actual=="reporte.php"){echo 'id="actual"'; }?>>
 						<a href="reporte.php">Reporte</a>
-					</li>-->
+					</li>
 	<?php	}else{
 					?>
 					<li <?php if($actual=="verCarrito.php"){echo 'id="actual"'; }?>>
@@ -98,8 +98,6 @@ function headerMenu($actual="", $admin=false){
 	?>
 				</ul> 		
 			</div>
-			<div id="separador">
-			</div>
 <?php
 }
 
@@ -127,29 +125,25 @@ function encabezado($pagina){
 }
 function footer(){
 	?>
-	<div id="footer">
-		<span id="footer-text">CookBook &copy; 2014  Grupo 33</span>
-		Carlos Carden - Walter Kato - Nahuel Llerena Suster - Martín Sarachaga
-	</div>
+	<div id="footer">CookBook 2014</div>
 	<?php
 }
 function body($pagina){
 ?>
 	<body>
-		<div id="wrap">
 		<?php 
 			encabezado($pagina);
 			?>
-			<div id="page">
-				<div id="content">
-					<div id="main-content">
+		<div id="page">
+			
+			<div id="content">
+				<div id="main-content">
 					<?php contenido(); //contenido es una funcion que debe implementarse en el script de cada pagina. tendra el contenido de la pagina debajo del menu y el submenu. ?> 
-					</div>
 				</div>
 			</div>
 		</div>
 		<?php 
-			footer();
+			footer($pagina);
 			?>
 	</body>
 	<?php

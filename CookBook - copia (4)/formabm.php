@@ -4,7 +4,7 @@ require_once("php/sesion.php");
 require_once("php/html.php");
 
 sesion();
-if(!(isset($_SESSION["categoria"])) || $_SESSION["categoria"]!="administrador"){
+if($_SESSION["categoria"]!="administrador"){
 	header("location:index.php");
 }
 head("js/validar_formularios.js");
@@ -227,13 +227,12 @@ function formularioLibro($abm="Libro"){
 						<select id="imagen" name="img" onchange="mostrarImagen();">
 							<option></option>
 					<?php
-
 				    $directory="portadas";
 				    $dirint = dir($directory);
 				    while (($archivo = $dirint->read()) !== false)
 				    {
 				        if (preg_match("(gif)i", $archivo) || preg_match("(jpg)i", $archivo) || preg_match("(png)i", $archivo)){
-				            echo '<option value="/'.$directory."/".$archivo.'"';
+				            echo '<option value="'.$directory."/".$archivo.'"';
 				            	if(isset($imagen)){
 				            		if($imagen=='/'.$directory.'/'.$archivo){
 				            			echo ' selected ';
@@ -243,7 +242,7 @@ function formularioLibro($abm="Libro"){
 				        }
 				    }
 				    $dirint->close();
-				    ?>
+					?>
 				
 						</select><span id="obligatorio">*</span>
 					</td>

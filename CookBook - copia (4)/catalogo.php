@@ -3,9 +3,7 @@ require_once("php/config.php");
 require_once("php/html.php");
 require_once("php/sesion.php");
 sesion();
-if(isset($_SESSION["categoria"]) && $_SESSION["categoria"]=="administrador"){
-	header("location:menuUsuario.php");
-}
+
 
 require_once("php/config.php");
 
@@ -34,11 +32,15 @@ function buscarporNombre($nombre, $idEtiqueta, $idAutor){
 
 function subMenu(){
 ?>
-<div id="sub-menu" style='height:auto'>
+<div id="sub-menu" style='height:110px'>
 <form method="GET" id="catalogo">
 	<table id="navegacion">
 	<tr>
 		<th>Etiquetas: </th>
+		<th>Autores: </th>
+		<th>Nombre: </th>
+	</tr>
+	<tr>
 		<td>
 			<select multiple id="etiqueta" name="idEtiqueta[]" >
 			<?php
@@ -54,7 +56,6 @@ function subMenu(){
 			?>
 			</select>
 		</td>
-		<th>Autores: </th>
 		<td>
 			<select multiple id="autor" name="idAutor[]" >
 				<?php
@@ -70,7 +71,6 @@ function subMenu(){
 				?>
 			</select>
 		</td>
-		<th>Nombre: </th>
 		<td>
 			<input  type="text" name="nombre" 
 			<?php
@@ -79,10 +79,9 @@ function subMenu(){
 			}
 			?>
 			/>
-		</td>
-		<td>
-			<input  type="submit" value="Buscar" />
-			<input  type="button" onclick="location.href='catalogo.php'" value="Limpiar" />			
+		</br>
+			<input  type="button" onclick="location.href='catalogo.php'" value="Limpiar"/>
+			<input  type="submit" value="Buscar"/>
 		</td>
 	</tr>
 	</table>
@@ -125,12 +124,12 @@ if (isset($_GET["nombre"])){
 		<div id="lista">
 		<table rules="rows">
 			<tr>
-				<th id="orden"><span>Imagen</span></th>
-				<th id="orden"><a href="<?php if(isset($_GET["orden"]) && $_GET["orden"]=="nombre ASC"){echo $url.'&orden=nombre DESC';}else{echo $url.'&orden=nombre ASC';} ?>" >Nombre</a></th>
-				<th id="orden"><span>Autores</span></th>
-				<th id="orden"><span>Etiquetas</span></th>
-				<th id="orden"><a href="<?php if(isset($_GET["orden"]) && $_GET["orden"]=="precio ASC"){echo $url.'&orden=precio DESC';}else{echo $url.'&orden=precio ASC';}  ?>" >Precio</a></th>
-				<th id="orden" style="width:100"><span>Acciones</span></th>
+				<th>Imagen</th>
+				<th><a href="<?php if(isset($_GET["orden"]) && $_GET["orden"]=="nombre ASC"){echo $url.'&orden=nombre DESC';}else{echo $url.'&orden=nombre ASC';} ?>" >Nombre</a></th>
+				<th>Autores</th>
+				<th>Etiquetas</th>
+				<th><a href="<?php if(isset($_GET["orden"]) && $_GET["orden"]=="precio ASC"){echo $url.'&orden=precio DESC';}else{echo $url.'&orden=precio ASC';}  ?>" >Precio</a></th>
+				<th></th>
 			</tr>
 			<tr>
 		<?php
@@ -178,7 +177,7 @@ if (isset($_GET["nombre"])){
 		?>
 			</td>
  			<td style='text-align:right'> $<?php echo number_format($precio,2,',','.') ?></td>
- 			<td> <?php echo "<a id='agregar' href=detalle.php?id=$id >Ver detalle</a>";  ?> </td>
+ 			<td> <?php echo "<a href=detalle.php?id=$id >Ver detalle</a>";  ?> </td>
 			</tr>
 
 		<?php
@@ -187,17 +186,12 @@ if (isset($_GET["nombre"])){
 			</table>
 		</div>
 	<?php
-	} ?>
+	}
+
+}
+?>
 </fieldset>
 <?php
-}else{
-?>
-	<h4><p>Elija etiqueta/s, autor/es y/o introduzca un nombre de libro para realizar una búsqueda específica.</p>
-		<p>O simplemente haga click en buscar, con los campos vacíos, para ver el catálogo completo.</p>
-
-	</h4>
-<?php
-}
 }
 $pagina="catalogo.php";
 head("");

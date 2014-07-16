@@ -149,7 +149,7 @@ function verLibro($id,$url){
 		}
 		echo "<td>$listaEtiquetas</td>";
 		echo "<td>";
-		if($row['estadoStock']>0){echo 'Normal';} else {echo '<h4 style="background-color: red; margin:auto">Critico</h4>';}
+		if($row['estadoStock']>0){echo 'Normal';} else {echo 'Critico';}
 		echo "</td>";
 		eliminar("Libro", $idLibro);
 		modificar("Libro", $idLibro);
@@ -261,7 +261,7 @@ if (isset($_SESSION["categoria"])){
 
 						}
 							?>
-						<td><a id='agregar' href='verPedido.php?idPedido=<?php echo $row["idPedido"]; ?>' >Ver detalle</a>  
+						<td><a id='agregar' href='verPedido.php?idPedido="<?php echo $row["idPedido"]; ?>"' >Ver detalle</a>  
 						</td>
 
 					</tr>

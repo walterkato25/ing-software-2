@@ -15,9 +15,17 @@ function subMenu(){
 		<form method="GET" id="catalogo" onsubmit="return validar_rango_fecha(this);">
 		<table style='width:850; margin:auto'>	
 		<tr>
-			<th >
-				Ver los usuarios registrados entre:
+			<th rowspan='2'>
+				Ingrese un rango de fecha para visualizar usuarios
 			</th>
+			<th>
+				Desde :
+			</th>
+			<th>
+				Hasta :
+			</th>	
+		</tr>
+		<tr>
 			<td><input type='date' name='desde' required
 				<?php
 					if (isset($_GET['desde'])){
@@ -26,7 +34,6 @@ function subMenu(){
 				?>
 
 				></td>
-				<th>y:</th>
 			<td><input type='date' name='hasta' required
 				<?php
 					if (isset($_GET['hasta'])){
@@ -34,7 +41,7 @@ function subMenu(){
 					}
 				?>
 				></td>
-			<td><input type='submit' value='Mostrar'></td>
+			<td><input type='submit' value='Enviar'></td>
 
 		</tr>
 		</table>	

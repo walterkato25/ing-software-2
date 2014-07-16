@@ -10,8 +10,8 @@ $pagina="login.php";
 body($pagina);
 function contenido(){
 	?>
-			<form id="contacto" name="login" method="post" action="php/validarsesion.php" style="">
-							<fieldset style="padding:15px;width:300px;margin:auto; text-align:center">
+			<form id="contacto" name="login" method="post" action="php/validarsesion.php">
+							<fieldset style="padding:15px;width:300px">
 							<legend>Iniciar Sesión:</legend>
 							<label>Usuario:</label><input type="text" name="user" required><br><br>
 							<label>Contraseña:</label><input type="password" name="pass" required><br><br>

@@ -12,14 +12,6 @@ if((isset($_SESSION["categoria"])) && ($_SESSION["categoria"]=="administrador"))
 	header("location:menuUsuario.php");
 }
 
-function subMenu(){
-	?>
-	<div id="sub-menu">
-		<ul id="navegacion" style="margin:auto; width:900px; "><li style="float:right"><a  href="javascript:void(0)" onclick="history.back()"> Volver </a></li></ul>
-		
-	</div>
-	<?php
-}
 
 function contenido(){
 	$id=$_GET["id"];

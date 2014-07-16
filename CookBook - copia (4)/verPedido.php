@@ -11,15 +11,6 @@ if(!isset($_GET["idPedido"])){
 	header("location:index.php");
 }
 
-function subMenu(){
-	?>
-	<div id="sub-menu">
-		<ul id="navegacion" style="margin:auto; width:900px; "><li style="float:right"><a  href="javascript:void(0)" onclick="history.back()"> Volver </a></li></ul>
-		
-	</div>
-	<?php
-}
-
 function contenido(){
 	$url=$_SERVER["REQUEST_URI"];
 		if (isset($_GET["orden"])){
@@ -37,7 +28,6 @@ function contenido(){
 	$pedido=mysql_fetch_assoc($query);
 	$monto=$pedido["monto"];
 	$estado=$pedido["estado"];
-	$fechayhora=$pedido["timestamp"];
 	$idUsuario=$pedido["idUsuario"];
 	$sql="SELECT * FROM usuario WHERE idUsuario=$idUsuario";
 	$query=mysql_query($sql);
@@ -55,33 +45,25 @@ function contenido(){
 	$telefono=$usuario["tel"];
 	$baja=$usuario["baja"];
 ?>
-	<div style="display:flex;" id="pedido">
-		<div style="display:inline-block;width: 45%">
+	<div id="pedido">
+		<div style="float:left;width: 45%">
 		<fieldset>
 			<legend>Pedido:</legend>
-			<style type="text/css">
-					#info-usuario th{text-align: right; width:180;} 
-					#info-pedido th{text-align: right;}
-					#info-pedido td{text-align: center;}
-					#info-usuario td {text-align: left} 
-					<?php if($_SESSION["categoria"]=="usuario"){
-				?>
-				#info-usuario{display: none;}
-				<?php
-			} ?>
-
-				</style>
+			
 			<div id="info-pedido">
 				<table style="margin:10 0">
 					<tr>
-					<th ><span>Estado: </span></th>
-					<td id="estado" style="background-color:#01214A;color:#EBEDF4"><span><b><?php echo $estado ?></b></span></td>
+					<th id="orden"><span>Estado</span></th>
+					<th id="orden"><span>Monto</span></th>
+					<?php
+					if($_SESSION["categoria"]=="administrador"){ ?>
+					<th id="orden"><span>Marcar como...</span></th>
+					<?php } ?>
 					</tr>
 					<tr>
+						<td id="estado" style="background-color:#01214A;color:#EBEDF4"><span><b><?php echo $estado ?></b></span></td>
+						<td><?php echo  "$".number_format($monto,2,',','.') ?></td>
 						<?php
-					if($_SESSION["categoria"]=="administrador"){ ?>
-					<th ><span>Marcar como:</span></th>
-					<?php
 						if($_SESSION["categoria"]=="administrador"){
 						if($estado!="Recibido"){
 								if($estado=="Pendiente"){
@@ -90,8 +72,8 @@ function contenido(){
 								if($estado=="Enviado"){
 									$nuevoEstado="Recibido";
 								}?>
-								<td style="padding: 0">
-									<a id="agregar" style="display:inline-block; width:100%;padding:3 0; margin:5 0" href='php/cambiarEstado.php?idPedido=<?php echo $idPedido?>' onclick= 'if(!confirm("¿Desea marcar el pedido como <?php echo $nuevoEstado ?>?"))return false'>
+								<td>
+									<a id="agregar" href='php/cambiarEstado.php?idPedido=<?php echo $idPedido?>' onclick= 'if(!confirm("¿Desea marcar el pedido como <?php echo $nuevoEstado ?>?"))return false'>
 										<?php echo $nuevoEstado ?>
 									</a>
 								</td>
@@ -100,27 +82,14 @@ function contenido(){
 						}
 						?>
 					</tr>
-					<tr>
-					<?php } ?>
-					<th ><span>Monto:</span></th>
-					<td><?php echo  "$".number_format($monto,2,',','.') ?></td>
-					</tr>
-					<tr>
-					<th ><span>Fecha y Hora:</span></th>
-					<td><?php echo  $fechayhora ?></td>
-					</tr>
-					<tr>
-						
-						
-						
-					</tr>
 
 				</table>
 			</div>
 		</fieldset>
 			
-			
-				
+			<?php if($_SESSION["categoria"]=="administrador"){
+				?>
+				<style type="text/css">#info-usuario th{text-align: right; width:180;} #info-usuario td{text-align: left} </style>
 				<div id="info-usuario">
 				<fieldset>
 				
@@ -151,9 +120,10 @@ function contenido(){
 				
 					</fieldset>
 					</div>
-				
+				<?php
+			} ?>
 			</div>
-			<div id="lista-libros" style="display: inline-block; width: 55%">
+			<div id="lista-libros" style="float: right;width: 55%">
 			<fieldset >
 			
 				<legend> Lista de libros en pedido: </legend>
@@ -204,7 +174,7 @@ function contenido(){
 
 <?php	
 }
-$pagina="pedidos.php";
+$pagina="verPedido.php";
 head("");
 body($pagina);
 
