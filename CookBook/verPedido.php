@@ -14,7 +14,7 @@ if(!isset($_GET["idPedido"])){
 function subMenu(){
 	?>
 	<div id="sub-menu">
-		<ul id="navegacion" style="margin:auto; width:900px; "><li style="float:right"><a  href="javascript:void(0)" onclick="history.back()"> Volver </a></li></ul>
+		<ul id="navegacion" style="margin:auto; width:900px; "><li style="float:right"><a  href="javascript:void(0)" onclick="self.history.back()"> Volver </a></li></ul>
 		
 	</div>
 	<?php
@@ -60,8 +60,8 @@ function contenido(){
 		<fieldset>
 			<legend>Pedido:</legend>
 			<style type="text/css">
-					#info-usuario th{text-align: right; width:180;} 
-					#info-pedido th{text-align: right;}
+					#info-usuario th{text-align: left; width:180;} 
+					#info-pedido th{text-align: left;}
 					#info-pedido td{text-align: center;}
 					#info-usuario td {text-align: left} 
 					<?php if($_SESSION["categoria"]=="usuario"){
@@ -72,10 +72,10 @@ function contenido(){
 
 				</style>
 			<div id="info-pedido">
-				<table style="margin:10 0">
+				<table rules="rows" style="margin:10 0">
 					<tr>
 					<th ><span>Estado: </span></th>
-					<td id="estado" style="background-color:#01214A;color:#EBEDF4"><span><b><?php echo $estado ?></b></span></td>
+					<td id="estado" style="background-color:#01214A;color:#EBEDF4"><span ><b><?php echo $estado ?></b></span></td>
 					</tr>
 					<tr>
 						<?php
@@ -91,7 +91,7 @@ function contenido(){
 									$nuevoEstado="Recibido";
 								}?>
 								<td style="padding: 0">
-									<a id="agregar" style="display:inline-block; width:100%;padding:3 0; margin:5 0" href='php/cambiarEstado.php?idPedido=<?php echo $idPedido?>' onclick= 'if(!confirm("¿Desea marcar el pedido como <?php echo $nuevoEstado ?>?"))return false'>
+									<a id="agregar" style="display:inline-block; width:50%;padding:3 0; margin:5 0" href='php/cambiarEstado.php?idPedido=<?php echo $idPedido?>' onclick= 'if(!confirm("¿Desea marcar el pedido como <?php echo $nuevoEstado ?>?"))return false'>
 										<?php echo $nuevoEstado ?>
 									</a>
 								</td>
@@ -109,12 +109,6 @@ function contenido(){
 					<th ><span>Fecha y Hora:</span></th>
 					<td><?php echo  $fechayhora ?></td>
 					</tr>
-					<tr>
-						
-						
-						
-					</tr>
-
 				</table>
 			</div>
 		</fieldset>
@@ -125,7 +119,7 @@ function contenido(){
 				<fieldset>
 				
 					<legend> Información de Usuario: </legend>
-					<table>
+					<table rules="rows">
 						<tr>
 							<th>Usuario:</th><td><?php echo $nombreDeUsuario ?></td>
 						</tr>
@@ -158,7 +152,7 @@ function contenido(){
 			
 				<legend> Lista de libros en pedido: </legend>
 			
-			<table  style="margin:10 0">
+			<table  rules="rows" style="margin:10 0">
 				<tr>
 					<th id="orden"> <span>Cantidad</span>     </th>
 					<th id="orden">
