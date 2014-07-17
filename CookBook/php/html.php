@@ -128,7 +128,8 @@ function encabezado($pagina){
 function footer(){
 	?>
 	<div id="footer">
-		<span id="footer-text">CookBook &copy; 2014  Grupo 33</span>
+		<div id="separador" style="background-color:#5D1746"></div>
+		<span id="footer-text">CookBook &copy; 2014 Ingeniería de Software II - Grupo 33</span>
 		Carlos Carden - Walter Kato - Nahuel Llerena Suster - Martín Sarachaga
 	</div>
 	<?php
