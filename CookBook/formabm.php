@@ -261,7 +261,7 @@ function formularioLibro($abm="Libro"){
 					function mostrarImagen(){
 						var img=document.getElementById("imgelegida");
 						var src=document.getElementById("imagen").value;
-						img.src=src;
+						img.src='.'+src;
 					}
 				</script>
 				<?php

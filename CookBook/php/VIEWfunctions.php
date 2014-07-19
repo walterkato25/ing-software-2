@@ -148,7 +148,7 @@ function verLibro($id,$url){
 			$listaEtiquetas = $listaEtiquetas.$etiqueta["etiqueta"]; 
 		}
 		echo "<td>$listaEtiquetas</td>";
-		echo "<td>";
+		echo "<td style='width:150'>";
 		if($row['estadoStock']>0){echo 'Normal';} else {echo '<h4 style="background-color: red; margin:auto">Critico</h4>';}
 		echo "</td>";
 		eliminar("Libro", $idLibro);
@@ -223,6 +223,8 @@ if (isset($_SESSION["categoria"])){
 		}
 		if(isset($_GET["orden"])){
 			$sql.=" ORDER BY ".$_GET["orden"];
+		}else{
+			$sql.=" ORDER BY timestamp DESC";
 		}
 			$query=mysql_query($sql);
 			if (mysql_num_rows($query)!=0) { ?>
