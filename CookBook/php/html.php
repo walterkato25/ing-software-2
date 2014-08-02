@@ -18,7 +18,7 @@ function head($script,$nombre="CookBook - Libros de Cocina"){
 function pageHeader(){
 ?>
 	<div id="page-header">
-				<div class="logo">
+				<div id="logo">
 					<a href="index.php">
 						<img src="img/Imagen1.png" height=100% alt="logo" border="0px">
 					</a>
@@ -33,7 +33,7 @@ function headerMenu($actual="", $admin=false){
 
 				<ul id="navegacion">
 					<li style="padding:0; margin:0" >
-						<a class="logo" href="index.php">
+						<a id="logo" href="index.php">
 							<img src="img/Imagen1.png" height="60px" alt="logo" border="0px">
 						</a>
 					</li>
@@ -46,10 +46,10 @@ function headerMenu($actual="", $admin=false){
 					<?php					
 					}
 					?>
-					<!--<li id="navegacion">
+					<!--<li>
 						<a href="aboutUs.php">Conocenos</a>
 					</li>
-					<li id="navegacion">
+					<li>
 						<a href="contacto.php">Contacto</a>
 					</li>-->
 					
@@ -66,9 +66,9 @@ function headerMenu($actual="", $admin=false){
 					<li <?php if($actual=="pedidos.php"){echo 'id="actual"'; }?>>
 						<a href="pedidos.php">Pedidos</a>
 					</li>
-					<!--<li <?php if($actual=="reporte.php"){echo 'id="actual"'; }?>>
+					<li <?php if($actual=="reporte.php"){echo 'id="actual"'; }?>>
 						<a href="reporte.php">Reporte</a>
-					</li>-->
+					</li>
 	<?php	}else{
 					?>
 					<li <?php if($actual=="verCarrito.php"){echo 'id="actual"'; }?>>

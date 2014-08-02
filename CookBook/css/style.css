@@ -85,14 +85,14 @@ ul{
 	border-width:0px;
 	padding-left: 0
 	}
-.logo{
+#logo{
 	height: 60px!important;
 	display:flex;
 	padding:0 20px!important;
 	margin:0!important;
 	}
-.logo:active{background-color:#5D1746!important}
-.logo:hover{background-color:#5D1746!important}
+#logo:active{background-color:#5D1746!important}
+#logo:hover{background-color:#5D1746!important}
 
 #navegacion li{float:left;padding-top:6px; height:24px; font-weight:bold;margin-top:30px;}
 #navegacion a{height:18px;}

@@ -157,11 +157,21 @@ function validar_altaCliente(form){
 	&& validar_tel(form);
 
 }
-function validar_rango_fecha(form){
-	if(form.desde.value > form.hasta.value){
-		form.desde.focus();
+function validar_rango(desde,hasta){
+	if(desde.value > hasta.value){
+		desde.focus();
 		alert("Introduzca una rango de fecha válido");
 		return false;
 	}
 	return true;
+}
+function validar_rango_fecha(form){
+	return validar_rango(form.desde,form.hasta);	
+}
+function validar_reporte(form){
+	if(form.fecha2.style.display!="none"){
+		return validar_rango(form.fecha,form.fecha2)
+	}else{
+		return true;
+	}
 }

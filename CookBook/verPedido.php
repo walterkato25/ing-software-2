@@ -11,14 +11,7 @@ if(!isset($_GET["idPedido"])){
 	header("location:index.php");
 }
 
-function subMenu(){
-	?>
-	<div id="sub-menu">
-		<ul id="navegacion" style="margin:auto; width:900px; "><li style="float:right"><a  href="javascript:void(0)" onclick="self.history.back()"> Volver </a></li></ul>
-		
-	</div>
-	<?php
-}
+
 
 function contenido(){
 	$url=$_SERVER["REQUEST_URI"];
